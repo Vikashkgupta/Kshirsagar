@@ -10,8 +10,6 @@
 
   </script>
 
-
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/700.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/900.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/latin.css">
@@ -490,103 +488,140 @@
       background-clip: text
     }
 
-    .mscroll {
+    /* ── NEW MENU DESIGN ── */
+    .menu-cat-nav {
       display: flex;
+      gap: .55rem;
+      padding: 0 2.5rem 2.2rem;
       overflow-x: auto;
-      overflow-y: visible;
-      padding: 2rem 2.5rem 2.5rem;
-      /* ✅ FIXED */
-      gap: 1.1rem;
       scrollbar-width: none;
-      scroll-snap-type: x mandatory;
+      flex-wrap: nowrap;
     }
+    .menu-cat-nav::-webkit-scrollbar { display: none; }
 
-    .mscroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .mcard {
-      flex-shrink: 0;
-      width: 275px;
-      height: 390px;
-      scroll-snap-align: start;
-      background: linear-gradient(145deg, rgba(255, 255, 255, .042), rgba(255, 255, 255, .01));
-      border: 1px solid rgba(255, 255, 255, .07);
-      border-radius: 18px;
-      padding: 1.6rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform .07s ease, box-shadow .3s, border-color .3s;
-      will-change: transform;
-      cursor: none;
-
-      position: relative;
-      /* 🔥 ADD */
-      z-index: 1;
-      /* 🔥 ADD */
-      transform-style: preserve-3d;
-      /* 🔥 ADD */
-    }
-
-    .mcard:hover {
-      z-index: 50;
-      /* 🔥 ADD */
-    }
-
-    @media (max-width:768px) {
-      .mscroll {
-        overflow-y: hidden !important;
-        padding: 1rem !important;
-      }
-
-      .mcard {
-        transform: none !important;
-      }
-    }
-
-    .cemoji {
-      font-size: 2.5rem;
-      margin-bottom: .7rem;
-      display: block
-    }
-
-    .ctitle {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: .25rem
-    }
-
-    .csub {
-      color: #5a5a5a;
-      font-size: .78rem;
-      font-family: 'Inter', sans-serif;
-      margin-bottom: .9rem
-    }
-
-    .citems {
-      list-style: none
-    }
-
-    .citems li {
-      color: #888;
-      font-size: .82rem;
-      font-family: 'Inter', sans-serif;
-      padding: .28rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, .04)
-    }
-
-    .cbtn {
-      padding: .55rem 1.1rem;
+    .menu-cat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .52rem 1.1rem;
       border-radius: 100px;
-      font-size: .78rem;
+      border: 1px solid rgba(212,175,55,.2);
+      background: rgba(212,175,55,.04);
+      color: #666;
       font-family: 'Inter', sans-serif;
-      border: 1px solid;
-      background: transparent;
-      cursor: none;
-      margin-top: .8rem;
-      transition: background .3s
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all .25s;
+      flex-shrink: 0;
     }
+    .menu-cat-btn .mcb-emoji { font-size: 1rem; }
+    .menu-cat-btn:hover {
+      border-color: rgba(212,175,55,.5);
+      color: #d4af37;
+      background: rgba(212,175,55,.08);
+    }
+    .menu-cat-btn.active {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, rgba(212,175,55,.18), rgba(249,115,22,.1));
+      color: #d4af37;
+      box-shadow: 0 0 18px rgba(212,175,55,.18);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .75rem;
+      padding: 0 2.5rem 3rem;
+    }
+    @media (max-width: 768px) {
+      .menu-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 1rem 2rem !important;
+      }
+      .menu-cat-nav { padding: 0 1rem 1.5rem !important; }
+    }
+
+    .menu-item-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .85rem 1rem;
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 14px;
+      transition: border-color .25s, background .25s;
+    }
+    .menu-item-row:hover {
+      border-color: rgba(212,175,55,.25);
+      background: rgba(212,175,55,.04);
+    }
+
+    .menu-item-img {
+      width: 62px;
+      height: 62px;
+      min-width: 62px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(212,175,55,.15), rgba(249,115,22,.1));
+      border: 1.5px solid rgba(212,175,55,.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      overflow: hidden;
+    }
+    .menu-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .menu-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .menu-item-name {
+      font-size: .92rem;
+      font-weight: 700;
+      color: #e8e8e8;
+      font-family: 'Playfair Display', serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .menu-item-desc {
+      font-size: .72rem;
+      color: #4a4a4a;
+      font-family: 'Inter', sans-serif;
+      margin-top: .18rem;
+      line-height: 1.4;
+    }
+    .menu-item-tag {
+      display: inline-block;
+      margin-top: .35rem;
+      font-size: .62rem;
+      letter-spacing: .07em;
+      color: #5a5a5a;
+      font-family: 'Inter', sans-serif;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 100px;
+      padding: .1rem .55rem;
+    }
+
+    .menu-item-price {
+      font-size: .95rem;
+      font-weight: 800;
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+      text-align: right;
+      min-width: fit-content;
+    }
+    /* ── END NEW MENU DESIGN ── */
 
     #legacy {
       padding: 5rem 2.5rem;
@@ -1103,7 +1138,10 @@
         <div class="ey">— THE TASTE MATRIX —</div>
         <h2 class="st">A Universe of <span class="gt">Flavors</span></h2>
       </div>
-      <div class="mscroll" id="ms"></div>
+      <!-- Category Nav Bar -->
+      <div class="menu-cat-nav" id="menuCatNav"></div>
+      <!-- Item Grid -->
+      <div class="menu-grid" id="menuGrid"></div>
     </section>
 
 
@@ -1310,168 +1348,188 @@
     sub: "Small / Large",
     emoji: "🍕",
     items: [
-      { name: "Sweetcorn Pizza", price: "₹80 / ₹130" },
-      { name: "Vegetable Pizza", price: "₹80 / ₹130" },
-      { name: "Paneer Pizza", price: "₹100 / ₹150" },
-      { name: "Mushroom Pizza", price: "₹120 / ₹180" }
+      { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn, cheese & herbs on crispy base" },
+      { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Garden veggies with golden mozzarella" },
+      { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Soft paneer tikka with tangy tomato sauce" },
+      { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Earthy mushrooms with rich cheese blend" }
     ],
     color: "#f97316",
     glow: "rgba(249,115,22,.28)"
   },
-
   {
     title: "Chowmein",
     sub: "Half / Full",
     emoji: "🍜",
     items: [
-      { name: "Veg Chowmein", price: "₹35 / ₹70" },
-      { name: "Paneer Chowmein", price: "₹60 / ₹100" },
-      { name: "Special Chowmein", price: "₹120" },
-      { name: "Hakka Noodles", price: "₹180" },
-      { name: "Singapuri Noodles", price: "₹180" }
+      { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style stir-fried noodles" },
+      { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with soft paneer cubes" },
+      { name: "Special Chowmein", price: "₹120", desc: "Chef's special loaded with veggies & spices" },
+      { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style with soy & chilli" },
+      { name: "Singapuri Noodles", price: "₹180", desc: "Spicy thin noodles Singapore style" }
     ],
     color: "#f59e0b",
     glow: "rgba(245,158,11,.28)"
   },
-
   {
     title: "Dosa",
     sub: "South Indian",
     emoji: "🥞",
     items: [
-      { name: "Onion Dosa", price: "₹70" },
-      { name: "Masala Dosa", price: "₹80" },
-      { name: "Special Dosa", price: "₹120" },
-      { name: "Paneer Dosa", price: "₹140" },
-      { name: "Uttapam", price: "₹180" },
-      { name: "Cheese Uttapam", price: "₹200" },
-      { name: "Shahi Dosa", price: "₹200" }
+      { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with caramelised onions" },
+      { name: "Masala Dosa", price: "₹80", desc: "Golden dosa stuffed with spiced potato filling" },
+      { name: "Special Dosa", price: "₹120", desc: "Premium stuffing with chef's secret masala" },
+      { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with spiced cottage cheese bhurji" },
+      { name: "Uttapam", price: "₹180", desc: "Thick soft pancake with mixed veggies" },
+      { name: "Cheese Uttapam", price: "₹200", desc: "Uttapam loaded with melted cheese" },
+      { name: "Shahi Dosa", price: "₹200", desc: "Royal dosa with cashew & dry fruit filling" }
     ],
     color: "#d4af37",
     glow: "rgba(212,175,55,.28)"
   },
-
   {
-    title: "Chilli & Manchurian",
+    title: "Chilli",
     sub: "Half / Full",
     emoji: "🌶️",
     items: [
-      { name: "Potato Chilli", price: "₹60 / ₹100" },
-      { name: "Veg Manchurian", price: "₹70 / ₹120" },
-      { name: "Paneer Chilli", price: "₹90 / ₹170" },
-      { name: "Mushroom Chilli", price: "₹200" }
+      { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in fiery chilli sauce" },
+      { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Soft balls in tangy Manchurian gravy" },
+      { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Tender paneer in hot chilli-garlic sauce" },
+      { name: "Mushroom Chilli", price: "₹200", desc: "Juicy mushrooms tossed with bell peppers" }
     ],
     color: "#ef4444",
     glow: "rgba(239,68,68,.28)"
   },
-
   {
     title: "Rice",
     sub: "Fried Rice",
     emoji: "🍚",
     items: [
-      { name: "Veg Fried Rice", price: "₹60" },
-      { name: "Paneer Fried Rice", price: "₹80" },
-      { name: "Combo Rice", price: "₹110" }
+      { name: "Veg Fried Rice", price: "₹60", desc: "Fluffy rice with fresh veggies & soy" },
+      { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with soft paneer pieces" },
+      { name: "Combo Rice", price: "₹110", desc: "Rice served with Manchurian gravy combo" }
     ],
     color: "#3b82f6",
     glow: "rgba(59,130,246,.28)"
   },
-
   {
     title: "Rolls",
     sub: "Street Style",
     emoji: "🌯",
     items: [
-      { name: "Veg Roll", price: "₹40" },
-      { name: "Paneer Roll", price: "₹50" },
-      { name: "Mushroom Roll", price: "₹70" },
-      { name: "Veg Crunchy Roll", price: "₹60" }
+      { name: "Veg Roll", price: "₹40", desc: "Stuffed paratha roll with fresh veggies" },
+      { name: "Paneer Roll", price: "₹50", desc: "Soft paneer tikka wrapped in flaky paratha" },
+      { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom filling in crispy roll" },
+      { name: "Veg Crunchy Roll", price: "₹60", desc: "Extra crunchy filling with special chutney" }
     ],
     color: "#10b981",
     glow: "rgba(16,185,129,.28)"
   },
-
   {
     title: "Sandwich",
     sub: "Quick Bites",
     emoji: "🥪",
     items: [
-      { name: "Vegetable Sandwich", price: "₹60" },
-      { name: "Corn Sandwich", price: "₹80" },
-      { name: "Paneer Sandwich", price: "₹80" },
-      { name: "Pizza Sandwich", price: "₹100" },
-      { name: "Mushroom Sandwich", price: "₹100" }
+      { name: "Vegetable Sandwich", price: "₹60", desc: "Fresh garden veggies on toasted bread" },
+      { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn with herbs & cream cheese" },
+      { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney" },
+      { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in toasted sandwich" },
+      { name: "Mushroom Sandwich", price: "₹100", desc: "Sautéed mushrooms with garlic butter" }
     ],
     color: "#eab308",
     glow: "rgba(234,179,8,.28)"
   },
-
   {
     title: "Burger",
     sub: "Fast Food",
     emoji: "🍔",
     items: [
-      { name: "Tikki Burger", price: "₹30" },
-      { name: "Paneer Burger", price: "₹50" },
-      { name: "Sandwich Burger", price: "₹40" },
-      { name: "Pizza Style Burger", price: "₹50" },
-      { name: "Paneer Tikki Burger", price: "₹50" },
-      { name: "Veg Burger", price: "₹70" },
-      { name: "Double Veg Burger", price: "₹99" }
+      { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty in soft bun" },
+      { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty with fresh veggies" },
+      { name: "Sandwich Burger", price: "₹40", desc: "Best of both worlds — burger meets sandwich" },
+      { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese inside a burger" },
+      { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki with tangy sauces" },
+      { name: "Veg Burger", price: "₹70", desc: "Loaded veggie patty with crunchy lettuce" },
+      { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double the indulgence" }
     ],
     color: "#f97316",
     glow: "rgba(249,115,22,.28)"
   },
-
   {
-    title: "Lollipop & Pakoda",
-    sub: "Snacks",
+    title: "Snacks",
+    sub: "Lollipop & Pakoda",
     emoji: "🍢",
     items: [
-      { name: "Paneer Pakoda", price: "₹80" },
-      { name: "Paneer Lollipop (6 pcs)", price: "₹200" }
+      { name: "Paneer Pakoda", price: "₹80", desc: "Golden fried paneer in spiced batter" },
+      { name: "Paneer Lollipop (6 pcs)", price: "₹200", desc: "Crispy paneer sticks on skewers" }
     ],
     color: "#a855f7",
     glow: "rgba(168,85,247,.28)"
   }
 ];
-    // js for menu start
 
-    // js for menu end
+    // ── NEW MENU RENDER & FILTER LOGIC ──
+    (function initMenu() {
+      const catNav = document.getElementById('menuCatNav');
+      const grid = document.getElementById('menuGrid');
+      let activeCat = 'all';
 
-    // ── INJECT MENU CARDS ──
-    const ms = document.getElementById('ms');
-    MENU.forEach(m => {
-      const d = document.createElement('div');
-      d.className = 'mcard';
-      d.innerHTML = `<div><span class="cemoji">${m.emoji}</span><div class="ctitle" style="color:${m.color}">${m.title}</div><div class="csub">${m.sub}</div><ul class="citems">${m.items.map(i => `
-  <li style="
-    display:flex;
-    justify-content:space-between;
-    border-bottom:1px solid rgba(255,255,255,.05);
-    padding:.3rem 0;
-  ">
-    <span>${i.name}</span>
-    <span style="color:${m.color}; font-weight:600;">
-      ${i.price}
-    </span>
-  </li>
-`).join('')}</ul></div><button class="cbtn" style="color:${m.color};border-color:${m.color}44">Explore Menu →</button>`;
-      d.style.boxShadow = `0 0 0 ${m.glow}`;
-      d.addEventListener('mousemove', e => {
-        const r = d.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-        d.style.transform = `perspective(900px) rotateY(${x * 22}deg) rotateX(${-y * 22}deg) scale(1.04)`;
-        d.style.borderColor = m.color + '55';
-        d.style.boxShadow = `0 0 45px ${m.glow},inset 0 1px 0 rgba(255,255,255,.06)`;
+      // Build ALL items flat list: { categoryObj, item }
+      const allItems = [];
+      MENU.forEach(cat => {
+        cat.items.forEach(item => allItems.push({ cat, item }));
       });
-      d.addEventListener('mouseleave', () => {
-        d.style.transform = 'perspective(900px) rotateY(0) rotateX(0) scale(1)';
-        d.style.borderColor = 'rgba(255,255,255,.07)';
-        d.style.boxShadow = `0 0 0 ${m.glow}`;
+
+      // Build category nav
+      const allBtn = document.createElement('button');
+      allBtn.className = 'menu-cat-btn active';
+      allBtn.innerHTML = `<span class="mcb-emoji">✦</span> All`;
+      allBtn.dataset.cat = 'all';
+      catNav.appendChild(allBtn);
+
+      MENU.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'menu-cat-btn';
+        btn.innerHTML = `<span class="mcb-emoji">${cat.emoji}</span>${cat.title}`;
+        btn.dataset.cat = cat.title;
+        catNav.appendChild(btn);
       });
-      ms.appendChild(d);
-    });
+
+      // Filter function
+      function renderItems(catTitle) {
+        grid.innerHTML = '';
+        const list = catTitle === 'all'
+          ? allItems
+          : allItems.filter(e => e.cat.title === catTitle);
+
+        list.forEach(({ cat, item }) => {
+          const row = document.createElement('div');
+          row.className = 'menu-item-row';
+          row.innerHTML = `
+            <div class="menu-item-img">${cat.emoji}</div>
+            <div class="menu-item-info">
+              <div class="menu-item-name">${item.name}</div>
+              <div class="menu-item-desc">${item.desc}</div>
+              <span class="menu-item-tag">${cat.title}</span>
+            </div>
+            <div class="menu-item-price">${item.price}</div>
+          `;
+          grid.appendChild(row);
+        });
+      }
+
+      // Nav click handler
+      catNav.addEventListener('click', e => {
+        const btn = e.target.closest('.menu-cat-btn');
+        if (!btn) return;
+        catNav.querySelectorAll('.menu-cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        renderItems(activeCat);
+      });
+
+      renderItems('all');
+    })();
+    // ── END NEW MENU LOGIC ──
 
     // ── CURSOR ──
     const cur = document.getElementById('cursor'), cdot = document.getElementById('cdot');
@@ -1740,16 +1798,7 @@
       revealObs.observe(el);
     });
 
-    // ── HORIZONTAL SCROLL ARROWS ──
-    const scrollBtn = document.createElement('div');
-    scrollBtn.innerHTML = `<div style="display:flex;gap:.6rem;padding:.8rem 2.5rem 0;justify-content:flex-end"><button id="sl" style="width:38px;height:38px;border-radius:50%;border:1px solid rgba(212,175,55,.25);background:transparent;color:#d4af37;font-size:1.1rem;cursor:none;transition:all .3s">←</button><button id="sr" style="width:38px;height:38px;border-radius:50%;border:1px solid rgba(212,175,55,.25);background:transparent;color:#d4af37;font-size:1.1rem;cursor:none;transition:all .3s">→</button></div>`;
-    document.getElementById('menu').insertBefore(scrollBtn, document.getElementById('ms'));
-    document.getElementById('sl').addEventListener('click', () => ms.scrollBy({ left: -310, behavior: 'smooth' }));
-    document.getElementById('sr').addEventListener('click', () => ms.scrollBy({ left: 310, behavior: 'smooth' }));
-    [document.getElementById('sl'), document.getElementById('sr')].forEach(b => {
-      b.addEventListener('mouseenter', () => { b.style.background = 'rgba(212,175,55,.1)'; b.style.borderColor = 'rgba(212,175,55,.6)'; });
-      b.addEventListener('mouseleave', () => { b.style.background = 'transparent'; b.style.borderColor = 'rgba(212,175,55,.25)'; });
-    });
+    // ── (scroll arrows removed — new menu uses filter nav) ──
 
     // --- for mobile scroll animation ---
 
@@ -1795,11 +1844,7 @@
     if (cursorEl) cursorEl.remove();
     if (cdotEl) cdotEl.remove();
 
-    // 4. Disable hover load
-    document.querySelectorAll('.mcard').forEach(el => {
-      el.onmousemove = null;
-      el.onmouseleave = null;
-    });
+    // 4. (mcard removed — new menu uses filter layout)
   </script>
 
   <!-- <style>
