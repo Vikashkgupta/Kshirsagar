@@ -5,7 +5,7 @@ Kshirsagar ek modern, fully responsive, aur interactive web application hai jo e
 ---
 
 ## 🚀 Live Demo
-**[Insert Live Website Link Here]**
+**[kshirsagarmairwa.netlify.app]**
 
 ---
 
@@ -31,5 +31,5 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/kshirsagar.git](https://github.com/your-username/kshirsagar.git)
+   git clone [https://github.com/vikashkgupta/kshirsagar.git](https://github.com/kshitsagar/kshirsagar.git)
  
