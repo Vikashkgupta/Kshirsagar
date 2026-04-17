@@ -8,12 +8,12 @@
   Live on: https://kshirsagarmairwa.netlify.app/
   Sections: #hero | #menu | #legacy | #location | #footer
   Performance: FPS-limited rAF, device detection,
-               lazy images, CSS-only hero background.
+               lazy images.
 ============================================================ -->
 
 <head>
 
-<!-- ── GOOGLE ANALYTICS ── -->
+  <!-- ── GOOGLE ANALYTICS ── -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W6Y1V36EF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -99,7 +99,7 @@
   <!-- ── TAILWIND (utility resets only) ── -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-  
+
 
   <!-- ============================================================
     GLOBAL STYLES
@@ -1056,9 +1056,10 @@
         width: 100% !important;
         gap: .6rem !important;
       }
+
       .hcnt {
-      padding-top: 80px !important; 
-    }
+        padding-top: 80px !important;
+      }
 
       .bp,
       .bs {
@@ -1125,6 +1126,252 @@
       }
     }
   </style>
+
+  <!-- theme change code start -->
+  <style>
+    /* ================= VARIABLES ================= */
+    :root {
+      --gold: #d4af37;
+      --saffron: #f97316;
+
+      /* DARK DEFAULT */
+      --bg-primary: #080808;
+      --bg-secondary: #040404;
+      --bg-tertiary: #030303;
+
+      --card-bg: rgba(255, 255, 255, 0.025);
+      --card-bg-soft: rgba(255, 255, 255, 0.018);
+
+      --text-main: #ffffff;
+      --text-muted: #777;
+      --text-soft: #5a5a5a;
+      --text-dim: #3d3d3d;
+
+      --border: rgba(255, 255, 255, 0.06);
+      --border-gold: rgba(212, 175, 55, 0.2);
+
+      --nav-bg: rgba(8, 8, 8, 0.93);
+
+      /* HERO FIX */
+      --hero-bg: #080808;
+      --hero-fade: #080808;
+      --hero-glow-gold: rgba(212, 175, 55, 0.12);
+      --hero-glow-saffron: rgba(249, 115, 22, 0.08);
+    }
+
+    /* ================= LIGHT MODE ================= */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-primary: #FDFBF5;
+        --bg-secondary: #ffffff;
+        --bg-tertiary: #ffffff;
+
+        --card-bg: #ffffff;
+        --card-bg-soft: #ffffff;
+
+        --text-main: #1A1A1A;
+        --text-muted: #4A4A4A;
+        --text-soft: #4A4A4A;
+        --text-dim: #4A4A4A;
+
+        --border: rgba(0, 0, 0, 0.06);
+        --border-gold: rgba(212, 175, 55, 0.3);
+
+        --nav-bg: rgba(255, 255, 255, 0.85);
+
+        /* HERO LIGHT FIX */
+        --hero-bg: #FDFBF5;
+        --hero-fade: #FDFBF5;
+        --hero-glow-gold: rgba(212, 175, 55, 0.08);
+        --hero-glow-saffron: rgba(249, 115, 22, 0.05);
+      }
+
+      .menu-item-row,
+      .scard,
+      .fc,
+      .ic {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    /* ================= BASE ================= */
+    #landing {
+      background: var(--bg-primary);
+      color: var(--text-main);
+    }
+
+    /* NAV */
+    nav.scrolled {
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border-gold);
+    }
+
+    .nm a {
+      color: var(--text-muted);
+    }
+
+    .nm a:hover {
+      color: var(--gold);
+    }
+
+    /* ================= HERO (FIXED) ================= */
+    #hero {
+      background:
+        radial-gradient(ellipse at 60% 40%, var(--hero-glow-gold) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 70%, var(--hero-glow-saffron) 0%, transparent 50%),
+        radial-gradient(ellipse at center, transparent 22%, var(--hero-fade) 72%),
+        var(--hero-bg);
+    }
+
+    .ho {
+      background: radial-gradient(ellipse at center, transparent 22%, var(--hero-fade) 72%);
+    }
+
+    .hsub {
+      color: var(--text-soft);
+    }
+
+    .hloc {
+      color: var(--text-dim);
+    }
+
+    /* BUTTONS */
+    .bs {
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* MENU */
+    #menu {
+      background: var(--bg-secondary);
+    }
+
+    .st {
+      color: var(--text-main);
+    }
+
+    .menu-cat-btn {
+      background: rgba(212, 175, 55, 0.04);
+      border: 1px solid var(--border-gold);
+      color: var(--text-muted);
+    }
+
+    .menu-item-row {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+
+    .menu-item-name {
+      color: var(--text-main);
+    }
+
+    .menu-item-desc {
+      color: var(--text-soft);
+    }
+
+    .menu-item-tag {
+      background: var(--card-bg-soft);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* LEGACY */
+    #legacy {
+      background: var(--bg-secondary);
+    }
+
+    .slabel {
+      color: var(--text-main);
+    }
+
+    .ssub {
+      color: var(--text-dim);
+    }
+
+    .stgrid p {
+      color: var(--text-soft);
+    }
+
+    .fc {
+      background: var(--card-bg-soft);
+      border: 1px solid var(--border-gold);
+    }
+
+    .ft {
+      color: var(--text-main);
+    }
+
+    .fd {
+      color: var(--text-dim);
+    }
+
+    /* LOCATION */
+    #location {
+      background: var(--bg-secondary);
+    }
+
+    .ic {
+      background: var(--card-bg-soft);
+      border: 1px solid var(--border-gold);
+    }
+
+    .idet {
+      color: var(--text-soft);
+    }
+
+    .mb {
+      background: var(--nav-bg);
+      border: 1px solid var(--border-gold);
+    }
+
+    .mbs {
+      color: var(--text-soft);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg-tertiary);
+      border-top: 1px solid var(--border-gold);
+    }
+
+    .ftag {
+      color: var(--text-soft);
+    }
+
+    .fct {
+      color: var(--text-main);
+    }
+
+    .fl a {
+      color: var(--text-soft);
+    }
+
+    .fb2 {
+      border-top: 1px solid var(--border);
+    }
+
+    .fc2 {
+      color: var(--text-soft);
+    }
+
+    .sl a {
+      color: var(--text-soft);
+    }
+
+    /* ================= MOBILE FIX ================= */
+    @media (max-width: 768px) {
+      #hero {
+        height: 100vh !important;
+      }
+
+      .hcnt {
+        padding-top: 80px !important;
+      }
+    }
+  </style>
+  <!-- theme change code end -->
+
+
 </head>
 
 <body>
@@ -1138,7 +1385,7 @@
     NAV
   ============================================================ -->
     <nav id="nav">
-      <a href="https://kshirsagarmairwa.netlify.app/" class="nl" style="text-decoration:none;color:#d4af37;">✦
+      <a href="https://kshirsagarmairwa.netlify.app/" class="nl" style="text-decoration:none;color:#d4af37;">🪶
         Kshirsagar</a>
       <ul class="nm">
         <li><a href="#menu">Menu</a></li>
@@ -1146,7 +1393,7 @@
         <li><a href="#location">Location</a></li>
         <li><a href="#footer">Contact</a></li>
       </ul>
-      <a href="https://wa.me/9523242424?text=Hello, mujhe order place karna hai." class="ncta">Order Now</a>
+      <a href="https://wa.me/9931890824?text=Hello, mujhe order place karna hai." class="ncta">Order Now</a>
     </nav>
 
     <!-- ============================================================
@@ -1168,10 +1415,10 @@
           <span style="color:var(--gold);font-size:.38rem">●</span>
         </div>
         <h1 class="htitle">KSHIRSAGAR</h1>
-        <p class="hsub">Premium Indian Sweets &amp; Multi-Cuisine Restaurant</p>
+        <p class="hsub">Mairwa's Favorite Sweets & Fast Food Restaurant</p>
         <p class="hloc">MAIRWA &nbsp;·&nbsp; SIWAN &nbsp;·&nbsp; BIHAR</p>
         <div class="hbtns">
-          <button class="bp" onclick="window.open('https://wa.me/919523242424','_blank')">✦ Order on WhatsApp</button>
+          <button class="bp" onclick="window.open('https://wa.me/919931890824','_blank')">✦ Order on WhatsApp</button>
           <button class="bs" onclick="window.location.href='#menu'">View Menu →</button>
         </div>
       </div>
@@ -1353,10 +1600,10 @@
           <div>
             <div class="fct">CONNECT</div>
             <ul class="fl">
-              <li><a href="https://wa.me/919523242424">WhatsApp Order</a></li>
+              <li><a href="https://wa.me/919931890824">WhatsApp Order</a></li>
               <li><a href="#">Facebook</a></li>
               <li><a href="#">Instagram</a></li>
-              <li><a href="tel:+919523242424">Call Us</a></li>
+              <li><a href="tel:+919931890824">Call Us</a></li>
             </ul>
           </div>
         </div>
@@ -1435,7 +1682,7 @@
         ]
       },
       {
-        title: "Chilli", sub: "Half / Full", emoji: "🌶️",
+        title: "Chilli Manchurian", sub: "Half / Full", emoji: "🌶️",
         items: [
           { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in fiery chilli sauce" },
           { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Soft balls in tangy Manchurian gravy" },
