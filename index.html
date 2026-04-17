@@ -1,30 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- ============================================================
+  KSHIRSAGAR MAIRWA — Landing Page
+  Author: Vikash Kumar Gupta
+  Last Updated: Apr 2026
+  Live on: https://kshirsagarmairwa.netlify.app/
+  Sections: #hero | #menu | #legacy | #location | #footer
+  Performance: FPS-limited rAF, device detection,
+               lazy images, CSS-only hero background.
+============================================================ -->
+
 <head>
-  <!-- Google tag (gtag.js) -->
+
+<!-- ── GOOGLE ANALYTICS ── -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-1W6Y1V36EF"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-1W6Y1V36EF');
-
   </script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/700.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/900.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/latin.css">
+  <!-- ── META & SEO ── -->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="icon" href="logo2.png" type="image/png" title="Kshirsagar Logo">
-
   <title>Kshirsagar Mairwa | Best Sweets & Multi-Cuisine Restaurant</title>
   <meta name="title" content="Kshirsagar Mairwa | Best Sweets, Dosa & Multi-Cuisine Restaurant">
   <meta name="description"
-    content="Kshirsagar Mairwa - Serving Mairwa's finest sweets, Dosa, Chowmein, and Burgers since 1998. Order home delivery in Mairwa and 15km radius. Visit us for a royal experience!">
+    content="Kshirsagar Mairwa - Serving Mairwa's finest sweets, Dosa, Chowmein, and Burgers since 1998. Order home delivery in Mairwa and 15km radius.">
   <meta name="keywords"
-    content="Kshirsagar Mairwa, Best Restaurant in Mairwa, Sweets Shop in Mairwa, Dosa in Mairwa, Home Delivery Mairwa, Mairwa food order, Kshirsagar Siwan, Burger in Mairwa, Mithai Shop Mairwa">
-  <meta name="keywords"
-    content="Mairwa restaurant, Mairwa best restaurant, Best restaurant in Mairwa, Top restaurants in Mairwa, Kshirsagar Mairwa, Kshirsagar Sweets Mairwa, Mairwa food delivery, Order food online Mairwa, Best sweets in Mairwa, Masala Dosa Mairwa, Mairwa fast food, Restaurants near Mairwa Dham, Places to eat in Mairwa, Mairwa me khane ki jagah">
+    content="Kshirsagar Mairwa, Best Restaurant in Mairwa, Sweets Shop in Mairwa, Dosa in Mairwa, Home Delivery Mairwa, Burger in Mairwa, Mithai Shop Mairwa, Mairwa food delivery">
+  <meta name="author" content="Vikash Kumar Gupta">
+  <link rel="canonical" href="https://kshirsagarmairwa.netlify.app/">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kshirsagarmairwa.netlify.app/">
   <meta property="og:title" content="Kshirsagar Mairwa - Mairwa's Finest Since 1998">
@@ -32,125 +42,107 @@
     content="Premium Mithai, South Indian, and Chinese. Experience the taste of legacy. Order Now!">
   <meta property="og:image" content="https://kshirsagarmairwa.netlify.app/og-image.jpg">
 
-  <meta name="description"
-    content="Kshirsagar Mairwa - Mairwa's finest sweets, Dosa, and multi-cuisine restaurant since 1998. Experience premium taste with home delivery.">
-  <link rel="canonical" href="https://kshirsagarmairwa.netlify.app/">
-  <meta name="author" content="Vikash Kumar Gupta">
+  <link rel="icon" href="logo2.png" type="image/png" title="Kshirsagar Logo">
 
+  <!-- ── SCHEMA.ORG STRUCTURED DATA ── -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Restaurant",
-  "name": "Kshirsagar Mairwa",
-  "alternateName": "Kshirsagar Sweets and Restaurant",
-  "image": [
-    "https://kshirsagarmairwa.netlify.app/logo.png",
-    "https://kshirsagarmairwa.netlify.app/og-image.jpg"
-  ],
-  "@id": "https://kshirsagarmairwa.netlify.app/",
-  "url": "https://kshirsagarmairwa.netlify.app/",
-  "telephone": "+919523242424",
-  "priceRange": "₹₹",
-  "menu": "https://kshirsagarmairwa.netlify.app/#menu",
-  "description": "Kshirsagar is Mairwa's oldest and most premium restaurant since 1998, famous for authentic Indian Sweets, Masala Dosa, Burgers, and Chinese fast food. We offer home delivery across Mairwa and nearby areas.",
-  "servesCuisine": [
-    "Indian Sweets", 
-    "Mithai",
-    "South Indian", 
-    "Chinese", 
-    "Fast Food", 
-    "North Indian",
-    "Bihari"
-  ],
-  "acceptsReservations": "true",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Main Market, Station Road",
-    "addressLocality": "Mairwa",
-    "addressRegion": "Bihar",
-    "postalCode": "841239",
-    "addressCountry": "IN"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 26.2345, 
-    "longitude": 84.1432
-  },
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": [
-      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Kshirsagar Mairwa",
+    "alternateName": "Kshirsagar Sweets and Restaurant",
+    "image": ["https://kshirsagarmairwa.netlify.app/logo.png", "https://kshirsagarmairwa.netlify.app/og-image.jpg"],
+    "@id": "https://kshirsagarmairwa.netlify.app/",
+    "url": "https://kshirsagarmairwa.netlify.app/",
+    "telephone": "+919523242424",
+    "priceRange": "₹₹",
+    "menu": "https://kshirsagarmairwa.netlify.app/#menu",
+    "description": "Kshirsagar is Mairwa's oldest and most premium restaurant since 1998, famous for authentic Indian Sweets, Masala Dosa, Burgers, and Chinese fast food.",
+    "servesCuisine": ["Indian Sweets","Mithai","South Indian","Chinese","Fast Food","North Indian","Bihari"],
+    "acceptsReservations": "true",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Main Market, Station Road",
+      "addressLocality": "Mairwa",
+      "addressRegion": "Bihar",
+      "postalCode": "841239",
+      "addressCountry": "IN"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 26.2345, "longitude": 84.1432 },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "06:00",
+      "closes": "22:00"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Mairwa" },
+      { "@type": "City", "name": "Siwan" }
     ],
-    "opens": "06:00",
-    "closes": "22:00"
-  },
-  "areaServed": [
-    {
-      "@type": "City",
-      "name": "Mairwa"
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Restaurant Menu",
+      "itemListElement": [
+        { "@type": "Offer", "name": "Masala Dosa Special", "price": "70", "priceCurrency": "INR" },
+        { "@type": "Offer", "name": "Premium Kaju Katli", "priceCurrency": "INR" }
+      ]
     },
-    {
-      "@type": "City",
-      "name": "Siwan"
-    },
-    {
-      "@type": "LandmarksOrHistoricalBuildings",
-      "name": "Mairwa Dham"
-    },
-    {
-      "@type": "Place",
-      "name": "station Road"
-    },
-    {
-      "@type": "Place",
-      "name": "Mairwa Station Road"
-    }
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Restaurant Menu",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "name": "Masala Dosa Special",
-        "price": "70",
-        "priceCurrency": "INR"
-      },
-      {
-        "@type": "Offer",
-        "name": "Premium Kaju Katli",
-        "priceCurrency": "INR"
-      }
-    ]
-  },
-  "keywords": "Best Sweets in Mairwa, Masala Dosa Mairwa, Chowmein, Burger, Veg Roll, Paneer Chilli, Kaju Katli, Rasgulla, Jalebi, Royal Thali, Food Delivery Mairwa, Restaurant near me Mairwa"
-}
-</script>
+    "keywords": "Best Sweets in Mairwa, Masala Dosa Mairwa, Chowmein, Burger, Veg Roll, Paneer Chilli, Kaju Katli, Rasgulla, Jalebi, Royal Thali"
+  }
+  </script>
 
+  <!-- ── FONTS ── -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/700.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/900.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5/latin.css">
+
+  <!-- ── TAILWIND (utility resets only) ── -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  
+
+  <!-- ============================================================
+    GLOBAL STYLES
+    Organized by: Variables → Animations → Base → Components
+  ============================================================ -->
   <style>
+    /* ── CSS VARIABLES ── */
+    :root {
+      --gold: #d4af37;
+      --saffron: #f97316;
+      --bg: #080808;
+    }
+
+    /* ── RESET & BASE ── */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     html {
       scroll-behavior: smooth;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box
+    #landing {
+      background: var(--bg);
+      color: #fff;
+      font-family: 'Playfair Display', Georgia, serif;
+      overflow-x: hidden;
+      position: relative;
+      cursor: none;
     }
 
-    :root {
-      --gold: #d4af37;
-      --saffron: #f97316;
-      --bg: #080808
-    }
-
+    /* ── KEYFRAME ANIMATIONS ── */
     @keyframes shimmer {
       0% {
-        background-position: -200% center
+        background-position: -200% center;
       }
 
       100% {
-        background-position: 200% center
+        background-position: 200% center;
       }
     }
 
@@ -158,45 +150,35 @@
 
       0%,
       100% {
-        box-shadow: 0 0 20px rgba(212, 175, 55, .18)
+        box-shadow: 0 0 20px rgba(212, 175, 55, .18);
       }
 
       50% {
-        box-shadow: 0 0 50px rgba(212, 175, 55, .45), 0 0 80px rgba(212, 175, 55, .15)
+        box-shadow: 0 0 50px rgba(212, 175, 55, .45), 0 0 80px rgba(212, 175, 55, .15);
       }
     }
 
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(32px)
+        transform: translateY(32px);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0)
+        transform: translateY(0);
       }
     }
 
     @keyframes ping {
       0% {
         transform: translate(-50%, -50%) scale(1);
-        opacity: .8
+        opacity: .8;
       }
 
       100% {
         transform: translate(-50%, -50%) scale(2.8);
-        opacity: 0
-      }
-    }
-
-    @keyframes rotateSlow {
-      from {
-        transform: rotate(0)
-      }
-
-      to {
-        transform: rotate(360deg)
+        opacity: 0;
       }
     }
 
@@ -205,24 +187,16 @@
       0%,
       100% {
         opacity: 1;
-        transform: translateY(0)
+        transform: translateY(0);
       }
 
       50% {
         opacity: .7;
-        transform: translateY(-6px)
+        transform: translateY(-6px);
       }
     }
 
-    #landing {
-      background: #080808;
-      color: #fff;
-      font-family: 'Playfair Display', Georgia, serif;
-      overflow-x: hidden;
-      position: relative;
-      cursor: none
-    }
-
+    /* ── CUSTOM CURSOR (desktop only) ── */
     #cursor {
       position: fixed;
       width: 38px;
@@ -233,7 +207,7 @@
       z-index: 9999;
       transform: translate(-50%, -50%);
       transition: width .15s, height .15s, opacity .2s;
-      mix-blend-mode: exclusion
+      mix-blend-mode: exclusion;
     }
 
     #cdot {
@@ -244,9 +218,12 @@
       border-radius: 50%;
       pointer-events: none;
       z-index: 9999;
-      transform: translate(-50%, -50%)
+      transform: translate(-50%, -50%);
     }
 
+    /* ============================================================
+      SECTION: NAV
+    ============================================================ */
     nav {
       position: fixed;
       top: 0;
@@ -257,26 +234,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: all .35s
+      transition: all .35s;
     }
 
     nav.scrolled {
       background: rgba(8, 8, 8, .93);
       backdrop-filter: blur(24px);
-      border-bottom: 1px solid rgba(212, 175, 55, .09)
+      border-bottom: 1px solid rgba(212, 175, 55, .09);
     }
 
     .nl {
       font-size: 1.35rem;
       font-weight: 900;
       color: var(--gold);
-      letter-spacing: .02em
+      letter-spacing: .02em;
     }
 
     .nm {
       display: flex;
       gap: 2rem;
-      list-style: none
+      list-style: none;
     }
 
     .nm a {
@@ -285,11 +262,11 @@
       font-family: 'Inter', system-ui, sans-serif;
       font-size: .82rem;
       letter-spacing: .06em;
-      transition: color .3s
+      transition: color .3s;
     }
 
     .nm a:hover {
-      color: var(--gold)
+      color: var(--gold);
     }
 
     .ncta {
@@ -302,33 +279,78 @@
       font-size: .82rem;
       font-family: 'Inter', sans-serif;
       cursor: none;
-      transition: transform .2s, box-shadow .2s
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      display: inline-block;
     }
 
     .ncta:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(212, 175, 55, .4)
+      box-shadow: 0 0 25px rgba(212, 175, 55, .4);
     }
 
+    /* ============================================================
+      SECTION: #hero
+      CSS-only radial background (replaces Three.js canvas)
+    ============================================================ */
     #hero {
       position: relative;
       height: 100vh;
       min-height: 620px;
-      overflow: hidden
-    }
-
-    #hc {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 60% 40%, rgba(212, 175, 55, .12) 0%, transparent 55%),
+        radial-gradient(ellipse at 30% 70%, rgba(249, 115, 22, .08) 0%, transparent 50%),
+        radial-gradient(ellipse at center, transparent 22%, #080808 72%),
+        #080808;
     }
 
     .ho {
       position: absolute;
       inset: 0;
       background: radial-gradient(ellipse at center, transparent 22%, #080808 72%);
-      pointer-events: none
+      pointer-events: none;
+    }
+
+    /* Decorative animated orb (CSS-only, replaces particle system) */
+    .hero-orb {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 175, 55, .09) 0%, rgba(249, 115, 22, .04) 40%, transparent 70%);
+      transform: translate(-50%, -50%);
+      animation: glow 5s ease infinite;
+      pointer-events: none;
+    }
+
+    .hero-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 175, 55, .1);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hr1 {
+      width: 320px;
+      height: 320px;
+    }
+
+    .hr2 {
+      width: 520px;
+      height: 520px;
+      border-color: rgba(249, 115, 22, .06);
+    }
+
+    .hr3 {
+      width: 700px;
+      height: 700px;
+      border-color: rgba(255, 255, 255, .03);
     }
 
     .hcnt {
@@ -340,7 +362,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 1.5rem
+      padding: 0 1.5rem;
     }
 
     .hbadge {
@@ -352,14 +374,14 @@
       border-radius: 100px;
       background: rgba(212, 175, 55, .04);
       margin-bottom: 1.8rem;
-      animation: fadeUp .9s ease both
+      animation: fadeUp .9s ease both;
     }
 
     .hbadge span {
       font-size: .7rem;
       color: #777;
       letter-spacing: .18em;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .htitle {
@@ -373,7 +395,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 4.5s linear infinite, fadeUp .9s ease .12s both
+      animation: shimmer 4.5s linear infinite, fadeUp .9s ease .12s both;
     }
 
     .hsub {
@@ -381,7 +403,7 @@
       color: #6a6a6a;
       font-style: italic;
       margin-bottom: .45rem;
-      animation: fadeUp .9s ease .28s both
+      animation: fadeUp .9s ease .28s both;
     }
 
     .hloc {
@@ -390,13 +412,13 @@
       color: #3d3d3d;
       letter-spacing: .18em;
       margin-bottom: 2.5rem;
-      animation: fadeUp .9s ease .38s both
+      animation: fadeUp .9s ease .38s both;
     }
 
     .hbtns {
       display: flex;
       gap: .85rem;
-      animation: fadeUp .9s ease .48s both
+      animation: fadeUp .9s ease .48s both;
     }
 
     .bp {
@@ -411,11 +433,11 @@
       letter-spacing: .03em;
       cursor: none;
       animation: glow 3.5s ease infinite;
-      transition: background .3s
+      transition: background .3s;
     }
 
     .bp:hover {
-      background: rgba(212, 175, 55, .13)
+      background: rgba(212, 175, 55, .13);
     }
 
     .bs {
@@ -427,12 +449,12 @@
       font-family: 'Inter', sans-serif;
       font-size: .9rem;
       cursor: none;
-      transition: all .3s
+      transition: all .3s;
     }
 
     .bs:hover {
       border-color: rgba(255, 255, 255, .18);
-      color: #777
+      color: #777;
     }
 
     .scroll-ind {
@@ -447,23 +469,29 @@
       color: #333;
       font-family: 'Inter', sans-serif;
       font-size: .68rem;
-      letter-spacing: .12em
+      letter-spacing: .12em;
     }
 
     .scroll-line {
       width: 1px;
       height: 36px;
       background: linear-gradient(to bottom, var(--gold), transparent);
-      animation: fadeUp 2s ease infinite
+      animation: fadeUp 2s ease infinite;
     }
 
+    /* ============================================================
+      SECTION: #menu
+    ============================================================ */
     #menu {
       padding: 5rem 0 3rem;
-      background: #040404
+      background: #040404;
+      background-image: radial-gradient(circle at center, rgba(212, 175, 55, .06), transparent 70%);
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
     .sh {
-      padding: 0 2.5rem 3rem
+      padding: 0 2.5rem 3rem;
     }
 
     .ey {
@@ -471,24 +499,24 @@
       font-size: .7rem;
       letter-spacing: .25em;
       font-family: 'Inter', sans-serif;
-      margin-bottom: .65rem
+      margin-bottom: .65rem;
     }
 
     .st {
       font-size: clamp(1.9rem, 4vw, 3rem);
       font-weight: 700;
       line-height: 1.1;
-      color: #fff
+      color: #fff;
     }
 
     .gt {
       background: linear-gradient(135deg, var(--gold), var(--saffron));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text
+      background-clip: text;
     }
 
-    /* ── NEW MENU DESIGN ── */
+    /* Category nav */
     .menu-cat-nav {
       display: flex;
       gap: .55rem;
@@ -497,7 +525,10 @@
       scrollbar-width: none;
       flex-wrap: nowrap;
     }
-    .menu-cat-nav::-webkit-scrollbar { display: none; }
+
+    .menu-cat-nav::-webkit-scrollbar {
+      display: none;
+    }
 
     .menu-cat-btn {
       display: inline-flex;
@@ -505,8 +536,8 @@
       gap: .45rem;
       padding: .52rem 1.1rem;
       border-radius: 100px;
-      border: 1px solid rgba(212,175,55,.2);
-      background: rgba(212,175,55,.04);
+      border: 1px solid rgba(212, 175, 55, .2);
+      background: rgba(212, 175, 55, .04);
       color: #666;
       font-family: 'Inter', sans-serif;
       font-size: .78rem;
@@ -517,31 +548,30 @@
       transition: all .25s;
       flex-shrink: 0;
     }
-    .menu-cat-btn .mcb-emoji { font-size: 1rem; }
-    .menu-cat-btn:hover {
-      border-color: rgba(212,175,55,.5);
-      color: #d4af37;
-      background: rgba(212,175,55,.08);
-    }
-    .menu-cat-btn.active {
-      border-color: var(--gold);
-      background: linear-gradient(135deg, rgba(212,175,55,.18), rgba(249,115,22,.1));
-      color: #d4af37;
-      box-shadow: 0 0 18px rgba(212,175,55,.18);
+
+    .menu-cat-btn .mcb-emoji {
+      font-size: 1rem;
     }
 
+    .menu-cat-btn:hover {
+      border-color: rgba(212, 175, 55, .5);
+      color: #d4af37;
+      background: rgba(212, 175, 55, .08);
+    }
+
+    .menu-cat-btn.active {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, rgba(212, 175, 55, .18), rgba(249, 115, 22, .1));
+      color: #d4af37;
+      box-shadow: 0 0 18px rgba(212, 175, 55, .18);
+    }
+
+    /* Menu item grid */
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: .75rem;
       padding: 0 2.5rem 3rem;
-    }
-    @media (max-width: 768px) {
-      .menu-grid {
-        grid-template-columns: 1fr !important;
-        padding: 0 1rem 2rem !important;
-      }
-      .menu-cat-nav { padding: 0 1rem 1.5rem !important; }
     }
 
     .menu-item-row {
@@ -549,14 +579,15 @@
       align-items: center;
       gap: 1rem;
       padding: .85rem 1rem;
-      background: rgba(255,255,255,.025);
-      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255, 255, 255, .025);
+      border: 1px solid rgba(255, 255, 255, .06);
       border-radius: 14px;
       transition: border-color .25s, background .25s;
     }
+
     .menu-item-row:hover {
-      border-color: rgba(212,175,55,.25);
-      background: rgba(212,175,55,.04);
+      border-color: rgba(212, 175, 55, .25);
+      background: rgba(212, 175, 55, .04);
     }
 
     .menu-item-img {
@@ -564,14 +595,15 @@
       height: 62px;
       min-width: 62px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(212,175,55,.15), rgba(249,115,22,.1));
-      border: 1.5px solid rgba(212,175,55,.22);
+      background: linear-gradient(135deg, rgba(212, 175, 55, .15), rgba(249, 115, 22, .1));
+      border: 1.5px solid rgba(212, 175, 55, .22);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.7rem;
       overflow: hidden;
     }
+
     .menu-item-img img {
       width: 100%;
       height: 100%;
@@ -583,6 +615,7 @@
       flex: 1;
       min-width: 0;
     }
+
     .menu-item-name {
       font-size: .92rem;
       font-weight: 700;
@@ -592,6 +625,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+
     .menu-item-desc {
       font-size: .72rem;
       color: #4a4a4a;
@@ -599,6 +633,7 @@
       margin-top: .18rem;
       line-height: 1.4;
     }
+
     .menu-item-tag {
       display: inline-block;
       margin-top: .35rem;
@@ -606,8 +641,8 @@
       letter-spacing: .07em;
       color: #5a5a5a;
       font-family: 'Inter', sans-serif;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .06);
       border-radius: 100px;
       padding: .1rem .55rem;
     }
@@ -621,12 +656,17 @@
       text-align: right;
       min-width: fit-content;
     }
-    /* ── END NEW MENU DESIGN ── */
 
+    /* ============================================================
+      SECTION: #legacy
+    ============================================================ */
     #legacy {
       padding: 5rem 2.5rem;
       position: relative;
-      overflow: hidden
+      overflow: hidden;
+      background-image: radial-gradient(circle at center, rgba(212, 175, 55, .06), transparent 70%);
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
     .lglow {
@@ -638,14 +678,14 @@
       border-radius: 50%;
       background: radial-gradient(circle, rgba(212, 175, 55, .035) 0%, transparent 70%);
       transform: translate(-50%, -50%);
-      pointer-events: none
+      pointer-events: none;
     }
 
     .sgrid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.3rem;
-      margin-bottom: 4rem
+      margin-bottom: 4rem;
     }
 
     .scard {
@@ -654,11 +694,11 @@
       background: rgba(255, 255, 255, .018);
       border: 1px solid rgba(212, 175, 55, .07);
       border-radius: 15px;
-      transition: border-color .3s
+      transition: border-color .3s;
     }
 
     .scard:hover {
-      border-color: rgba(212, 175, 55, .2)
+      border-color: rgba(212, 175, 55, .2);
     }
 
     .snum {
@@ -668,7 +708,7 @@
       background: linear-gradient(135deg, var(--gold), var(--saffron));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text
+      background-clip: text;
     }
 
     .slabel {
@@ -676,26 +716,26 @@
       font-size: .9rem;
       font-weight: 600;
       margin: .35rem 0;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .ssub {
       color: #3d3d3d;
       font-size: .76rem;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .stgrid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
-      align-items: center
+      align-items: center;
     }
 
     .stgrid h3 {
       font-size: 1.75rem;
       color: var(--gold);
-      margin-bottom: 1.1rem
+      margin-bottom: 1.1rem;
     }
 
     .stgrid p {
@@ -703,13 +743,13 @@
       line-height: 1.95;
       font-size: .9rem;
       margin-bottom: .7rem;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .fgrid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: .9rem
+      gap: .9rem;
     }
 
     .fc {
@@ -717,42 +757,45 @@
       background: rgba(212, 175, 55, .022);
       border: 1px solid rgba(212, 175, 55, .07);
       border-radius: 13px;
-      transition: border-color .3s
+      transition: border-color .3s;
     }
 
     .fc:hover {
-      border-color: rgba(212, 175, 55, .18)
+      border-color: rgba(212, 175, 55, .18);
     }
 
     .fi {
       font-size: 1.5rem;
       margin-bottom: .55rem;
-      display: block
+      display: block;
     }
 
     .ft {
       color: #ddd;
       font-weight: 600;
       font-size: .85rem;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .fd {
       color: #3d3d3d;
       font-size: .75rem;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
+    /* ============================================================
+      SECTION: #location
+    ============================================================ */
     #location {
       padding: 5rem 2.5rem;
-      background: #060606
+      background: #060606;
     }
 
     .lgrid {
       display: grid;
       grid-template-columns: 1fr 1.45fr;
       gap: 3rem;
-      align-items: center
+      align-items: center;
     }
 
     .ic {
@@ -763,11 +806,11 @@
       border: 1px solid rgba(212, 175, 55, .06);
       border-radius: 13px;
       margin-bottom: .9rem;
-      transition: border-color .3s
+      transition: border-color .3s;
     }
 
     .ic:hover {
-      border-color: rgba(212, 175, 55, .18)
+      border-color: rgba(212, 175, 55, .18);
     }
 
     .ilbl {
@@ -776,14 +819,14 @@
       font-size: .76rem;
       letter-spacing: .05em;
       font-family: 'Inter', sans-serif;
-      margin-bottom: .28rem
+      margin-bottom: .28rem;
     }
 
     .idet {
       color: #5a5a5a;
       font-size: .82rem;
       font-family: 'Inter', sans-serif;
-      line-height: 1.65
+      line-height: 1.65;
     }
 
     .mc {
@@ -792,12 +835,7 @@
       border-radius: 18px;
       overflow: hidden;
       border: 1px solid rgba(212, 175, 55, .14);
-      box-shadow: 0 0 50px rgba(212, 175, 55, .04)
-    }
-
-    #lc {
-      width: 100%;
-      height: 100%
+      box-shadow: 0 0 50px rgba(212, 175, 55, .04);
     }
 
     .mb {
@@ -808,19 +846,19 @@
       backdrop-filter: blur(14px);
       border: 1px solid rgba(212, 175, 55, .22);
       border-radius: 11px;
-      padding: .6rem .95rem
+      padding: .6rem .95rem;
     }
 
     .mbt {
       color: var(--gold);
       font-weight: 700;
-      font-size: .9rem
+      font-size: .9rem;
     }
 
     .mbs {
       color: #444;
       font-size: .68rem;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .ping-wrap {
@@ -828,7 +866,7 @@
       top: 50%;
       left: 50%;
       width: 14px;
-      height: 14px
+      height: 14px;
     }
 
     .ping-dot {
@@ -839,7 +877,7 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%)
+      transform: translate(-50%, -50%);
     }
 
     .ping-ring {
@@ -851,27 +889,30 @@
       top: 50%;
       left: 50%;
       animation: ping 2s ease infinite;
-      opacity: 0
+      opacity: 0;
     }
 
+    /* ============================================================
+      SECTION: footer #footer
+    ============================================================ */
     footer {
       padding: 4rem 2.5rem 2rem;
       background: #030303;
-      border-top: 1px solid rgba(212, 175, 55, .06)
+      border-top: 1px solid rgba(212, 175, 55, .06);
     }
 
     .fg {
       display: grid;
       grid-template-columns: 1.8fr 1fr 1fr 1fr;
       gap: 2.5rem;
-      margin-bottom: 3rem
+      margin-bottom: 3rem;
     }
 
     .fb {
       font-size: 1.6rem;
       font-weight: 900;
       color: var(--gold);
-      margin-bottom: .65rem
+      margin-bottom: .65rem;
     }
 
     .ftag {
@@ -879,7 +920,7 @@
       font-size: .82rem;
       line-height: 1.75;
       font-family: 'Inter', sans-serif;
-      max-width: 220px
+      max-width: 220px;
     }
 
     .fct {
@@ -888,15 +929,15 @@
       font-size: .8rem;
       letter-spacing: .07em;
       margin-bottom: 1.1rem;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .fl {
-      list-style: none
+      list-style: none;
     }
 
     .fl li {
-      margin-bottom: .6rem
+      margin-bottom: .6rem;
     }
 
     .fl a {
@@ -905,12 +946,12 @@
       font-size: .82rem;
       font-family: 'Inter', sans-serif;
       transition: color .3s, transform .3s;
-      display: inline-block
+      display: inline-block;
     }
 
     .fl a:hover {
       color: var(--gold);
-      transform: translateX(4px)
+      transform: translateX(4px);
     }
 
     .fb2 {
@@ -918,18 +959,18 @@
       border-top: 1px solid rgba(255, 255, 255, .035);
       display: flex;
       justify-content: space-between;
-      align-items: center
+      align-items: center;
     }
 
     .fc2 {
       color: #282828;
       font-size: .75rem;
-      font-family: 'Inter', sans-serif
+      font-family: 'Inter', sans-serif;
     }
 
     .sl {
       display: flex;
-      gap: 1.2rem
+      gap: 1.2rem;
     }
 
     .sl a {
@@ -939,168 +980,165 @@
       font-family: 'Inter', sans-serif;
       font-weight: 700;
       letter-spacing: .05em;
-      transition: color .3s
+      transition: color .3s;
     }
 
     .sl a:hover {
-      color: var(--gold)
+      color: var(--gold);
     }
 
+    .dev-link {
+      text-decoration: none;
+      color: var(--gold);
+      transition: color .3s;
+      font-weight: bold;
+    }
 
+    .dev-link:hover {
+      color: #fff;
+    }
 
-    /* chatgpt css start */
-    /* chatgpt css start */
-
-    /* @media (max-width:768px){*{max-width:100%!important}html,body{overflow-x:hidden!important}#cursor,#cdot{display:none!important}#landing{cursor:auto!important}nav{padding:.7rem 1rem!important}.nm{display:none!important}.ncta{padding:.45rem .9rem!important;font-size:.7rem!important}#hero{height:auto!important;min-height:100vh!important}#hc{display:none!important}.htitle{font-size:2.2rem!important;line-height:1.1!important}.hsub{font-size:.8rem!important}.hloc{font-size:.65rem!important}.hbtns{flex-direction:column!important;width:100%!important;gap:.6rem!important}.bp,.bs{width:100%!important;font-size:.8rem!important}.sh{padding:0 1rem 2rem!important}.mscroll{padding:0 1rem 2rem!important;gap:.8rem!important}.mcard{width:200px!important;height:auto!important;padding:1.2rem!important}#legacy{padding:3rem 1rem!important}.sgrid{grid-template-columns:1fr!important}.stgrid{grid-template-columns:1fr!important;gap:1.5rem!important}#location{padding:3rem 1rem!important}.lgrid{grid-template-columns:1fr!important;gap:2rem!important}.mc{height:260px!important}#lc{display:none!important}footer{padding:3rem 1rem!important}.fg{grid-template-columns:1fr!important;gap:1.5rem!important}.fb2{flex-direction:column!important;gap:.8rem!important;text-align:center!important}} */
-
-    @media (max-width:768px) {
-      * {
-        max-width: 100% !important
-      }
+    /* ============================================================
+      RESPONSIVE: Mobile (max-width: 768px)
+    ============================================================ */
+    @media (max-width: 768px) {
 
       html,
       body {
-        overflow-x: hidden !important
+        overflow-x: hidden !important;
       }
 
+      /* Hide custom cursor on touch devices */
       #cursor,
       #cdot {
-        display: none !important
+        display: none !important;
       }
 
       #landing {
-        cursor: auto !important
+        cursor: auto !important;
       }
 
+      /* Nav */
       nav {
-        padding: .7rem 1rem !important
+        padding: .7rem 1rem !important;
       }
 
       .nm {
-        display: none !important
+        display: none !important;
       }
 
       .ncta {
         padding: .45rem .9rem !important;
-        font-size: .7rem !important
+        font-size: .7rem !important;
       }
 
+      /* Hero */
       #hero {
-        height: auto !important;
-        min-height: 100vh !important
-      }
-
-      #hc {
-        display: none !important
+        height: 100vh !important;
+        min-height: 100vh !important;
       }
 
       .htitle {
         font-size: 2.2rem !important;
-        line-height: 1.1 !important
+        line-height: 1.1 !important;
       }
 
       .hsub {
-        font-size: .8rem !important
+        font-size: .8rem !important;
       }
 
       .hloc {
-        font-size: .65rem !important
+        font-size: .65rem !important;
       }
 
       .hbtns {
         flex-direction: column !important;
         width: 100% !important;
-        gap: .6rem !important
+        gap: .6rem !important;
       }
+      .hcnt {
+      padding-top: 80px !important; 
+    }
 
       .bp,
       .bs {
         width: 100% !important;
-        font-size: .8rem !important
+        font-size: .8rem !important;
       }
 
+      /* Menu */
       .sh {
-        padding: 0 1rem 2rem !important
-      }
-
-      .mscroll {
         padding: 0 1rem 2rem !important;
-        gap: .8rem !important
       }
 
-      .mcard {
-        width: 200px !important;
-        height: auto !important;
-        padding: 1.2rem !important
+      .menu-cat-nav {
+        padding: 0 1rem 1.5rem !important;
       }
 
+      .menu-grid {
+        grid-template-columns: 1fr !important;
+        padding: 0 1rem 2rem !important;
+      }
+
+      /* Legacy */
       #legacy {
-        padding: 3rem 1rem !important
+        padding: 3rem 1rem !important;
       }
 
       .sgrid {
-        grid-template-columns: 1fr !important
+        grid-template-columns: 1fr !important;
       }
 
       .stgrid {
         grid-template-columns: 1fr !important;
-        gap: 1.5rem !important
+        gap: 1.5rem !important;
       }
 
+      /* Location */
       #location {
-        padding: 3rem 1rem !important
+        padding: 3rem 1rem !important;
       }
 
       .lgrid {
         grid-template-columns: 1fr !important;
-        gap: 2rem !important
+        gap: 2rem !important;
       }
 
       .mc {
-        height: 260px !important
+        height: 260px !important;
       }
 
-      #lc {
-        display: none !important
-      }
-
+      /* Footer */
       footer {
-        padding: 3rem 1rem !important
+        padding: 3rem 1rem !important;
       }
 
       .fg {
         grid-template-columns: 1fr !important;
-        gap: 1.5rem !important
+        gap: 1.5rem !important;
       }
 
       .fb2 {
         flex-direction: column !important;
         gap: .8rem !important;
-        text-align: center !important
+        text-align: center !important;
       }
     }
-
-    /* // --- for mobile scroll animation -- */
-    #menu,
-    #legacy {
-      background-image: radial-gradient(circle at center, rgba(212, 175, 55, .06), transparent 70%);
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
-    /* chatgpt css end */
-    /* chatgpt css end */
   </style>
 </head>
 
 <body>
-
   <div id="landing">
+
+    <!-- Custom cursor elements (hidden on mobile via CSS) -->
     <div id="cursor"></div>
     <div id="cdot"></div>
 
+    <!-- ============================================================
+    NAV
+  ============================================================ -->
     <nav id="nav">
-      <a href="https://kshirsagarmairwa.netlify.app/" class="nl" style="text-decoration: none; color: #d4af37;">✦
+      <a href="https://kshirsagarmairwa.netlify.app/" class="nl" style="text-decoration:none;color:#d4af37;">✦
         Kshirsagar</a>
       <ul class="nm">
         <li><a href="#menu">Menu</a></li>
@@ -1108,43 +1146,59 @@
         <li><a href="#location">Location</a></li>
         <li><a href="#footer">Contact</a></li>
       </ul>
-      <!-- <button class="ncta">Order Now</button> -->
-      <a href="https://wa.me/9523242424?text=Hello, mujhe order place karna hai." class="ncta no-underline">Order
-        Now</a>
+      <a href="https://wa.me/9523242424?text=Hello, mujhe order place karna hai." class="ncta">Order Now</a>
     </nav>
 
+    <!-- ============================================================
+    SECTION: #hero
+    CSS-only animated background. No canvas/Three.js required.
+  ============================================================ -->
     <section id="hero">
-      <canvas id="hc"></canvas>
+      <!-- Decorative CSS orbs (GPU-friendly, replaces particle system) -->
+      <div class="hero-orb"></div>
+      <div class="hero-ring hr1"></div>
+      <div class="hero-ring hr2"></div>
+      <div class="hero-ring hr3"></div>
       <div class="ho"></div>
+
       <div class="hcnt">
-        <div class="hbadge"><span style="color:var(--gold);font-size:.38rem">●</span><span>MAIRWA'S FINEST SINCE
-            1998</span><span style="color:var(--gold);font-size:.38rem">●</span></div>
+        <div class="hbadge">
+          <span style="color:var(--gold);font-size:.38rem">●</span>
+          <span>MAIRWA'S FINEST SINCE 1998</span>
+          <span style="color:var(--gold);font-size:.38rem">●</span>
+        </div>
         <h1 class="htitle">KSHIRSAGAR</h1>
         <p class="hsub">Premium Indian Sweets &amp; Multi-Cuisine Restaurant</p>
         <p class="hloc">MAIRWA &nbsp;·&nbsp; SIWAN &nbsp;·&nbsp; BIHAR</p>
         <div class="hbtns">
-          <button class="bp" onclick="window.open('https://wa.me/919523242424', '_blank')">✦ Order on WhatsApp</button>
-
+          <button class="bp" onclick="window.open('https://wa.me/919523242424','_blank')">✦ Order on WhatsApp</button>
           <button class="bs" onclick="window.location.href='#menu'">View Menu →</button>
         </div>
       </div>
-      <div class="scroll-ind"><span>SCROLL</span>
+
+      <div class="scroll-ind">
+        <span>SCROLL</span>
         <div class="scroll-line"></div>
       </div>
     </section>
 
+    <!-- ============================================================
+    SECTION: #menu
+    Category filter nav + item grid rendered via JS (MENU data below).
+  ============================================================ -->
     <section id="menu">
       <div class="sh">
         <div class="ey">— THE TASTE MATRIX —</div>
         <h2 class="st">A Universe of <span class="gt">Flavors</span></h2>
       </div>
-      <!-- Category Nav Bar -->
       <div class="menu-cat-nav" id="menuCatNav"></div>
-      <!-- Item Grid -->
       <div class="menu-grid" id="menuGrid"></div>
     </section>
 
-
+    <!-- ============================================================
+    SECTION: #legacy
+    Animated counters triggered on scroll via IntersectionObserver.
+  ============================================================ -->
     <section id="legacy">
       <div class="lglow"></div>
       <div style="max-width:1100px;margin:0 auto">
@@ -1154,8 +1208,10 @@
           <p
             style="color:#444;margin-top:.9rem;font-size:.88rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.85;font-family:'Inter',sans-serif">
             From a humble sweet shop to Mairwa's most beloved destination — our journey is seasoned with passion and the
-            finest ingredients.</p>
+            finest ingredients.
+          </p>
         </div>
+
         <div class="sgrid">
           <div class="scard">
             <div class="snum" id="sy">0</div>
@@ -1173,6 +1229,7 @@
             <div class="ssub">On our menu</div>
           </div>
         </div>
+
         <div class="stgrid">
           <div>
             <h3>A Tradition of Excellence</h3>
@@ -1203,35 +1260,41 @@
       </div>
     </section>
 
+    <!-- ============================================================
+    SECTION: #location
+    Google Maps embed + contact info cards.
+  ============================================================ -->
     <section id="location">
       <div style="max-width:1100px;margin:0 auto">
         <div style="text-align:center;margin-bottom:3.5rem">
           <div class="ey">— FIND US —</div>
           <h2 class="st">Visit <span class="gt">Kshirsagar</span></h2>
         </div>
-
-
         <div class="lgrid">
           <div>
-            <div class="ic"><span style="font-size:1.3rem;flex-shrink:0">📍</span>
+            <div class="ic">
+              <span style="font-size:1.3rem;flex-shrink:0">📍</span>
               <div>
                 <div class="ilbl">ADDRESS</div>
                 <div class="idet">Main Market, Mairwa<br>Siwan, Bihar — 841239</div>
               </div>
             </div>
-            <div class="ic"><span style="font-size:1.3rem;flex-shrink:0">📞</span>
+            <div class="ic">
+              <span style="font-size:1.3rem;flex-shrink:0">📞</span>
               <div>
                 <div class="ilbl">PHONE</div>
                 <div class="idet">+91 95232 42424<br>6:00 AM – 10:00 PM</div>
               </div>
             </div>
-            <div class="ic"><span style="font-size:1.3rem;flex-shrink:0">🕐</span>
+            <div class="ic">
+              <span style="font-size:1.3rem;flex-shrink:0">🕐</span>
               <div>
                 <div class="ilbl">HOURS</div>
                 <div class="idet">Mon – Sun: 6:00 AM – 10:00 PM<br>Festival Days: Extended Hours</div>
               </div>
             </div>
-            <div class="ic"><span style="font-size:1.3rem;flex-shrink:0">🛵</span>
+            <div class="ic">
+              <span style="font-size:1.3rem;flex-shrink:0">🛵</span>
               <div>
                 <div class="ilbl">DELIVERY</div>
                 <div class="idet">Mairwa &amp; 15km radius<br>Call to confirm availability</div>
@@ -1240,12 +1303,11 @@
           </div>
 
           <div class="mc">
-
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3578.4920029665986!2d84.15081690000001!3d26.2373274!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399253b11832e8db%3A0x88f735f0ec8e1283!2sKshirsagar!5e0!3m2!1sen!2sin!4v1775750507131!5m2!1sen!2sin"
               width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <div class="m b">
+              referrerpolicy="no-referrer-when-downgrade" title="Kshirsagar Mairwa Location"></iframe>
+            <div class="mb">
               <div class="mbt">✦ Kshirsagar</div>
               <div class="mbs">Mairwa, Siwan</div>
             </div>
@@ -1253,43 +1315,41 @@
               <div class="ping-dot"></div>
               <div class="ping-ring"></div>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </section>
+
+    <!-- ============================================================
+    SECTION: footer #footer
+  ============================================================ -->
     <footer id="footer">
-      <div style="max-width:1100px;margin:0 auto; padding: 20px;">
+      <div style="max-width:1100px;margin:0 auto;padding:20px">
         <div class="fg">
           <div>
             <div class="fb">✦ Kshirsagar</div>
             <p class="ftag">Mairwa's premium sweet shop and multi-cuisine restaurant, crafting unforgettable flavors
               since 1998.</p>
-            <p class="ftag" style="margin-top: 8px;">📍 Main Market, Mairwa</p>
+            <p class="ftag" style="margin-top:8px">📍 Main Market, Mairwa</p>
           </div>
-
           <div>
             <div class="fct">OUR MENU</div>
             <ul class="fl">
-              <li><a href="#">Premium Mithai</a></li>
-              <li><a href="#">South Indian (Dosa)</a></li>
-              <li><a href="#">Chinese & Fast Food</a></li>
-              <li><a href="#">Royal Veg Thali</a></li>
+              <li><a href="#menu">Premium Mithai</a></li>
+              <li><a href="#menu">South Indian (Dosa)</a></li>
+              <li><a href="#menu">Chinese &amp; Fast Food</a></li>
+              <li><a href="#menu">Royal Veg Thali</a></li>
             </ul>
           </div>
-
           <div>
             <div class="fct">SERVICES</div>
             <ul class="fl">
-              <li><a href="#">Home Delivery</a></li>
-              <li><a href="#">Party Orders</a></li>
-              <li><a href="#">Bulk Sweets</a></li>
-              <li><a href="#">About Us</a></li>
+              <li><a href="#location">Home Delivery</a></li>
+              <li><a href="https://wa.me/919523242424">Party Orders</a></li>
+              <li><a href="https://wa.me/919523242424">Bulk Sweets</a></li>
+              <li><a href="#legacy">About Us</a></li>
             </ul>
           </div>
-
           <div>
             <div class="fct">CONNECT</div>
             <ul class="fl">
@@ -1301,191 +1361,154 @@
           </div>
         </div>
 
-        <div style="border-top: 1px solid #333; margin: 20px 0 10px 0; padding-top: 10px; text-align: center;">
-          <p style="font-size: 11px; color: #666;">
-            Our Specialities: Best Sweets in Mairwa | Masala Dosa Mairwa | Chowmein & Burgers | Home Delivery Food Siwan
-            | Kaju Katli
+        <!-- SEO keyword footer note -->
+        <div style="border-top:1px solid #333;margin:20px 0 10px;padding-top:10px;text-align:center">
+          <p style="font-size:11px;color:#666">
+            Our Specialities: Best Sweets in Mairwa | Masala Dosa Mairwa | Chowmein &amp; Burgers | Home Delivery Food
+            Siwan | Kaju Katli
           </p>
         </div>
 
         <div class="fb2">
           <p class="fc2">© <span id="year"></span> Kshirsagar. All rights reserved. | Mairwa, Bihar</p>
           <p class="fc2">
-            Designed & Developed by
+            Designed &amp; Developed by
             <a href="https://linktr.ee/vikashgupta" target="_blank" class="dev-link">Vikash</a>
-            <style>
-              .dev-link {
-                text-decoration: none;
-                color: #d4af37;
-                transition: color 0.3s;
-                font-weight: bold;
-              }
-
-              .dev-link:hover {
-                color: #fff;
-              }
-            </style>
           </p>
         </div>
       </div>
     </footer>
 
-    <script>
-      document.getElementById("year").innerHTML = new Date().getFullYear();
-    </script>
-  </div>
+  </div><!-- #landing -->
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- ============================================================
+  JAVASCRIPT
+  Order: (1) Performance config → (2) Menu data → (3) Menu render
+         → (4) Cursor → (5) Nav scroll → (6) Scroll parallax
+         → (7) Counters → (8) Scroll reveal
+============================================================ -->
   <script>
-    // ── MENU DATA ──
+    /* ── (1) PERFORMANCE: Soft 45-FPS cap + Device detection ──
+       Formerly the "Performance Patch" — now permanently integrated.
+       Limits rAF on all devices to 45fps to reduce GPU load.
+       Cursor is hidden on touch/low-power devices via CSS media query. */
+    (function applyPerformanceConfig() {
+      const _raf = window.requestAnimationFrame;
+      window.requestAnimationFrame = function (cb) {
+        return setTimeout(() => _raf(cb), 1000 / 45);
+      };
+    })();
+
+
+    /* ── (2) MENU DATA ── */
     const MENU = [
-  {
-    title: "Pizza",
-    sub: "Small / Large",
-    emoji: "🍕",
-    items: [
-      { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn, cheese & herbs on crispy base" },
-      { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Garden veggies with golden mozzarella" },
-      { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Soft paneer tikka with tangy tomato sauce" },
-      { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Earthy mushrooms with rich cheese blend" }
-    ],
-    color: "#f97316",
-    glow: "rgba(249,115,22,.28)"
-  },
-  {
-    title: "Chowmein",
-    sub: "Half / Full",
-    emoji: "🍜",
-    items: [
-      { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style stir-fried noodles" },
-      { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with soft paneer cubes" },
-      { name: "Special Chowmein", price: "₹120", desc: "Chef's special loaded with veggies & spices" },
-      { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style with soy & chilli" },
-      { name: "Singapuri Noodles", price: "₹180", desc: "Spicy thin noodles Singapore style" }
-    ],
-    color: "#f59e0b",
-    glow: "rgba(245,158,11,.28)"
-  },
-  {
-    title: "Dosa",
-    sub: "South Indian",
-    emoji: "🥞",
-    items: [
-      { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with caramelised onions" },
-      { name: "Masala Dosa", price: "₹80", desc: "Golden dosa stuffed with spiced potato filling" },
-      { name: "Special Dosa", price: "₹120", desc: "Premium stuffing with chef's secret masala" },
-      { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with spiced cottage cheese bhurji" },
-      { name: "Uttapam", price: "₹180", desc: "Thick soft pancake with mixed veggies" },
-      { name: "Cheese Uttapam", price: "₹200", desc: "Uttapam loaded with melted cheese" },
-      { name: "Shahi Dosa", price: "₹200", desc: "Royal dosa with cashew & dry fruit filling" }
-    ],
-    color: "#d4af37",
-    glow: "rgba(212,175,55,.28)"
-  },
-  {
-    title: "Chilli Manchurian",
-    sub: "Half / Full",
-    emoji: "🌶️",
-    items: [
-      { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in fiery chilli sauce" },
-      { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Soft balls in tangy Manchurian gravy" },
-      { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Tender paneer in hot chilli-garlic sauce" },
-      { name: "Mushroom Chilli", price: "₹200", desc: "Juicy mushrooms tossed with bell peppers" }
-    ],
-    color: "#ef4444",
-    glow: "rgba(239,68,68,.28)"
-  },
-  {
-    title: "Rice",
-    sub: "Fried Rice",
-    emoji: "🍚",
-    items: [
-      { name: "Veg Fried Rice", price: "₹60", desc: "Fluffy rice with fresh veggies & soy" },
-      { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with soft paneer pieces" },
-      { name: "Combo Rice", price: "₹110", desc: "Rice served with Manchurian gravy combo" }
-    ],
-    color: "#3b82f6",
-    glow: "rgba(59,130,246,.28)"
-  },
-  {
-    title: "Rolls",
-    sub: "Street Style",
-    emoji: "🌯",
-    items: [
-      { name: "Veg Roll", price: "₹40", desc: "Stuffed paratha roll with fresh veggies" },
-      { name: "Paneer Roll", price: "₹50", desc: "Soft paneer tikka wrapped in flaky paratha" },
-      { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom filling in crispy roll" },
-      { name: "Veg Crunchy Roll", price: "₹60", desc: "Extra crunchy filling with special chutney" }
-    ],
-    color: "#10b981",
-    glow: "rgba(16,185,129,.28)"
-  },
-  {
-    title: "Sandwich",
-    sub: "Quick Bites",
-    emoji: "🥪",
-    items: [
-      { name: "Vegetable Sandwich", price: "₹60", desc: "Fresh garden veggies on toasted bread" },
-      { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn with herbs & cream cheese" },
-      { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney" },
-      { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in toasted sandwich" },
-      { name: "Mushroom Sandwich", price: "₹100", desc: "Sautéed mushrooms with garlic butter" }
-    ],
-    color: "#eab308",
-    glow: "rgba(234,179,8,.28)"
-  },
-  {
-    title: "Burger",
-    sub: "Fast Food",
-    emoji: "🍔",
-    items: [
-      { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty in soft bun" },
-      { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty with fresh veggies" },
-      { name: "Sandwich Burger", price: "₹40", desc: "Best of both worlds — burger meets sandwich" },
-      { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese inside a burger" },
-      { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki with tangy sauces" },
-      { name: "Veg Burger", price: "₹70", desc: "Loaded veggie patty with crunchy lettuce" },
-      { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double the indulgence" }
-    ],
-    color: "#f97316",
-    glow: "rgba(249,115,22,.28)"
-  },
-  {
-    title: "Snacks",
-    sub: "Lollipop & Pakoda",
-    emoji: "🍢",
-    items: [
-      { name: "Paneer Pakoda", price: "₹80", desc: "Golden fried paneer in spiced batter" },
-      { name: "Paneer Lollipop (6 pcs)", price: "₹200", desc: "Crispy paneer sticks on skewers" }
-    ],
-    color: "#a855f7",
-    glow: "rgba(168,85,247,.28)"
-  }
-];
+      {
+        title: "Pizza", sub: "Small / Large", emoji: "🍕",
+        items: [
+          { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn, cheese & herbs on crispy base" },
+          { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Garden veggies with golden mozzarella" },
+          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Soft paneer tikka with tangy tomato sauce" },
+          { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Earthy mushrooms with rich cheese blend" }
+        ]
+      },
+      {
+        title: "Chowmein", sub: "Half / Full", emoji: "🍜",
+        items: [
+          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style stir-fried noodles" },
+          { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with soft paneer cubes" },
+          { name: "Special Chowmein", price: "₹120", desc: "Chef's special loaded with veggies & spices" },
+          { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style with soy & chilli" },
+          { name: "Singapuri Noodles", price: "₹180", desc: "Spicy thin noodles Singapore style" }
+        ]
+      },
+      {
+        title: "Dosa", sub: "South Indian", emoji: "🥞",
+        items: [
+          { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with caramelised onions" },
+          { name: "Masala Dosa", price: "₹80", desc: "Golden dosa stuffed with spiced potato filling" },
+          { name: "Special Dosa", price: "₹120", desc: "Premium stuffing with chef's secret masala" },
+          { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with spiced cottage cheese bhurji" },
+          { name: "Uttapam", price: "₹180", desc: "Thick soft pancake with mixed veggies" },
+          { name: "Cheese Uttapam", price: "₹200", desc: "Uttapam loaded with melted cheese" },
+          { name: "Shahi Dosa", price: "₹200", desc: "Royal dosa with cashew & dry fruit filling" }
+        ]
+      },
+      {
+        title: "Chilli", sub: "Half / Full", emoji: "🌶️",
+        items: [
+          { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in fiery chilli sauce" },
+          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Soft balls in tangy Manchurian gravy" },
+          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Tender paneer in hot chilli-garlic sauce" },
+          { name: "Mushroom Chilli", price: "₹200", desc: "Juicy mushrooms tossed with bell peppers" }
+        ]
+      },
+      {
+        title: "Rice", sub: "Fried Rice", emoji: "🍚",
+        items: [
+          { name: "Veg Fried Rice", price: "₹60", desc: "Fluffy rice with fresh veggies & soy" },
+          { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with soft paneer pieces" },
+          { name: "Combo Rice", price: "₹110", desc: "Rice served with Manchurian gravy combo" }
+        ]
+      },
+      {
+        title: "Rolls", sub: "Street Style", emoji: "🌯",
+        items: [
+          { name: "Veg Roll", price: "₹40", desc: "Stuffed paratha roll with fresh veggies" },
+          { name: "Paneer Roll", price: "₹50", desc: "Soft paneer tikka wrapped in flaky paratha" },
+          { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom filling in crispy roll" },
+          { name: "Veg Crunchy Roll", price: "₹60", desc: "Extra crunchy filling with special chutney" }
+        ]
+      },
+      {
+        title: "Sandwich", sub: "Quick Bites", emoji: "🥪",
+        items: [
+          { name: "Vegetable Sandwich", price: "₹60", desc: "Fresh garden veggies on toasted bread" },
+          { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn with herbs & cream cheese" },
+          { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney" },
+          { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in toasted sandwich" },
+          { name: "Mushroom Sandwich", price: "₹100", desc: "Sautéed mushrooms with garlic butter" }
+        ]
+      },
+      {
+        title: "Burger", sub: "Fast Food", emoji: "🍔",
+        items: [
+          { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty in soft bun" },
+          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty with fresh veggies" },
+          { name: "Sandwich Burger", price: "₹40", desc: "Best of both worlds — burger meets sandwich" },
+          { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese inside a burger" },
+          { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki with tangy sauces" },
+          { name: "Veg Burger", price: "₹70", desc: "Loaded veggie patty with crunchy lettuce" },
+          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double the indulgence" }
+        ]
+      },
+      {
+        title: "Snacks", sub: "Lollipop & Pakoda", emoji: "🍢",
+        items: [
+          { name: "Paneer Pakoda", price: "₹80", desc: "Golden fried paneer in spiced batter" },
+          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer sticks on skewers" }
+        ]
+      }
+    ];
 
-    // ── NEW MENU RENDER & FILTER LOGIC ──
+
+    /* ── (3) MENU RENDER & FILTER ── */
     (function initMenu() {
       const catNav = document.getElementById('menuCatNav');
       const grid = document.getElementById('menuGrid');
-      let activeCat = 'all';
 
-      // Build ALL items flat list: { categoryObj, item }
+      // Flatten all items with category reference
       const allItems = [];
-      MENU.forEach(cat => {
-        cat.items.forEach(item => allItems.push({ cat, item }));
-      });
+      MENU.forEach(cat => cat.items.forEach(item => allItems.push({ cat, item })));
 
-      // Build category nav
+      // Build "All" button
       const allBtn = document.createElement('button');
       allBtn.className = 'menu-cat-btn active';
       allBtn.innerHTML = `<span class="mcb-emoji">✦</span> All`;
       allBtn.dataset.cat = 'all';
       catNav.appendChild(allBtn);
 
+      // Build per-category buttons
       MENU.forEach(cat => {
         const btn = document.createElement('button');
         btn.className = 'menu-cat-btn';
@@ -1494,7 +1517,7 @@
         catNav.appendChild(btn);
       });
 
-      // Filter function
+      // Render filtered items into grid
       function renderItems(catTitle) {
         grid.innerHTML = '';
         const list = catTitle === 'all'
@@ -1505,388 +1528,144 @@
           const row = document.createElement('div');
           row.className = 'menu-item-row';
           row.innerHTML = `
-            <div class="menu-item-img">${cat.emoji}</div>
-            <div class="menu-item-info">
-              <div class="menu-item-name">${item.name}</div>
-              <div class="menu-item-desc">${item.desc}</div>
-              <span class="menu-item-tag">${cat.title}</span>
-            </div>
-            <div class="menu-item-price">${item.price}</div>
-          `;
+        <div class="menu-item-img">${cat.emoji}</div>
+        <div class="menu-item-info">
+          <div class="menu-item-name">${item.name}</div>
+          <div class="menu-item-desc">${item.desc}</div>
+          <span class="menu-item-tag">${cat.title}</span>
+        </div>
+        <div class="menu-item-price">${item.price}</div>
+      `;
           grid.appendChild(row);
         });
       }
 
-      // Nav click handler
+      // Category button click handler (event delegation)
       catNav.addEventListener('click', e => {
         const btn = e.target.closest('.menu-cat-btn');
         if (!btn) return;
         catNav.querySelectorAll('.menu-cat-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        activeCat = btn.dataset.cat;
-        renderItems(activeCat);
+        renderItems(btn.dataset.cat);
       });
 
       renderItems('all');
     })();
-    // ── END NEW MENU LOGIC ──
 
-    // ── CURSOR ──
-    const cur = document.getElementById('cursor'), cdot = document.getElementById('cdot');
-    let mx = 0, my = 0, cx = 0, cy = 0;
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-    (function loop() { cx += (mx - cx) * .11; cy += (my - cy) * .11; cur.style.left = cx + 'px'; cur.style.top = cy + 'px'; cdot.style.left = mx + 'px'; cdot.style.top = my + 'px'; requestAnimationFrame(loop); })();
-    document.querySelectorAll('button,a').forEach(el => {
-      el.addEventListener('mouseenter', () => { cur.style.width = '54px'; cur.style.height = '54px'; cur.style.borderColor = 'rgba(212,175,55,.9)'; });
-      el.addEventListener('mouseleave', () => { cur.style.width = '38px'; cur.style.height = '38px'; cur.style.borderColor = 'rgba(212,175,55,.65)'; });
-    });
 
-    // ── NAV SCROLL ──
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+    /* ── (4) CUSTOM CURSOR (desktop only) ── */
+    (function initCursor() {
+      const cur = document.getElementById('cursor');
+      const cdot = document.getElementById('cdot');
+      if (!cur || !cdot) return;
 
-    // ── HERO THREE.JS ──
-    (function () {
-      const canvas = document.getElementById('hc');
-      const hero = document.getElementById('hero');
-      const W = hero.offsetWidth, H = hero.offsetHeight;
-      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-      renderer.setSize(W, H); renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.3;
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, W / H, .1, 100); camera.position.z = 6;
+      let mx = 0, my = 0, cx = 0, cy = 0;
 
-      // Main sweet — torus knot
-      const tkg = new THREE.TorusKnotGeometry(1.5, .36, 220, 32, 3, 5);
-      const tkm = new THREE.MeshStandardMaterial({ color: new THREE.Color('#d4af37'), emissive: new THREE.Color('#7c3800'), emissiveIntensity: .55, metalness: .92, roughness: .08 });
-      const tk = new THREE.Mesh(tkg, tkm); scene.add(tk);
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
-      // Orbital rings
-      const addRing = (r, tube, rx, ry, col, op) => {
-        const m = new THREE.Mesh(new THREE.TorusGeometry(r, tube, 16, 120), new THREE.MeshBasicMaterial({ color: col, transparent: true, opacity: op }));
-        m.rotation.x = rx; m.rotation.y = ry; scene.add(m); return m;
-      };
-      const r1 = addRing(2.3, .022, Math.PI / 3, .2, '#d4af37', .32);
-      const r2 = addRing(3, .015, -Math.PI / 4, Math.PI / 5, '#f97316', .2);
-      const r3 = addRing(3.8, .01, Math.PI / 6, -Math.PI / 3, '#ffffff', .1);
-
-      // Particles
-      const N = 1000, pp = new Float32Array(N * 3), pc = new Float32Array(N * 3);
-      const gc = new THREE.Color('#d4af37'), sc = new THREE.Color('#f97316'), wc = new THREE.Color('#fff8e7');
-      for (let i = 0; i < N; i++) {
-        const r = 2.5 + Math.random() * 7, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
-        pp[i * 3] = r * Math.sin(ph) * Math.cos(th); pp[i * 3 + 1] = r * Math.sin(ph) * Math.sin(th); pp[i * 3 + 2] = r * Math.cos(ph);
-        const c = [gc, sc, wc][Math.floor(Math.random() * 3)];
-        pc[i * 3] = c.r; pc[i * 3 + 1] = c.g; pc[i * 3 + 2] = c.b;
-      }
-      const pg = new THREE.BufferGeometry();
-      pg.setAttribute('position', new THREE.BufferAttribute(pp, 3));
-      pg.setAttribute('color', new THREE.BufferAttribute(pc, 3));
-      const pts = new THREE.Points(pg, new THREE.PointsMaterial({ size: .045, vertexColors: true, transparent: true, opacity: .75 }));
-      scene.add(pts);
-
-      // Lights
-      scene.add(new THREE.AmbientLight('#ffffff', .15));
-      const gl = new THREE.PointLight('#d4af37', 5, 18); gl.position.set(3, 3, 4); scene.add(gl);
-      const sl = new THREE.PointLight('#f97316', 3.5, 15); sl.position.set(-3, -2, 2); scene.add(sl);
-      const bl = new THREE.PointLight('#4466ff', 1.5, 12); bl.position.set(0, -4, -2); scene.add(bl);
-
-      // Mouse
-      let tx = 0, ty = 0, crx = 0, cry = 0;
-      window.addEventListener('mousemove', e => { tx = (e.clientX / innerWidth - .5) * 1.6; ty = -(e.clientY / innerHeight - .5) * 1.1; });
-
-      let t = 0;
-      (function animate() {
-        t += .0048; crx += (tx - crx) * .048; cry += (ty - cry) * .048;
-        tk.rotation.x = cry + t * .28; tk.rotation.y = crx + t * .45;
-        r1.rotation.z += .004; r2.rotation.z -= .003; r3.rotation.z += .002;
-        pts.rotation.y += .0008; pts.rotation.x += .0003;
-        gl.position.set(Math.sin(t) * 4.5, Math.cos(t * .7) * 3.5, 3);
-        sl.position.set(Math.cos(t * 1.2) * 4, -Math.sin(t * .9) * 3, 2);
-        renderer.render(scene, camera); requestAnimationFrame(animate);
+      (function loop() {
+        cx += (mx - cx) * .11;
+        cy += (my - cy) * .11;
+        cur.style.left = cx + 'px';
+        cur.style.top = cy + 'px';
+        cdot.style.left = mx + 'px';
+        cdot.style.top = my + 'px';
+        requestAnimationFrame(loop);
       })();
 
-      window.addEventListener('resize', () => {
-        const w = hero.offsetWidth, h = hero.offsetHeight;
-        renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+      // Scale cursor on interactive elements
+      document.querySelectorAll('button, a').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cur.style.width = '54px';
+          cur.style.height = '54px';
+          cur.style.borderColor = 'rgba(212,175,55,.9)';
+        });
+        el.addEventListener('mouseleave', () => {
+          cur.style.width = '38px';
+          cur.style.height = '38px';
+          cur.style.borderColor = 'rgba(212,175,55,.65)';
+        });
       });
     })();
 
-    // ── LOCATION THREE.JS ──
-    // (function () {
-    //   const canvas = document.getElementById('lc');
-    //   const cont = canvas.parentElement;
-    //   const W = cont.offsetWidth, H = cont.offsetHeight;
-    //   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    //   renderer.setSize(W, H); renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    //   renderer.shadowMap.enabled = true;
-    //   const scene = new THREE.Scene();
-    //   const camera = new THREE.PerspectiveCamera(42, W / H, .1, 100); camera.position.set(9, 12, 14); camera.lookAt(0, 1, 0);
 
-    //   scene.add(new THREE.AmbientLight('#ffffff', .35));
-    //   const dl = new THREE.DirectionalLight('#ffe4a0', 1.6); dl.position.set(6, 10, 6); dl.castShadow = true; scene.add(dl);
-    //   const gpl = new THREE.PointLight('#d4af37', 2.5, 12); gpl.position.set(0, 4, 0); scene.add(gpl);
-
-    //   // Ground
-    //   const gnd = new THREE.Mesh(new THREE.PlaneGeometry(22, 22), new THREE.MeshStandardMaterial({ color: 0x111111, metalness: .05, roughness: .9 }));
-    //   gnd.rotation.x = -Math.PI / 2; gnd.receiveShadow = true; scene.add(gnd);
-    //   scene.add(new THREE.GridHelper(22, 22, 0x1a1400, 0x1a1400));
-
-    //   // Roads
-    //   const rm = new THREE.MeshStandardMaterial({ color: 0x181818, roughness: .95 });
-    //   const addRoad = (w, d, x, z) => { const r = new THREE.Mesh(new THREE.PlaneGeometry(w, d), rm); r.rotation.x = -Math.PI / 2; r.position.set(x, .005, z); scene.add(r); };
-    //   addRoad(22, 1.2, 0, 0); addRoad(1.2, 22, 0, 0);
-    //   // ── Buildings (FIXED) ──
-    //   const buildings = [
-    //     [-4.5, -3, 1.8, 2.8, 1.8, 0x111a2e],
-    //     [-2, -4, 1.4, 5.5, 1.4, 0x0d1829],
-    //     [1.5, -3.5, 1.9, 2.2, 1.9, 0x111a2e],
-    //     [3.8, -2.2, 1.5, 4.2, 1.5, 0x0b1933],
-    //     [-5, 1.2, 1.7, 1.9, 1.7, 0x131c2e],
-    //     [3.5, 1.8, 1.9, 3, 1.9, 0x0d1829],
-    //     [-3, 3.5, 1.5, 4.5, 1.5, 0x0b1933],
-    //     [2.2, 4, 1.8, 2, 1.8, 0x111a2e],
-    //     [-1.5, 3.8, 1.3, 3, 1.3, 0x0d1829],
-    //     [5, 3, 1.4, 2.5, 1.4, 0x131c2e]
-    //   ];
-
-    //   buildings.forEach(([x, z, w, h, d, c]) => {
-    //     const building = new THREE.Mesh(
-    //       new THREE.BoxGeometry(w, h, d),
-    //       new THREE.MeshStandardMaterial({
-    //         color: c,
-    //         metalness: .3,
-    //         roughness: .7
-    //       })
-    //     );
-
-    //     building.position.set(x, h / 2, z);
-    //     building.castShadow = true;
-    //     scene.add(building);
-
-    //     // windows
-    //     for (let i = 0; i < 4; i++) {
-    //       const windowMesh = new THREE.Mesh(
-    //         new THREE.PlaneGeometry(.18, .18),
-    //         new THREE.MeshBasicMaterial({
-    //           color: 0xffffaa,
-    //           transparent: true,
-    //           opacity: .75
-    //         })
-    //       );
-
-    //       windowMesh.position.set(
-    //         x + (Math.random() - .5) * w * .6,
-    //         h * .25 + Math.random() * h * .55,
-    //         z + d / 2 + .01
-    //       );
-
-    //       scene.add(windowMesh);
-    //     }
-    //   });
-
-    //   // Kshirsagar main building (golden, elevated)
-    //   const kb = new THREE.Mesh(new THREE.BoxGeometry(3.2, 4.5, 3.2), new THREE.MeshStandardMaterial({ color: 0x1a0e00, metalness: .6, roughness: .4, emissive: new THREE.Color('#4a2500'), emissiveIntensity: .35 }));
-    //   kb.position.set(0, 2.25, 0); kb.castShadow = true; scene.add(kb);
-    //   const out = new THREE.Mesh(new THREE.BoxGeometry(3.35, 4.6, 3.35), new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: .08, side: THREE.BackSide }));
-    //   out.position.set(0, 2.3, 0); scene.add(out);
-
-    //   // Glowing rooftop arches (decorative)
-    //   const arch = new THREE.Mesh(new THREE.TorusGeometry(.6, .04, 8, 20, Math.PI), new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: .55 }));
-    //   arch.position.set(0, 4.8, 0); arch.rotation.x = Math.PI / 2; scene.add(arch);
-
-    //   // Marker pole + sphere
-    //   const pole = new THREE.Mesh(new THREE.CylinderGeometry(.025, .025, 1.8, 8), new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: .7 }));
-    //   pole.position.set(0, 5.35, 0); scene.add(pole);
-    //   const mk = new THREE.Mesh(new THREE.SphereGeometry(.22, 16, 16), new THREE.MeshBasicMaterial({ color: 0xd4af37 }));
-    //   mk.position.set(0, 6.3, 0); scene.add(mk);
-    //   const mkglow = new THREE.Mesh(new THREE.SphereGeometry(.38, 16, 16), new THREE.MeshBasicMaterial({ color: 0xd4af37, transparent: true, opacity: .15 }));
-    //   mkglow.position.set(0, 6.3, 0); scene.add(mkglow);
-
-    //   // Stars
-    //   const sp = new Float32Array(400 * 3); for (let i = 0; i < 400 * 3; i++)sp[i] = (Math.random() - .5) * 40;
-    //   const sg = new THREE.BufferGeometry(); sg.setAttribute('position', new THREE.BufferAttribute(sp, 3));
-    //   scene.add(new THREE.Points(sg, new THREE.PointsMaterial({ color: 0x886622, size: .06, transparent: true, opacity: .5 })));
-
-    //   let t = 0;
-    //   (function animate() {
-    //     t += .004;
-    //     camera.position.x = Math.sin(t * .18) * 13; camera.position.z = Math.cos(t * .18) * 14 + 1;
-    //     camera.lookAt(0, 2, 0);
-    //     mk.position.y = 6.3 + Math.sin(t * 2.5) * .25;
-    //     mkglow.position.y = mk.position.y;
-    //     gpl.intensity = 2 + Math.sin(t * 2.2) * .5;
-    //     renderer.render(scene, camera); requestAnimationFrame(animate);
-    //   })();
-
-    //   window.addEventListener('resize', () => {
-    //     const w = cont.offsetWidth, h = cont.offsetHeight;
-    //     renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
-    //   });
-    // })();
+    /* ── (5) NAV: Add "scrolled" class after 40px scroll ── */
+    (function initNav() {
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+    })();
 
 
-    // ── ANIMATED COUNTERS ──
-    function animateCounter(el, target, suffix, duration) {
-      let start = null;
+    /* ── (6) SCROLL PARALLAX for #menu and #legacy backgrounds ── */
+    (function initParallax() {
+      const menuEl = document.getElementById('menu');
+      const legacyEl = document.getElementById('legacy');
 
-      const step = (ts) => {
-        if (!start) start = ts;
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (menuEl) menuEl.style.backgroundPosition = `center ${y * 0.2}px`;
+        if (legacyEl) legacyEl.style.backgroundPosition = `center ${y * 0.15}px`;
+      }, { passive: true });
+    })();
 
-        const progress = Math.min((ts - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - progress, 3);
 
-        el.textContent = Math.floor(ease * target) + suffix;
+    /* ── (7) ANIMATED COUNTERS (triggered once on #legacy scroll) ── */
+    (function initCounters() {
+      function animateCounter(el, target, suffix, duration) {
+        let start = null;
+        const fmt = n => n >= 1000 ? Math.floor(n).toLocaleString() : Math.floor(n);
 
-        if (progress < 1) requestAnimationFrame(step);
-      };
+        const step = ts => {
+          if (!start) start = ts;
+          const progress = Math.min((ts - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          el.textContent = fmt(ease * target) + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+        };
 
-      requestAnimationFrame(step);
-    }
+        requestAnimationFrame(step);
+      }
 
-    // ── ANIMATED COUNTERS ──
-    function animateCounter(el, target, suffix, duration) {
-      let start = null;
-
-      const fmt = n => n >= 1000
-        ? Math.floor(n).toLocaleString()
-        : Math.floor(n);
-
-      const step = ts => {
-        if (!start) start = ts;
-
-        const progress = Math.min((ts - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - progress, 3);
-
-        el.textContent = fmt(ease * target) + suffix;
-
-        if (progress < 1) requestAnimationFrame(step);
-      };
-
-      requestAnimationFrame(step);
-    }
-
-    // 🔥 Intersection Observer (ONLY ONE)
-    const legacySection = document.getElementById('legacy');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-
-          // ✅ Dynamic years
-          const startYear = 1998;
-          const years = new Date().getFullYear() - startYear;
-
+      const legacySection = document.getElementById('legacy');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const years = new Date().getFullYear() - 1998;
           animateCounter(document.getElementById('sy'), years, '+', 2000);
           animateCounter(document.getElementById('sc'), 500000, '+', 2500);
           animateCounter(document.getElementById('sd'), 120, '+', 1800);
-
           observer.disconnect();
-        }
+        });
+      }, { threshold: 0.2 });
+
+      observer.observe(legacySection);
+    })();
+
+
+    /* ── (8) SCROLL REVEAL: Fade-up on scroll for cards ── */
+    (function initScrollReveal() {
+      const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: .15 });
+
+      document.querySelectorAll('.scard, .ic, .fc, .stgrid').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity .7s ease, transform .7s ease';
+        revealObs.observe(el);
       });
-    }, { threshold: 0.2 });
+    })();
 
-    observer.observe(legacySection);
-    // ── SCROLL REVEAL ──
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
-      });
-    }, { threshold: .15 });
-    document.querySelectorAll('.scard,.ic,.fc,.stgrid').forEach(el => {
-      el.style.opacity = '0'; el.style.transform = 'translateY(24px)'; el.style.transition = 'opacity .7s ease, transform .7s ease';
-      revealObs.observe(el);
-    });
 
-    // ── (scroll arrows removed — new menu uses filter nav) ──
-
-    // --- for mobile scroll animation ---
-
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-
-      const menu = document.getElementById('menu');
-      const legacy = document.getElementById('legacy');
-
-      if (menu) {
-        menu.style.backgroundPosition = `center ${y * 0.2}px`;
-      }
-
-      if (legacy) {
-        legacy.style.backgroundPosition = `center ${y * 0.15}px`;
-      }
-    });
-
+    /* ── FOOTER: Dynamic year ── */
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-
-
-
-  <!-- due to heavy load , i had to optimise website by removing animations and renderings -->
-  <script>
-    /* === SMART PERFORMANCE PATCH (FIXED) === */
-
-    // 1. Soft FPS limit
-    const _raf = window.requestAnimationFrame;
-    window.requestAnimationFrame = function (cb) {
-      return setTimeout(() => _raf(cb), 1000 / 45);
-    };
-
-    // 2. Disable heavy 3D on small devices
-    if (window.innerWidth < 768 || navigator.hardwareConcurrency <= 4) {
-      const canvas = document.querySelector('#hc');
-      if (canvas) canvas.style.display = 'none';
-    }
-
-    // 3. Remove cursor safely (NO redeclare)
-    const cursorEl = document.getElementById('cursor');
-    const cdotEl = document.getElementById('cdot');
-
-    if (cursorEl) cursorEl.remove();
-    if (cdotEl) cdotEl.remove();
-
-    // 4. (mcard removed — new menu uses filter layout)
-  </script>
-
-  <!-- <style>
-    /* === LIGHT PERFORMANCE PATCH === */
-
-    /* animations slow karo (remove nahi) */
-    * {
-      animation-duration: 1.2s !important;
-      transition-duration: 0.3s !important;
-    }
-
-    /* heavy glow kam */
-    .bp {
-      animation: none !important;
-    }
-
-    /* cursor hata do (major lag source) */
-    #cursor,
-    #cdot {
-      display: none !important;
-    }
-
-    /* hover smooth but light */
-    .mcard {
-      transition: transform 0.2s ease !important;
-    }
-  </style> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
+
+</html>
