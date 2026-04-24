@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -635,6 +634,11 @@
       letter-spacing: 0.04em;
       transform: rotate(10deg);
       pointer-events: none;
+    }
+    
+    .badge-chef {
+      background: linear-gradient(135deg, #d4af37, #f97316);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
     }
 
     .menu-item-info {
@@ -1802,8 +1806,8 @@
         <li><a href="#footer">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <!-- PWA Install App Button -->
-        <button class="ncta" id="install-app-nav" style="border-color:var(--saffron); color:var(--saffron);">
+        <!-- PWA Install App Button (Hidden by default, shown by JS if supported) -->
+        <button class="ncta" id="install-app-nav" style="display:none; border-color:var(--saffron); color:var(--saffron);">
           <span>📱</span> Install App
         </button>
         <!-- Reorder Last Meal Button (Hidden by default) -->
@@ -2009,7 +2013,7 @@
             </a>
             <br>
             <!-- Install App Footer Link -->
-            <button class="footer-contact-pill" style="border-color:var(--saffron); color:var(--saffron); cursor:pointer; margin-top:0.6rem;">
+            <button class="footer-contact-pill" id="install-app-footer" style="display:none; border-color:var(--saffron); color:var(--saffron); cursor:pointer; margin-top:0.6rem;">
               📱 Install Kshirsagar App
             </button>
           </div>
@@ -2131,17 +2135,17 @@
           <div class="cart-addon-card">
             <div class="addon-name">Extra Sambhar</div>
             <div class="addon-price">₹20</div>
-            <button class="addon-add-btn">+ Add</button>
+            <button class="addon-add-btn" onclick="addToCart('Extra Sambhar', 20, '', '🍲', 'Add-on')">+ Add</button>
           </div>
           <div class="cart-addon-card">
             <div class="addon-name">Cold Drink</div>
             <div class="addon-price">₹40</div>
-            <button class="addon-add-btn">+ Add</button>
+            <button class="addon-add-btn" onclick="addToCart('Cold Drink', 40, '', '🥤', 'Add-on')">+ Add</button>
           </div>
           <div class="cart-addon-card">
             <div class="addon-name">Extra Pav</div>
             <div class="addon-price">₹15</div>
-            <button class="addon-add-btn">+ Add</button>
+            <button class="addon-add-btn" onclick="addToCart('Extra Pav', 15, '', '🍞', 'Add-on')">+ Add</button>
           </div>
         </div>
       </div>
@@ -2151,18 +2155,20 @@
         
         <label class="cart-field-label">🚚 ORDER TYPE</label>
         <div class="cart-toggle-group">
-          <button class="cart-toggle-btn active" type="button">🛵 Delivery</button>
-          <button class="cart-toggle-btn" type="button">🛍️ Store Pickup</button>
+          <button class="cart-toggle-btn active" type="button" data-type="Delivery">🛵 Delivery</button>
+          <button class="cart-toggle-btn" type="button" data-type="Pickup">🛍️ Store Pickup</button>
         </div>
 
         <label class="cart-field-label" for="cart-name">👤 FULL NAME *</label>
         <input id="cart-name" type="text" class="cart-input" placeholder="Enter your full name…" autocomplete="name">
 
         <label class="cart-field-label" for="cart-mobile">📱 MOBILE NUMBER *</label>
-        <input id="cart-mobile" type="tel" class="cart-input" placeholder="+91 XXXXX XXXXX" autocomplete="tel">
+        <input id="cart-mobile" type="tel" class="cart-input" placeholder="10-digit number" autocomplete="tel">
 
-        <label class="cart-field-label" for="cart-address">📍 COMPLETE DELIVERY ADDRESS *</label>
-        <textarea id="cart-address" class="cart-input" placeholder="House no., street, landmark, area, city…" rows="3"></textarea>
+        <div id="address-wrapper">
+          <label class="cart-field-label" for="cart-address">📍 COMPLETE DELIVERY ADDRESS *</label>
+          <textarea id="cart-address" class="cart-input" placeholder="House no., street, landmark, area, city…" rows="3"></textarea>
+        </div>
 
         <label class="cart-field-label" for="cart-instructions">👨‍🍳 COOKING INSTRUCTIONS</label>
         <textarea id="cart-instructions" class="cart-input" placeholder="Make it spicy, extra onions..." rows="2"></textarea>
@@ -2170,9 +2176,9 @@
         <div class="cart-tip-section">
           <label class="cart-field-label">❤️ SHOW SOME LOVE TO THE CHEF</label>
           <div class="cart-tip-group">
-            <button class="cart-tip-btn" type="button">+ ₹10</button>
-            <button class="cart-tip-btn" type="button">+ ₹20</button>
-            <button class="cart-tip-btn" type="button">+ ₹50</button>
+            <button class="cart-tip-btn" type="button" data-tip="10">+ ₹10</button>
+            <button class="cart-tip-btn" type="button" data-tip="20">+ ₹20</button>
+            <button class="cart-tip-btn" type="button" data-tip="50">+ ₹50</button>
           </div>
         </div>
 
@@ -2184,7 +2190,7 @@
           ⚠️ Note: Final price will be confirmed by Admin on WhatsApp. This is only an estimated reference.
         </div>
 
-        <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="checkoutViaWhatsApp()" disabled>
+        <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="handleCheckoutClick()" disabled>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
           </svg>
@@ -2202,11 +2208,11 @@
   <div id="time-warning-modal" class="glass-modal-overlay">
     <div style="position:absolute;inset:0;" onclick="this.parentElement.classList.remove('open')"></div>
     <div class="glass-modal-content" style="position:relative;z-index:1; text-align:center;">
-      <h3 style="color:#e53935; font-size:1.6rem;">🌙 Store is Closed</h3>
-      <p>Our standard hours are 6:00 AM – 10:00 PM. Your order might not be processed immediately.</p>
+      <h3 id="tw-title" style="color:#e53935; font-size:1.6rem;">🌙 Store is Closed</h3>
+      <p id="tw-desc">Our standard hours are 6:00 AM – 10:00 PM. Your order might not be processed immediately.</p>
       <div style="display:flex; gap:1rem; justify-content:center;">
         <button class="bs" onclick="document.getElementById('time-warning-modal').classList.remove('open')">Cancel Order</button>
-        <button class="bp" style="border-color:#e53935; color:#e53935;" onclick="document.getElementById('time-warning-modal').classList.remove('open')">Send Anyway</button>
+        <button class="bp" id="tw-send-btn" style="border-color:#e53935; color:#e53935;" onclick="proceedFromWarning()">Send Anyway</button>
       </div>
     </div>
   </div>
@@ -2230,17 +2236,17 @@
       <p>Craving something not on the menu? Let our master chefs craft it for you.</p>
       
       <label class="cart-field-label">👤 NAME</label>
-      <input type="text" class="cart-input" placeholder="Your name" style="margin-bottom:0.8rem;">
+      <input type="text" id="cr-name" class="cart-input" placeholder="Your name" style="margin-bottom:0.8rem;">
       
       <label class="cart-field-label">📱 MOBILE</label>
-      <input type="tel" class="cart-input" placeholder="Your mobile" style="margin-bottom:0.8rem;">
+      <input type="tel" id="cr-mobile" class="cart-input" placeholder="10-digit number" style="margin-bottom:0.8rem;">
       
       <label class="cart-field-label">📝 DISH DETAILS</label>
-      <textarea class="cart-input" rows="3" placeholder="Describe the dish..." style="margin-bottom:0.8rem;"></textarea>
+      <textarea id="cr-desc" class="cart-input" rows="3" placeholder="Describe the dish..." style="margin-bottom:0.8rem;"></textarea>
       
       <div style="display:flex; gap:1rem; margin-top:1rem;">
         <button class="bs" style="flex:1;" onclick="document.getElementById('custom-request-modal').classList.remove('open')">Cancel</button>
-        <button class="bp" style="flex:1; padding: 0.85rem;" onclick="document.getElementById('custom-request-modal').classList.remove('open')">Submit Request</button>
+        <button class="bp" style="flex:1; padding: 0.85rem;" onclick="submitCustomRequest()">Submit Request</button>
       </div>
     </div>
   </div>
@@ -2248,9 +2254,10 @@
 
   <!-- ============================================================
   JAVASCRIPT
-  Order: (1) Performance config → (2) Menu data → (3) Menu render
-         → (4) Cursor → (5) Nav scroll → (6) Scroll parallax
-         → (7) Counters → (8) Scroll reveal → Cart System
+  Order: (1) Performance config → (2) Menu data & State → 
+         (3) Initialization → (4) Menu render & filtering → 
+         (5) UI/UX Handlers → (6) Cart Logic & Reorder →
+         (7) Validation & WhatsApp Checkout → (8) PWA Install
 ============================================================ -->
   <script>
     /* ── (1) PERFORMANCE: Soft 45-FPS cap + Device detection ── */
@@ -2261,23 +2268,24 @@
       };
     })();
 
-    /* ── (2) MENU DATA — Per-item imageUrl (no category-level imageUrl) ── */
+    /* ── (2) MENU DATA & STATE ── */
+    // Updated MENU with 'tags' for Phase 2 Famous/Chef special categories
     const MENU = [
       {
         title: "Pizza", sub: "Small / Large", emoji: "🍕",
         items: [
           { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn, cheese & herbs on crispy base", imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" },
           { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Garden veggies with golden mozzarella", imageUrl: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80" },
-          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Soft paneer tikka with tangy tomato sauce", imageUrl: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80" },
+          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Soft paneer tikka with tangy tomato sauce", imageUrl: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80", tags: ['chefSpecial'] },
           { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Earthy mushrooms with rich cheese blend", imageUrl: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80" }
         ]
       },
       {
         title: "Chowmein", sub: "Half / Full", emoji: "🍜",
         items: [
-          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style stir-fried noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80" },
+          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style stir-fried noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80", tags: ['bestseller'] },
           { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with soft paneer cubes", imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80" },
-          { name: "Special Chowmein", price: "₹120", desc: "Chef's special loaded with veggies & spices", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80" },
+          { name: "Special Chowmein", price: "₹120", desc: "Chef's special loaded with veggies & spices", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80", tags: ['chefSpecial'] },
           { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style with soy & chilli", imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" },
           { name: "Singapuri Noodles", price: "₹180", desc: "Spicy thin noodles Singapore style", imageUrl: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80" }
         ]
@@ -2286,20 +2294,20 @@
         title: "Dosa", sub: "South Indian", emoji: "🥞",
         items: [
           { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with caramelised onions", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80" },
-          { name: "Masala Dosa", price: "₹80", desc: "Golden dosa stuffed with spiced potato filling", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80" },
+          { name: "Masala Dosa", price: "₹80", desc: "Golden dosa stuffed with spiced potato filling", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'] },
           { name: "Special Dosa", price: "₹120", desc: "Premium stuffing with chef's secret masala", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80" },
           { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with spiced cottage cheese bhurji", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
           { name: "Uttapam", price: "₹180", desc: "Thick soft pancake with mixed veggies", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
           { name: "Cheese Uttapam", price: "₹200", desc: "Uttapam loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" },
-          { name: "Shahi Dosa", price: "₹200", desc: "Royal dosa with cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80" }
+          { name: "Shahi Dosa", price: "₹200", desc: "Royal dosa with cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80", tags: ['chefSpecial'] }
         ]
       },
       {
         title: "Chilli Manchurian", sub: "Half / Full", emoji: "🌶️",
         items: [
           { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in fiery chilli sauce", imageUrl: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80" },
-          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Soft balls in tangy Manchurian gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80" },
-          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Tender paneer in hot chilli-garlic sauce", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80" },
+          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Soft balls in tangy Manchurian gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80", tags: ['bestseller'] },
+          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Tender paneer in hot chilli-garlic sauce", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80", tags: ['chefSpecial'] },
           { name: "Mushroom Chilli", price: "₹200", desc: "Juicy mushrooms tossed with bell peppers", imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" }
         ]
       },
@@ -2308,14 +2316,14 @@
         items: [
           { name: "Veg Fried Rice", price: "₹60", desc: "Fluffy rice with fresh veggies & soy", imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80" },
           { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with soft paneer pieces", imageUrl: "https://images.unsplash.com/photo-1536304993881-ff86e0c9b0b4?w=400&q=80" },
-          { name: "Combo Rice", price: "₹110", desc: "Rice served with Manchurian gravy combo", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80" }
+          { name: "Combo Rice", price: "₹110", desc: "Rice served with Manchurian gravy combo", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80", tags: ['bestseller'] }
         ]
       },
       {
         title: "Rolls", sub: "Street Style", emoji: "🌯",
         items: [
           { name: "Veg Roll", price: "₹40", desc: "Stuffed paratha roll with fresh veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80" },
-          { name: "Paneer Roll", price: "₹50", desc: "Soft paneer tikka wrapped in flaky paratha", imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80" },
+          { name: "Paneer Roll", price: "₹50", desc: "Soft paneer tikka wrapped in flaky paratha", imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'] },
           { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom filling in crispy roll", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80" },
           { name: "Veg Crunchy Roll", price: "₹60", desc: "Extra crunchy filling with special chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80" }
         ]
@@ -2325,7 +2333,7 @@
         items: [
           { name: "Vegetable Sandwich", price: "₹60", desc: "Fresh garden veggies on toasted bread", imageUrl: "https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&q=80" },
           { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn with herbs & cream cheese", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80" },
-          { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney", imageUrl: "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400&q=80" },
+          { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney", imageUrl: "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400&q=80", tags: ['bestseller'] },
           { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in toasted sandwich", imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&q=80" },
           { name: "Mushroom Sandwich", price: "₹100", desc: "Sautéed mushrooms with garlic butter", imageUrl: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&q=80" }
         ]
@@ -2334,41 +2342,63 @@
         title: "Burger", sub: "Fast Food", emoji: "🍔",
         items: [
           { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty in soft bun", imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" },
-          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty with fresh veggies", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80" },
+          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty with fresh veggies", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80", tags: ['bestseller'] },
           { name: "Sandwich Burger", price: "₹40", desc: "Best of both worlds — burger meets sandwich", imageUrl: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80" },
           { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese inside a burger", imageUrl: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80" },
           { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki with tangy sauces", imageUrl: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" },
           { name: "Veg Burger", price: "₹70", desc: "Loaded veggie patty with crunchy lettuce", imageUrl: "https://images.unsplash.com/photo-1585190411866-9e83e4f67e7e?w=400&q=80" },
-          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double the indulgence", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80" }
+          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double the indulgence", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80", tags: ['chefSpecial'] }
         ]
       },
       {
         title: "Snacks", sub: "Lollipop & Pakoda", emoji: "🍢",
         items: [
           { name: "Paneer Pakoda", price: "₹80", desc: "Golden fried paneer in spiced batter", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
-          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer sticks on skewers", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" }
+          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer sticks on skewers", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'] }
         ]
       }
     ];
 
+    let cart = JSON.parse(localStorage.getItem('kshirsagar_cart')) || [];
+    let currentOrderType = 'Delivery';
+    let currentTip = 0;
+    const allItems = []; // Flattened menu array populated in initialization
 
-    /* ── (3) MENU RENDER & FILTER ── */
-    (function initMenu() {
+    /* ── (3) INITIALIZATION ── */
+    window.onload = () => {
+      initMenu();
+      initUIHandlers();
+      initScrollParallax();
+      initScrollReveal();
+      initCounters();
+      initCursor();
+      updateCartUI();
+      checkLastOrder();
+    };
+
+    function checkLastOrder() {
+      const lastOrder = JSON.parse(localStorage.getItem('kshirsagar_last_order'));
+      if (lastOrder && lastOrder.length > 0) {
+        document.getElementById('reorder-btn').style.display = 'inline-flex';
+      }
+    }
+
+    /* ── (4) MENU RENDER & FILTERING ── */
+    function initMenu() {
       const catNav = document.getElementById('menuCatNav');
       const grid = document.getElementById('menuGrid');
 
-      // Flatten all items with category reference
-      const allItems = [];
+      // Populate flattened list
       MENU.forEach(cat => cat.items.forEach(item => allItems.push({ cat, item })));
 
-      // Build "All" button
+      // Inject "All" button right after "Famous" (which was added directly in HTML)
       const allBtn = document.createElement('button');
       allBtn.className = 'menu-cat-btn active';
       allBtn.innerHTML = `<span class="mcb-emoji">✦</span> All`;
       allBtn.dataset.cat = 'all';
-      catNav.appendChild(allBtn); // Appends *after* the structurally injected "Famous" button
+      catNav.appendChild(allBtn);
 
-      // Build per-category buttons
+      // Build rest of category buttons
       MENU.forEach(cat => {
         const btn = document.createElement('button');
         btn.className = 'menu-cat-btn';
@@ -2377,17 +2407,24 @@
         catNav.appendChild(btn);
       });
 
-      // Render filtered items into grid
+      // Render grid items based on active category
       function renderItems(catTitle) {
         grid.innerHTML = '';
-        const list = catTitle === 'all'
-          ? allItems
-          : allItems.filter(e => e.cat && e.cat.title === catTitle); // Safe fallbacks for missing categories
+        let list = [];
+
+        if (catTitle === 'all') {
+          list = allItems;
+        } else if (catTitle === 'Famous') {
+          list = allItems.filter(e => e.item.tags && e.item.tags.length > 0);
+        } else {
+          list = allItems.filter(e => e.cat && e.cat.title === catTitle);
+        }
 
         list.forEach(({ cat, item }) => {
           const row = document.createElement('div');
           row.className = 'menu-item-row';
 
+          // Price Variants & Add Buttons
           const hasVariant = item.price.includes('/');
           let addButtonsHTML = '';
 
@@ -2409,14 +2446,8 @@
             addButtonsHTML = `
               <div class="menu-item-actions">
                 <div class="menu-item-price">${item.price}</div>
-                <button class="btn-add btn-half"
-                  onclick="addToCart('${nameEsc}',${priceA},'${labelAEsc}','${emojiEsc}','${catTitleEsc}')">
-                  + ${labelA}
-                </button>
-                <button class="btn-add"
-                  onclick="addToCart('${nameEsc}',${priceB},'${labelBEsc}','${emojiEsc}','${catTitleEsc}')">
-                  + ${labelB}
-                </button>
+                <button class="btn-add btn-half" onclick="addToCart('${nameEsc}',${priceA},'${labelAEsc}','${emojiEsc}','${catTitleEsc}')">+ ${labelA}</button>
+                <button class="btn-add" onclick="addToCart('${nameEsc}',${priceB},'${labelBEsc}','${emojiEsc}','${catTitleEsc}')">+ ${labelB}</button>
               </div>`;
           } else {
             const priceVal = parseInt(item.price.replace(/[^\d]/g, ''), 10);
@@ -2426,23 +2457,29 @@
             addButtonsHTML = `
               <div class="menu-item-actions">
                 <div class="menu-item-price">${item.price}</div>
-                <button class="btn-add"
-                  onclick="addToCart('${nameEsc}',${priceVal},'','${emojiEsc}','${catTitleEsc}')">
-                  + Add
-                </button>
+                <button class="btn-add" onclick="addToCart('${nameEsc}',${priceVal},'','${emojiEsc}','${catTitleEsc}')">+ Add</button>
               </div>`;
           }
 
+          // Image & UI Ribbon logic
           const imgUrl = item.imageUrl || '';
           const imgEscName = item.name.replace(/'/g, "\\'");
           const imgEscDesc = item.desc.replace(/'/g, "\\'");
+          
+          let badgeHTML = '';
+          if (item.tags && item.tags.length > 0) {
+            const isChef = item.tags.includes('chefSpecial');
+            badgeHTML = `<div class="badge-famous ${isChef ? 'badge-chef' : ''}">${isChef ? "👨‍🍳 Chef's Special" : "🔥 Famous"}</div>`;
+          }
+
           const imgHTML = imgUrl
             ? `<div class="menu-item-img" onclick="openDishPopup('${imgUrl}','${imgEscName}','${imgEscDesc}')" title="View dish">
-                 <img src="${imgUrl}" alt="${item.name}" loading="lazy"
-                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                 ${badgeHTML}
+                 <img src="${imgUrl}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                  <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:1.7rem;">${cat.emoji}</div>
                </div>`
             : `<div class="menu-item-img" onclick="openDishPopup('','${imgEscName}','${imgEscDesc}')" title="View dish">
+                 ${badgeHTML}
                  ${cat.emoji}
                </div>`;
 
@@ -2459,7 +2496,6 @@
         });
       }
 
-      // Category button click handler (event delegation)
       catNav.addEventListener('click', e => {
         const btn = e.target.closest('.menu-cat-btn');
         if (!btn) return;
@@ -2469,100 +2505,343 @@
       });
 
       renderItems('all');
-    })();
+    }
 
+    /* ── (5) UI/UX HANDLERS ── */
+    function initUIHandlers() {
+      // Reorder Button
+      document.getElementById('reorder-btn').addEventListener('click', () => {
+        const last = JSON.parse(localStorage.getItem('kshirsagar_last_order'));
+        if (last && last.length) {
+          cart = [...last];
+          updateCartUI();
+          openCart();
+          showCartPop('Last order restored!');
+        }
+      });
 
-    /* ── DISH POPUP: Glassmorphism modal functions ── */
+      // Nav scroll effect
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+
+      // Delivery vs Pickup Toggle
+      const orderToggleBtns = document.querySelectorAll('.cart-toggle-btn');
+      orderToggleBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          orderToggleBtns.forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          currentOrderType = e.target.dataset.type;
+          document.getElementById('address-wrapper').style.display = currentOrderType === 'Pickup' ? 'none' : 'block';
+        });
+      });
+
+      // Tip System
+      const tipBtns = document.querySelectorAll('.cart-tip-btn');
+      tipBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          if(e.target.classList.contains('active')) {
+            e.target.classList.remove('active');
+            currentTip = 0;
+          } else {
+            tipBtns.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            currentTip = parseInt(e.target.dataset.tip);
+          }
+          updateCartUI();
+        });
+      });
+
+      // Escape key handler
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          closeDishPopup();
+          closeCart();
+          document.querySelectorAll('.glass-modal-overlay').forEach(el => el.classList.remove('open'));
+        }
+      });
+    }
+
+    function shakeField(el) {
+      el.classList.remove('shake');
+      void el.offsetWidth;
+      el.classList.add('shake');
+      el.focus();
+      setTimeout(() => el.classList.remove('shake'), 500);
+    }
+
+    /* Dish Popup */
     function openDishPopup(imgUrl, name, desc) {
       const overlay = document.getElementById('dish-popup-overlay');
       const img = document.getElementById('dish-popup-img');
-      const nameEl = document.getElementById('dish-popup-name');
-      const descEl = document.getElementById('dish-popup-desc');
-
+      
       img.src = imgUrl || '';
       img.alt = name;
       img.style.display = imgUrl ? 'block' : 'none';
-      nameEl.textContent = name;
-      descEl.textContent = desc;
+      document.getElementById('dish-popup-name').textContent = name;
+      document.getElementById('dish-popup-desc').textContent = desc;
 
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
     function closeDishPopup() {
       document.getElementById('dish-popup-overlay').classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeDishPopup();
-        closeCart();
+    /* ── (6) CART LOGIC & REORDER ── */
+    function addToCart(name, price, variant, emoji, category) {
+      const key = name + '||' + variant;
+      const existing = cart.find(i => i.key === key);
+
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ key, name, price, variant, emoji, category, qty: 1 });
       }
+
+      updateCartUI();
+      showCartPop(name + (variant ? ' (' + variant + ')' : '') + ' added!');
+    }
+
+    function changeQuantity(key, delta) {
+      const idx = cart.findIndex(i => i.key === key);
+      if (idx === -1) return;
+      cart[idx].qty += delta;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      localStorage.setItem('kshirsagar_cart', JSON.stringify(cart)); // Persist state
+
+      const badge = document.getElementById('cart-badge');
+      const badgeNav = document.getElementById('cart-badge-nav');
+      const area = document.getElementById('cart-items-area');
+      const empty = document.getElementById('cart-empty-state');
+      const totalEl = document.getElementById('cart-total-display');
+      const checkoutBtn = document.getElementById('cart-checkout-btn');
+      
+      const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+      if (totalQty === 0) {
+        badge.classList.add('hidden');
+        badgeNav.style.display = 'none';
+      } else {
+        badge.classList.remove('hidden');
+        badge.textContent = totalQty;
+        badge.classList.add('bump');
+        setTimeout(() => badge.classList.remove('bump'), 200);
+        badgeNav.style.display = 'inline';
+        badgeNav.textContent = totalQty;
+      }
+
+      document.getElementById('cart-item-count-label').textContent = totalQty > 0 ? `(${totalQty} item${totalQty>1?'s':''})` : '';
+
+      const baseTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+      totalEl.textContent = '₹' + (baseTotal + currentTip);
+      checkoutBtn.disabled = cart.length === 0;
+
+      // Render cart items
+      Array.from(area.children).forEach(c => { if (!c.classList.contains('cart-empty')) area.removeChild(c); });
+      
+      if (cart.length === 0) {
+        empty.style.display = 'flex';
+        return;
+      }
+      empty.style.display = 'none';
+
+      cart.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        const safeKey = item.key.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        div.innerHTML = `
+          <div class="cart-item-emoji">${item.emoji}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            ${item.variant ? `<div class="cart-item-variant">${item.variant}</div>` : ''}
+            <div class="cart-item-price">₹${item.price} each</div>
+          </div>
+          <div class="cart-qty-controls">
+            <button class="cart-qty-btn minus" onclick="changeQuantity('${safeKey}', -1)">−</button>
+            <span class="cart-qty-num">${item.qty}</span>
+            <button class="cart-qty-btn" onclick="changeQuantity('${safeKey}', 1)">+</button>
+          </div>
+          <button class="cart-delete-btn" onclick="changeQuantity('${safeKey}', -${item.qty})">✕</button>
+        `;
+        area.appendChild(div);
+      });
+    }
+
+    function openCart() {
+      document.getElementById('cart-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+      document.getElementById('cart-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function showCartPop(msg) {
+      const old = document.querySelector('.cart-pop');
+      if (old) old.remove();
+      const pop = document.createElement('div');
+      pop.className = 'cart-pop';
+      pop.textContent = '✦ ' + msg;
+      document.body.appendChild(pop);
+      setTimeout(() => { if (pop.parentNode) pop.remove(); }, 1800);
+    }
+
+    /* ── (7) VALIDATION & WHATSAPP CHECKOUT ── */
+    function handleCheckoutClick() {
+      if (cart.length === 0) return;
+
+      const nameEl = document.getElementById('cart-name');
+      const mobileEl = document.getElementById('cart-mobile');
+      const addrEl = document.getElementById('cart-address');
+
+      const name = nameEl.value.trim();
+      const mobileRaw = mobileEl.value.replace(/\D/g, ''); // Extract digits only
+      const address = addrEl.value.trim();
+
+      let hasError = false;
+
+      // Validate from bottom up so top-most error gets final focus
+      if (currentOrderType === 'Delivery' && !address) { shakeField(addrEl); hasError = true; }
+      if (mobileRaw.length !== 10) { shakeField(mobileEl); hasError = true; }
+      if (!name) { shakeField(nameEl); hasError = true; }
+
+      if (hasError) return;
+
+      // Time-Based Interception
+      const h = new Date().getHours();
+      if (h < 10) {
+        document.getElementById('tw-title').textContent = '☀️ Morning! Kitchen Opens at 10 AM';
+        document.getElementById('tw-desc').textContent = "Namaskar! Our kitchen opens at 10:00 AM. Send your order now and we'll prepare it fresh at opening. Proceed?";
+        document.getElementById('time-warning-modal').classList.add('open');
+      } else if (h >= 20) {
+        document.getElementById('tw-title').textContent = '🌙 Store is Closed';
+        document.getElementById('tw-desc').textContent = "Store is currently closed. We'll be back at 10:00 AM. Send order for tomorrow?";
+        document.getElementById('time-warning-modal').classList.add('open');
+      } else {
+        executeCheckout();
+      }
+    }
+
+    function proceedFromWarning() {
+      document.getElementById('time-warning-modal').classList.remove('open');
+      executeCheckout();
+    }
+
+    function executeCheckout() {
+      const name = document.getElementById('cart-name').value.trim();
+      const mobile = document.getElementById('cart-mobile').value.replace(/\D/g, '');
+      const address = document.getElementById('cart-address').value.trim();
+      const instructions = document.getElementById('cart-instructions').value.trim();
+      const total = cart.reduce((s, i) => s + i.price * i.qty, 0) + currentTip;
+
+      const orderLines = cart.map(item => {
+        const variantStr = item.variant ? ` (${item.variant})` : '';
+        return `  - ${item.name}${variantStr} x${item.qty}`;
+      }).join('\n');
+
+      let msg = `✦ *KSHIRSAGAR* ✦\n_Hamesha Kuch Naya._\n\n`;
+      msg += `Order Type: ${currentOrderType}\n`;
+      msg += `👤 *CUSTOMER:*\n${name} | ${mobile}`;
+      if (currentOrderType === 'Delivery') msg += `\n${address}`;
+      
+      msg += `\n\n🍽️ *ITEMS:*\n${orderLines}`;
+      if (instructions) msg += `\n\n📝 *INSTRUCTIONS:*\n${instructions}`;
+      if (currentTip > 0) msg += `\n\n💖 *TIP:* ₹${currentTip}`;
+      msg += `\n\n🧾 *ESTIMATED TOTAL:* ₹${total}\n\n`;
+      msg += `*Note:* Please reply with '1' to CONFIRM or '2' to CANCEL this order. Admin will share final details shortly.`;
+
+      // Save as Last Order, Reset State
+      localStorage.setItem('kshirsagar_last_order', JSON.stringify(cart));
+      cart = [];
+      currentTip = 0;
+      document.querySelectorAll('.cart-tip-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('cart-instructions').value = '';
+      
+      updateCartUI();
+      closeCart();
+      checkLastOrder();
+
+      document.getElementById('success-modal').classList.add('open');
+      window.open('https://wa.me/919523242424?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    function submitCustomRequest() {
+      const nameEl = document.getElementById('cr-name');
+      const mobEl = document.getElementById('cr-mobile');
+      const descEl = document.getElementById('cr-desc');
+      
+      if(!nameEl.value.trim()) { shakeField(nameEl); return; }
+      if(mobEl.value.replace(/\D/g,'').length !== 10) { shakeField(mobEl); return; }
+      if(!descEl.value.trim()) { shakeField(descEl); return; }
+      
+      let msg = `✦ *CUSTOM REQUEST* ✦\n\n👤 Name: ${nameEl.value.trim()}\n📱 Mobile: ${mobEl.value.trim()}\n📝 Details: ${descEl.value.trim()}`;
+      
+      document.getElementById('custom-request-modal').classList.remove('open');
+      window.open('https://wa.me/919523242424?text=' + encodeURIComponent(msg), '_blank');
+      
+      nameEl.value = ''; mobEl.value = ''; descEl.value = '';
+    }
+
+    /* ── (8) PWA INSTALL LOGIC ── */
+    let deferredPrompt;
+    const installBtns = [document.getElementById('install-app-nav'), document.getElementById('install-app-footer')];
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtns.forEach(btn => { if(btn) btn.style.display = 'inline-flex'; });
+    });
+
+    installBtns.forEach(btn => {
+      if(!btn) return;
+      btn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          installBtns.forEach(b => b.style.display = 'none');
+        }
+        deferredPrompt = null;
+      });
     });
 
 
-    /* ── (4) CUSTOM CURSOR (desktop only) ── */
-    (function initCursor() {
-      const cur = document.getElementById('cursor');
-      const cdot = document.getElementById('cdot');
-      if (!cur || !cdot) return;
-
-      let mx = 0, my = 0, cx = 0, cy = 0;
-
-      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-      (function loop() {
-        cx += (mx - cx) * .11;
-        cy += (my - cy) * .11;
-        cur.style.left = cx + 'px';
-        cur.style.top = cy + 'px';
-        cdot.style.left = mx + 'px';
-        cdot.style.top = my + 'px';
-        requestAnimationFrame(loop);
-      })();
-
-      document.querySelectorAll('button, a, .btn-add, .cart-qty-btn, .cart-delete-btn, .menu-item-img').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          cur.style.width = '54px';
-          cur.style.height = '54px';
-          cur.style.borderColor = 'rgba(212,175,55,.9)';
-        });
-        el.addEventListener('mouseleave', () => {
-          cur.style.width = '38px';
-          cur.style.height = '38px';
-          cur.style.borderColor = 'rgba(212,175,55,.65)';
-        });
-      });
-    })();
-
-
-    /* ── (5) NAV: Add "scrolled" class after 40px scroll ── */
-    (function initNav() {
-      const nav = document.getElementById('nav');
-      window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
-    })();
-
-
-    /* ── (6) SCROLL PARALLAX for #menu and #legacy backgrounds ── */
-    (function initParallax() {
+    /* Background Parallax & Scroll reveals */
+    function initScrollParallax() {
       const menuEl = document.getElementById('menu');
       const legacyEl = document.getElementById('legacy');
-
       window.addEventListener('scroll', () => {
         const y = window.scrollY;
         if (menuEl) menuEl.style.backgroundPosition = `center ${y * 0.2}px`;
         if (legacyEl) legacyEl.style.backgroundPosition = `center ${y * 0.15}px`;
       }, { passive: true });
-    })();
+    }
 
+    function initScrollReveal() {
+      const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: .15 });
 
-    /* ── (7) ANIMATED COUNTERS (triggered once on #legacy scroll) ── */
-    (function initCounters() {
+      document.querySelectorAll('.scard, .ic, .fc, .stgrid').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = 'opacity .7s ease, transform .7s ease';
+        revealObs.observe(el);
+      });
+    }
+
+    function initCounters() {
       function animateCounter(el, target, suffix, duration) {
         let start = null;
         const fmt = n => n >= 1000 ? Math.floor(n).toLocaleString() : Math.floor(n);
-
         const step = ts => {
           if (!start) start = ts;
           const progress = Math.min((ts - start) / duration, 1);
@@ -2570,7 +2849,6 @@
           el.textContent = fmt(ease * target) + suffix;
           if (progress < 1) requestAnimationFrame(step);
         };
-
         requestAnimationFrame(step);
       }
 
@@ -2587,209 +2865,36 @@
       }, { threshold: 0.2 });
 
       observer.observe(legacySection);
-    })();
+    }
 
+    function initCursor() {
+      const cur = document.getElementById('cursor');
+      const cdot = document.getElementById('cdot');
+      if (!cur || !cdot) return;
 
-    /* ── (8) SCROLL REVEAL: Fade-up on scroll for cards ── */
-    (function initScrollReveal() {
-      const revealObs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.style.opacity = '1';
-            e.target.style.transform = 'translateY(0)';
-          }
+      let mx = 0, my = 0, cx = 0, cy = 0;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+      (function loop() {
+        cx += (mx - cx) * .11;
+        cy += (my - cy) * .11;
+        cur.style.left = cx + 'px';
+        cur.style.top = cy + 'px';
+        cdot.style.left = mx + 'px';
+        cdot.style.top = my + 'px';
+        requestAnimationFrame(loop);
+      })();
+
+      document.querySelectorAll('button, a, .btn-add, .cart-qty-btn, .cart-delete-btn, .menu-item-img').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cur.style.width = '54px'; cur.style.height = '54px'; cur.style.borderColor = 'rgba(212,175,55,.9)';
         });
-      }, { threshold: .15 });
-
-      document.querySelectorAll('.scard, .ic, .fc, .stgrid').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(24px)';
-        el.style.transition = 'opacity .7s ease, transform .7s ease';
-        revealObs.observe(el);
-      });
-    })();
-
-
-
-    /* ══════════════════════════════════════════════════════════════
-       CART SYSTEM — State, UI, Checkout
-    ══════════════════════════════════════════════════════════════ */
-
-    /* ── STATE ── */
-    let cart = [];
-
-    /* ── addToCart: add item or increment existing variant ── */
-    function addToCart(name, price, variant, emoji, category) {
-      const key = name + '||' + variant;
-      const existing = cart.find(i => i.key === key);
-
-      if (existing) {
-        existing.qty++;
-      } else {
-        cart.push({ key, name, price, variant, emoji, category, qty: 1 });
-      }
-
-      updateCartUI();
-      showCartPop(name + (variant ? ' (' + variant + ')' : '') + ' added!');
-    }
-
-    /* ── changeQuantity: increment or decrement item; remove if 0 ── */
-    function changeQuantity(key, delta) {
-      const idx = cart.findIndex(i => i.key === key);
-      if (idx === -1) return;
-      cart[idx].qty += delta;
-      if (cart[idx].qty <= 0) cart.splice(idx, 1);
-      updateCartUI();
-    }
-
-    /* ── updateCartUI: re-render badge + modal contents ── */
-    function updateCartUI() {
-      const badge       = document.getElementById('cart-badge');
-      const badgeNav    = document.getElementById('cart-badge-nav');
-      const area        = document.getElementById('cart-items-area');
-      const empty       = document.getElementById('cart-empty-state');
-      const totalEl     = document.getElementById('cart-total-display');
-      const checkoutBtn = document.getElementById('cart-checkout-btn');
-      const countLabel  = document.getElementById('cart-item-count-label');
-
-      // Badge
-      const totalQty = cart.reduce((s, i) => s + i.qty, 0);
-      if (totalQty === 0) {
-        badge.classList.add('hidden');
-        badgeNav.style.display = 'none';
-      } else {
-        badge.classList.remove('hidden');
-        badge.textContent = totalQty;
-        badge.classList.add('bump');
-        setTimeout(() => badge.classList.remove('bump'), 200);
-        badgeNav.style.display = 'inline';
-        badgeNav.textContent = totalQty;
-      }
-
-      // Count label in header
-      countLabel.textContent = totalQty > 0 ? '(' + totalQty + ' item' + (totalQty > 1 ? 's' : '') + ')' : '';
-
-      // Total
-      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-      totalEl.textContent = '₹' + total;
-
-      // Checkout button state
-      checkoutBtn.disabled = cart.length === 0;
-
-      // Items list — Remove old item rows (keep empty state node)
-      Array.from(area.children).forEach(child => {
-        if (!child.classList.contains('cart-empty')) area.removeChild(child);
-      });
-
-      if (cart.length === 0) {
-        empty.style.display = 'flex';
-        return;
-      }
-      empty.style.display = 'none';
-
-      cart.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'cart-item';
-        const safeKey = item.key.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
-        div.innerHTML =
-          '<div class="cart-item-emoji">' + item.emoji + '</div>' +
-          '<div class="cart-item-info">' +
-            '<div class="cart-item-name">' + item.name + '</div>' +
-            (item.variant ? '<div class="cart-item-variant">' + item.variant + '</div>' : '') +
-            '<div class="cart-item-price">₹' + item.price + ' each</div>' +
-          '</div>' +
-          '<div class="cart-qty-controls">' +
-            '<button class="cart-qty-btn minus" onclick="changeQuantity(\'' + safeKey + '\', -1)" aria-label="Decrease">−</button>' +
-            '<span class="cart-qty-num">' + item.qty + '</span>' +
-            '<button class="cart-qty-btn" onclick="changeQuantity(\'' + safeKey + '\', 1)" aria-label="Increase">+</button>' +
-          '</div>' +
-          '<button class="cart-delete-btn" onclick="changeQuantity(\'' + safeKey + '\', -' + item.qty + ')" aria-label="Remove item" title="Remove">✕</button>';
-        area.appendChild(div);
+        el.addEventListener('mouseleave', () => {
+          cur.style.width = '38px'; cur.style.height = '38px'; cur.style.borderColor = 'rgba(212,175,55,.65)';
+        });
       });
     }
 
-    /* ── openCart / closeCart ── */
-    function openCart() {
-      document.getElementById('cart-overlay').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCart() {
-      document.getElementById('cart-overlay').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    /* ── showCartPop: brief toast notification ── */
-    function showCartPop(msg) {
-      const old = document.querySelector('.cart-pop');
-      if (old) old.remove();
-      const pop = document.createElement('div');
-      pop.className = 'cart-pop';
-      pop.textContent = '✦ ' + msg;
-      document.body.appendChild(pop);
-      setTimeout(() => { if (pop.parentNode) pop.remove(); }, 1800);
-    }
-
-    /* ── Helper: shake + highlight a field ── */
-    function shakeField(el) {
-      el.classList.remove('shake');
-      void el.offsetWidth; // reflow to restart animation
-      el.classList.add('shake');
-      el.focus();
-      setTimeout(() => el.classList.remove('shake'), 500);
-    }
-
-    /* ── checkoutViaWhatsApp ── */
-    function checkoutViaWhatsApp() {
-      if (cart.length === 0) return;
-
-      const nameEl    = document.getElementById('cart-name');
-      const mobileEl  = document.getElementById('cart-mobile');
-      const addrEl    = document.getElementById('cart-address');
-
-      const name    = nameEl.value.trim();
-      const mobile  = mobileEl.value.trim();
-      const address = addrEl.value.trim();
-
-      // Validate all 3 fields — stop at first empty and shake it
-      let hasError = false;
-
-      if (!address) { shakeField(addrEl); hasError = true; }
-      if (!mobile)  { shakeField(mobileEl); hasError = true; }
-      if (!name)    { shakeField(nameEl); hasError = true; }
-
-      if (hasError) return;
-
-      const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-
-      const orderLines = cart.map(item => {
-        const variantStr = item.variant ? ' (' + item.variant + ')' : '';
-        return '  - ' + item.name + variantStr + ' x' + item.qty;
-      }).join('\n');
-
-      const message =
-        '✦ *KSHIRSAGAR* ✦\n' +
-        '_Hamesha Kuch Naya._\n\n' +
-        '👤 *CUSTOMER DETAILS:*\n' +
-        'Name: ' + name + '\n' +
-        'Mobile: ' + mobile + '\n' +
-        'Address: ' + address + '\n\n' +
-        '🍽️ *ORDER DETAILS:*\n' +
-        orderLines + '\n\n' +
-        '---\n' +
-        '🧾 *ESTIMATED TOTAL:* ₹' + total + '\n\n' +
-        "*Note:* Please reply with '1' to confirm your order. Admin will share payment QR and final details shortly.";
-
-      const encoded = encodeURIComponent(message);
-      window.open('https://wa.me/919523242424?text=' + encoded, '_blank');
-      
-      cart = []; updateCartUI(); closeCart();
-    }
-
-    /* Initialise UI on load */
-    updateCartUI();
-
-    /* ── FOOTER: Dynamic year ── */
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 
