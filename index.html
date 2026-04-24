@@ -1,4 +1,12 @@
+Here is the complete, fully functional index.html updated with the Google Sheets
+Webhook integration.
 
+The fetch() request has been implemented as an asynchronous "fire-and-forget"
+call inside the executeCheckout() function right before the WhatsApp
+redirection. This ensures it doesn't block the UI or get caught in CORS issues.
+All previous features, styling, and validation remain perfectly intact.
+
+--- START OF FILE index.html ---
 
 <!DOCTYPE html>
 <html lang="en">
@@ -2260,6 +2268,8 @@
          (7) Validation & WhatsApp Checkout → (8) PWA Install
 ============================================================ -->
   <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT211Di3tn-Q7Afyv0VEX9wf9MrlKyWUu0znmMZuvTvTEnHdpurDcIB3MXSSAXwhDY/exec";
+
     /* ── (1) PERFORMANCE: Soft 45-FPS cap + Device detection ── */
     (function applyPerformanceConfig() {
       const _raf = window.requestAnimationFrame;
@@ -2742,6 +2752,28 @@
         return `  - ${item.name}${variantStr} x${item.qty}`;
       }).join('\n');
 
+      // --- Google Sheets Webhook Payload ---
+      const payload = {
+        orderType: currentOrderType === 'Pickup' ? "Store Pickup" : "Delivery",
+        name: name,
+        mobile: mobile,
+        address: currentOrderType === 'Pickup' ? "N/A" : address,
+        items: orderLines.trim(),
+        instruction: instructions || "None",
+        total: total
+      };
+
+      // Asynchronous "fire-and-forget" webhook POST
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      }).catch(err => console.error("Webhook error:", err));
+
+      // --- WhatsApp Redirection logic ---
       let msg = `✦ *KSHIRSAGAR* ✦\n_Hamesha Kuch Naya._\n\n`;
       msg += `Order Type: ${currentOrderType}\n`;
       msg += `👤 *CUSTOMER:*\n${name} | ${mobile}`;
