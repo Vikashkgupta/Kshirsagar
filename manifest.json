@@ -1,44 +1,33 @@
 {
-  "background_color": "#ffffff",
-  "description": "Kshirsagar Mairwa - Serving Mairwa's finest sweets, Dosa, Chowmein, and Burgers since 1998. Order home delivery in Mairwa and 15km radius.",
-  "dir": "ltr",
-  "display": "standalone",
   "name": "Kshirsagar",
+  "short_name": "kshirsagar",
+  "description": "Kshirsagar Mairwa - Serving Mairwa's finest sweets, Dosa, Chowmein, and Burgers since 1998. Order home delivery in Mairwa and 15km radius.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#080808",
   "orientation": "any",
   "scope": "/",
-  "short_name": "kshirsagar",
-  "start_url": "/",
-  "theme_color": "#080808",
-  "icons": [
-    {
-      "src": "https://kshirsagarmairwa.netlify.app/logo2.png",
-      "type": "image/png",
-      "isSquare": false,
-      "isPng": true,
-      "isWebp": false,
-      "isJpg": false,
-      "width": 0,
-      "is512x512": false,
-      "is256x256": false,
-      "is192x192": false
-    },
-    {
-      "src": "https://kshirsagarmairwa.netlify.app/og-image.jpg",
-      "isSquare": false,
-      "isPng": false,
-      "isWebp": false,
-      "isJpg": true,
-      "width": 0,
-      "is512x512": false,
-      "is256x256": false,
-      "is192x192": false
-    }
-  ],
-  "id": "1",
+  "dir": "ltr",
+  "id": "/",
   "categories": [
     "dating",
     "food",
     "lifestyle",
     "shopping"
+  ],
+  "icons": [
+    {
+      "src": "https://kshirsagarmairwa.netlify.app/logo2.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://kshirsagarmairwa.netlify.app/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
