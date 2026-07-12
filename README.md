@@ -1,35 +1,110 @@
-# 🍽️ Kshirsagar - Premium Restaurant Web Experience
+# 🍽️ Kshirsagar – Restaurant Management Platform
 
-Kshirsagar ek modern, fully responsive, aur interactive web application hai jo ek real-world restaurant business ke digital presence ko enhance karne ke liye design ki gayi hai. Is project mein seamless navigation, premium UI/UX, aur modern web technologies ka use kiya gaya hai.
-
----
+A modern, responsive, and scalable restaurant web application developed to enhance the digital presence of a real-world restaurant. The project focuses on delivering a premium user experience with an interactive interface, online menu browsing, and seamless customer engagement.
 
 ## 🚀 Live Demo
-**[kshirsagarmairwa.netlify.app]**
+🌐 https://kshirsagarmairwa.netlify.app
 
 ---
 
-## ✨ Key Features
-- **Premium UI/UX:** Clean, elegant design tailored for a high-end restaurant brand identity.
-- **Interactive Elements:** Smooth animations and transitions using modern CSS and JavaScript (GSAP/Three.js).
-- **Dynamic Digital Menu:** Well-categorized, easy-to-browse menu interface for customers.
-- **Direct Communication:** Seamless WhatsApp integration for instant ordering and customer queries.
-- **Cross-Device Compatibility:** 100% responsive design optimized for Mobile, Tablet, and Desktop views.
+## ✨ Features
+
+- Responsive and modern UI optimized for mobile, tablet, and desktop.
+- Digital restaurant menu with categorized food items.
+- Featured, popular, and recommended dishes.
+- WhatsApp integration for instant ordering and customer support.
+- Smooth animations using GSAP.
+- Fast navigation with React Router.
+- Clean and scalable component-based architecture.
 
 ---
 
 ## 🛠️ Tech Stack
-- **Frontend:** React.js, HTML5, CSS3, JavaScript (ES6+)
-- **Styling & Animations:** Tailwind CSS / Custom CSS, GSAP
-- **Icons:** Lucide React / FontAwesome
-- **Deployment:** Netlify / Vercel
+
+### Frontend
+- React.js
+- JavaScript (ES6+)
+- HTML5
+- CSS3
+- Tailwind CSS
+
+### Libraries
+- GSAP
+- Lucide React
+
+### Tools
+- Git
+- GitHub
+- VS Code
+
+### Deployment
+- Netlify
 
 ---
 
-## ⚙️ Installation & Setup
-To run this project locally, follow these steps:
+## 📂 Project Structure
 
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/vikashkgupta/kshirsagar.git](https://github.com/kshitsagar/kshirsagar.git)
- 
+```
+src/
+ ├── components/
+ ├── pages/
+ ├── assets/
+ ├── hooks/
+ ├── context/
+ ├── utils/
+ └── App.jsx
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/Vikashkgupta/kshirsagar.git
+```
+
+Go to project directory
+
+```bash
+cd kshirsagar
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Run development server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🎯 Future Enhancements
+
+- User Authentication (JWT)
+- Online Payment Integration
+- Admin Dashboard
+- Table Reservation System
+- Order Tracking
+- Customer Reviews & Ratings
+- Backend Integration with Node.js, Express.js & MongoDB
+
+---
+
+## 👨‍💻 Author
+
+**Vikash Kumar Gupta**
+
+- GitHub: https://github.com/Vikashkgupta
+- LinkedIn: https://linkedin.com/in/vikash-kumar-gupta-505899295
+- Portfolio: https://vikashkumargupta.netlify.app
+
+---
+
+⭐ If you like this project, don't forget to give it a Star.
