@@ -297,16 +297,16 @@
       max-height: 100svh;
       overflow: hidden;
       background:
-        /* Top dark vignette */
-        linear-gradient(to bottom, rgba(8,8,8,0.82) 0%, rgba(8,8,8,0.35) 28%, transparent 50%),
-        /* Bottom dark vignette */
-        linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.65) 22%, transparent 55%),
-        /* Left edge fade */
-        linear-gradient(to right, rgba(8,8,8,0.55) 0%, transparent 45%),
-        /* Right edge fade */
-        linear-gradient(to left, rgba(8,8,8,0.35) 0%, transparent 40%),
-        /* The cinematic food image */
-        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1920&q=80') center center / cover no-repeat;
+        /* Top light overlay */
+        linear-gradient(to bottom, rgba(255,255,255,0.58) 0%, rgba(255,255,255,0.22) 28%, transparent 50%),
+        /* Bottom light overlay */
+        linear-gradient(to top, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.28) 24%, transparent 58%),
+        /* Left edge soft fade */
+        linear-gradient(to right, rgba(255,255,255,0.3) 0%, transparent 45%),
+        /* Right edge soft fade */
+        linear-gradient(to left, rgba(255,255,255,0.2) 0%, transparent 40%),
+        /* The hero food image */
+        url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80') center center / cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -330,7 +330,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      box-shadow: inset 0 0 120px rgba(8,8,8,0.5);
+      box-shadow: inset 0 0 120px rgba(255,255,255,0.24);
       pointer-events: none;
       z-index: 2;
     }
@@ -388,7 +388,7 @@
     /* ── TAGLINE ── */
     .hsub {
       font-size: clamp(.95rem, 2vw, 1.22rem);
-      color: #c0c0c0;
+      color: #1f2937;
       font-style: italic;
       margin-bottom: .45rem;
       animation: fadeUp .9s ease .28s both;
@@ -398,7 +398,7 @@
     .hloc {
       font-family: 'Inter', sans-serif;
       font-size: .75rem;
-      color: #3d3d3d;
+      color: #111827;
       letter-spacing: .18em;
       margin-bottom: 2.5rem;
       animation: fadeUp .9s ease .38s both;
