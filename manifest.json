@@ -1,33 +1,61 @@
 {
-  "name": "Kshirsagar",
-  "short_name": "kshirsagar",
-  "description": "Kshirsagar Mairwa - Serving Mairwa's finest sweets, Dosa, Chowmein, and Burgers since 1998. Order home delivery in Mairwa and 15km radius.",
+  "name": "Kshirsagar Mairwa | Best Sweets & Restaurant",
+  "short_name": "Kshirsagar",
+  "description": "Kshirsagar Mairwa - Serving Mairwa's finest sweets, Dosa, Chowmein, and Burgers since 1998. Order home delivery in Mairwa.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "display_override": ["window-controls-overlay"],
+  "background_color": "#080808",
   "theme_color": "#080808",
-  "orientation": "any",
+  "orientation": "portrait-primary",
   "scope": "/",
   "dir": "ltr",
-  "id": "/",
+  "lang": "en",
   "categories": [
-    "dating",
     "food",
-    "lifestyle",
-    "shopping"
+    "shopping",
+    "lifestyle"
   ],
   "icons": [
     {
-      "src": "https://kshirsagarmairwa.netlify.app/logo2.png",
+      "src": "logo1.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://kshirsagarmairwa.netlify.app/logo512.png",
+      "src": "logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Menu",
+      "short_name": "Menu",
+      "description": "Explore our premium legacy menu",
+      "url": "/#menu",
+      "icons": [
+        {
+          "src": "logo1.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "My Orders",
+      "short_name": "Cart",
+      "description": "View your cart and checkout",
+      "url": "/",
+      "icons": [
+        {
+          "src": "logo1.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
