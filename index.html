@@ -102,8 +102,6 @@
   <!-- ── TAILWIND (utility resets only) ── -->
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-
-
   <!-- ============================================================
     GLOBAL STYLES
     Organized by: Variables → Animations → Base → Components
@@ -722,11 +720,12 @@
     /* ── REDESIGNED CATEGORY NAV (White Luxury Theme) ── */
     .menu-cat-nav {
       display: flex;
-      gap: 1.5rem;
-      padding: 1rem 2.5rem 3rem !important;
+      gap: clamp(1rem, 3vw, 1.5rem);
+      padding: clamp(0.5rem, 2vw, 1rem) clamp(1rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3rem) !important;
       overflow-x: auto;
       scrollbar-width: none;
       align-items: flex-start;
+      flex-wrap: nowrap;
     }
 
     .menu-cat-nav::-webkit-scrollbar {
@@ -736,8 +735,8 @@
     .menu-cat-btn {
       display: flex;
       flex-direction: column;
-      width: 140px !important;
-      height: 175px !important;
+      width: clamp(110px, 30vw, 140px) !important;
+      height: clamp(140px, 38vw, 175px) !important;
       padding: 0 !important;
       border-radius: 16px !important;
       background: #ffffff !important;
@@ -789,7 +788,7 @@
       text-align: center;
       padding: 0 0.4rem;
       font-family: 'Inter', sans-serif;
-      font-size: 0.95rem !important;
+      font-size: clamp(0.8rem, 2.5vw, 0.95rem) !important;
       font-weight: 700 !important;
       color: #222 !important;
       background: #ffffff !important;
@@ -811,7 +810,7 @@
 
     /* ── DYNAMIC CATEGORY HEADING ── */
     .active-category-heading {
-      padding: 0 2.5rem 1.5rem;
+      padding: 0 clamp(1rem, 4vw, 2.5rem) clamp(1rem, 3vw, 1.5rem);
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -826,7 +825,7 @@
 
     .active-category-title {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem;
+      font-size: clamp(1.4rem, 5vw, 2rem) !important;
       font-weight: 700;
       color: #111;
       display: flex;
@@ -841,19 +840,21 @@
       width: 100%;
     }
 
-    /* Menu item grid */
+    /* ── RESPONSIVE MENU GRID ── */
     .menu-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      padding: 0 2.5rem 4rem;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+      gap: clamp(1rem, 3vw, 1.5rem);
+      padding: 0 clamp(1rem, 4vw, 2.5rem) clamp(2rem, 6vw, 4rem);
     }
 
+    /* ── RESPONSIVE PRODUCT CARD ── */
     .menu-item-row {
       display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      padding: 1.5rem !important;
+      flex-wrap: wrap; /* Allows natural wrapping on super small devices */
+      align-items: center; /* Vertically centers when in row */
+      gap: clamp(0.75rem, 2vw, 1.2rem);
+      padding: clamp(0.8rem, 2.5vw, 1.2rem) !important;
       background: #ffffff !important;
       border: 1px solid rgba(0,0,0,0.06) !important;
       border-radius: 18px !important;
@@ -869,9 +870,10 @@
     }
 
     .menu-item-img {
-      width: 90px !important;
-      height: 90px !important;
-      min-width: 90px !important;
+      width: clamp(65px, 18vw, 90px) !important;
+      height: clamp(65px, 18vw, 90px) !important;
+      min-width: clamp(65px, 18vw, 90px) !important;
+      flex: 0 0 auto;
       border-radius: 12px !important;
       border: none !important;
       background: #fdfdfd !important;
@@ -883,7 +885,6 @@
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
       transition: transform .2s, box-shadow .2s;
-      flex-shrink: 0;
       position: relative;
     }
 
@@ -929,33 +930,43 @@
       box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
     }
 
+    /* Info Section Fluidness */
     .menu-item-info {
-      flex: 1;
-      min-width: 0;
+      flex: 1 1 min(100%, 140px); /* Fill space, wraps actions if less than 140px width left */
+      min-width: 0; /* Important for ellipsis & flex containment */
     }
 
     .menu-item-name {
-      font-size: 1.15rem !important;
+      font-size: clamp(0.95rem, 4vw, 1.15rem) !important;
       font-weight: 700 !important;
       color: #111 !important;
       font-family: 'Playfair Display', serif !important;
-      white-space: nowrap;
+      white-space: normal !important; 
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.25;
+      margin-bottom: 0.1rem;
+    }
+
+    .menu-item-desc {
+      font-size: clamp(0.75rem, 3vw, 0.85rem) !important;
+      color: #666 !important;
+      font-family: 'Inter', sans-serif;
+      margin-top: 0.2rem !important;
+      line-height: 1.4 !important;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .menu-item-desc {
-      font-size: 0.85rem !important;
-      color: #666 !important;
-      font-family: 'Inter', sans-serif;
-      margin-top: 0.4rem !important;
-      line-height: 1.5 !important;
-    }
-
     .menu-item-tag {
       display: inline-block;
-      margin-top: 0.6rem !important;
-      font-size: 0.7rem !important;
+      margin-top: 0.4rem !important;
+      font-size: clamp(0.6rem, 2vw, 0.7rem) !important;
       letter-spacing: 0.05em;
       color: #b8860b !important;
       font-family: 'Inter', sans-serif;
@@ -966,32 +977,39 @@
       font-weight: 600 !important;
     }
 
-    /* Actions styling structure based on modified JS output */
+    /* Actions Layout - fully fluid to avoid clipping on mobile */
     .variant-actions {
       display: flex;
-      gap: 1rem;
+      flex-wrap: wrap; /* Allows halves to stack if heavily constrained */
+      gap: clamp(0.5rem, 2vw, 1rem);
+      margin-left: auto; /* Always pushes actions to the right */
+      justify-content: flex-end;
+      flex: 0 0 auto;
     }
     .single-action {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       gap: 0.5rem;
+      margin-left: auto;
+      flex: 0 0 auto;
     }
     .action-col {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.3rem;
+      flex: 0 0 auto;
     }
     .action-label {
-      font-size: 0.65rem;
+      font-size: clamp(0.6rem, 2vw, 0.65rem);
       color: #888;
       font-weight: 700;
       letter-spacing: 0.05em;
       font-family: 'Inter', sans-serif;
     }
     .action-price {
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 3vw, 1rem);
       color: #111;
       font-weight: 800;
       font-family: 'Inter', sans-serif;
@@ -1002,13 +1020,13 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.5rem 1.4rem !important;
+      padding: clamp(0.35rem, 1.5vw, 0.5rem) clamp(1rem, 3vw, 1.4rem) !important;
       border-radius: 8px !important;
       border: 1px solid #d4af37 !important;
       background: #ffffff !important;
       color: #d4af37 !important;
       font-family: 'Inter', sans-serif;
-      font-size: 0.8rem !important;
+      font-size: clamp(0.7rem, 2vw, 0.8rem) !important;
       font-weight: 700 !important;
       letter-spacing: 0.05em !important;
       cursor: pointer;
@@ -1028,7 +1046,6 @@
       transform: scale(.97) !important;
     }
 
-    /* Remove previous half variant distinct coloring to keep uniform premium white styling */
     .btn-add.btn-half {
       border-color: #d4af37 !important;
       background: #ffffff !important;
@@ -2781,7 +2798,7 @@
       <a href="https://kshirsagarmairwa.netlify.app/" class="nl" style="text-decoration:none;">
         <img src="logo.png" alt="Kshirsagar Logo" style="height:55px;object-fit:contain;"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <span style="display:none;color:#d4af37;font-size:1.35rem;font-weight:900;">✦ Kshirsagar</span>
+        <span style="display:none;color:#d4af37;font-size:1.35rem;font-weight:900;">Kshirsagar</span>
       </a>
       <ul class="nm">
         <li><a href="#menu">Menu</a></li>
@@ -2790,11 +2807,11 @@
         <li><a href="#footer">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <!-- PWA Install App Button (Hidden by default, shown by JS if supported) -->
-        <button class="ncta" id="install-app-nav"
-          style="display:none; border-color:var(--saffron); color:var(--saffron);">
-          <span>📱</span> Install App
-        </button>
+        <!-- APK Download Button -->
+        <a href="Releases/KshirSagar.apk" download class="ncta" id="install-app-nav"
+          style="border-color:var(--saffron); color:var(--saffron); text-decoration: none;">
+          <span>📱</span> Get App
+        </a>
         <!-- Reorder Last Meal Button (Hidden by default) -->
         <button class="ncta" id="reorder-btn" style="display:none; border-color:var(--peacock); color:var(--peacock);">
           <span>🔄</span> Reorder
@@ -2815,8 +2832,8 @@
       <div class="hcnt">
         <div class="hero-left">
           <div class="hbadge">
-            <span style="color:#c88a2e;font-size:0.75rem;">✦</span>
-            <span>EST. 1998</span>
+            <span style="color:#c88a2e;font-size:0.75rem;"></span>
+            <span>SINCE 1998</span>
           </div>
 
           <div class="htradition">TRADITION OF EXCELLENCE</div>
@@ -2829,9 +2846,9 @@
           </div>
 
           <div class="hhindi-wrap">
-            <span class="hhindi-arrow">➔</span>
+            <span class="hhindi-arrow">➞</span>
             <span>हमेशा कुछ नया</span>
-            <span class="hhindi-arrow">🠔</span>
+            <span class="hhindi-arrow">⬅</span>
           </div>
 
           <div class="hloc">
@@ -2839,12 +2856,12 @@
               <path
                 d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2ZM12 11.5C10.62 11.5 9.5 10.38 9.5 9C9.5 7.62 10.62 6.5 12 6.5C13.38 6.5 14.5 7.62 14.5 9C14.5 10.38 13.38 11.5 12 11.5Z" />
             </svg>
-            Mairwa • Siwan • Bihar
+            Nai bazar, Mairwa (Siwan)
           </div>
 
           <div class="hbtns">
             <button class="bp" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
-              <span style="font-size:1.1rem;color:#ffe9c0;">✦</span> Explore Menu <span
+              <span style="font-size:1.1rem;color:#ffe9c0;"></span> Explore Menu <span
                 style="font-size:1.1rem;">→</span>
             </button>
             <button class="bs" onclick="document.getElementById('custom-request-modal').classList.add('open')">
@@ -3035,7 +3052,7 @@
               <span style="font-size:1.3rem;flex-shrink:0">📍</span>
               <div>
                 <div class="ilbl">ADDRESS</div>
-                <div class="idet">Main Market, Mairwa<br>Siwan, Bihar — 841239</div>
+                <div class="idet">Nai Bazar, Mairwa<br>Siwan, Bihar — 841239</div>
               </div>
             </div>
             <div class="ic">
@@ -3067,7 +3084,7 @@
               width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
               referrerpolicy="no-referrer-when-downgrade" title="Kshirsagar Mairwa Location"></iframe>
             <div class="mb">
-              <div class="mbt">✦ Kshirsagar</div>
+              <div class="mbt">Kshirsagar</div>
               <div class="mbs">Mairwa, Siwan</div>
             </div>
             <div class="ping-wrap">
@@ -3087,10 +3104,10 @@
         <div class="fg">
           <!-- COL 1: Brand -->
           <div class="footer-brand-col">
-            <div class="fb">✦ Kshirsagar</div>
+            <div class="fb">Kshirsagar</div>
             <p class="ftag">Mairwa's most beloved sweet shop &amp; multi-cuisine restaurant, crafting unforgettable
               memories through flavors since 1998.</p>
-            <p class="ftag">📍 Main Market, Station Road, Mairwa — 841239</p>
+            <p class="ftag">📍 Nai Bazar, Mairwa (Siwan)— 841239</p>
             <a href="https://wa.me/919931890824" class="footer-contact-pill" target="_blank" rel="noopener">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -3100,10 +3117,10 @@
             </a>
             <br>
             <!-- Install App Footer Link -->
-            <button class="footer-contact-pill" id="install-app-footer"
-              style="display:none; border-color:var(--saffron); color:var(--saffron); cursor:pointer; margin-top:0.6rem;">
-              📱 Install Kshirsagar App
-            </button>
+            <a href="releases/KshirSagar.apk" download class="footer-contact-pill" id="install-app-footer"
+              style="border-color:var(--saffron); color:var(--saffron); cursor:pointer; margin-top:0.6rem; text-decoration: none;">
+              📱 Download Kshirsagar App
+            </a>
           </div>
 
           <!-- COL 2: Menu -->
@@ -3141,7 +3158,7 @@
                 aria-label="Email for newsletter">
               <button class="footer-nl-btn"
                 onclick="this.textContent='✓ Subscribed!';this.style.background='linear-gradient(135deg,#25d366,#128c7e)';setTimeout(()=>{this.textContent='Subscribe';this.style.background='';},2500)">
-                SUBSCRIBE ✦
+                SUBSCRIBE
               </button>
             </div>
             <div class="footer-social-row">
@@ -3361,7 +3378,7 @@
   Order: (1) Performance config → (2) Menu data & State → 
          (3) Initialization → (4) Menu render & filtering → 
          (5) UI/UX Handlers → (6) Cart Logic & Reorder →
-         (7) Validation & WhatsApp Checkout → (8) PWA Install
+         (7) Validation & WhatsApp Checkout
 ============================================================ -->
   <script>
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT211Di3tn-Q7Afyv0VEX9wf9MrlKyWUu0znmMZuvTvTEnHdpurDcIB3MXSSAXwhDY/exec";
@@ -3380,87 +3397,87 @@
       {
         title: "Pizza", sub: "Small / Large", emoji: "🍕",
         items: [
-          { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn, cheese & herbs on crispy base", imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" },
-          { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Garden veggies with golden mozzarella", imageUrl: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80" },
-          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Soft paneer tikka with tangy tomato sauce", imageUrl: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Earthy mushrooms with rich cheese blend", imageUrl: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80" }
+          { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn & cheese", imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" },
+          { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Veggies with golden mozzarella", imageUrl: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80" },
+          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Paneer tikka with tangy sauce", imageUrl: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80", tags: ['chefSpecial'] },
+          { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Mushrooms with rich cheese", imageUrl: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80" }
         ]
       },
       {
         title: "Chowmein", sub: "Half / Full", emoji: "🍜",
         items: [
-          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style stir-fried noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80", tags: ['bestseller'] },
-          { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with soft paneer cubes", imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80" },
-          { name: "Special Chowmein", price: "₹120", desc: "Chef's special loaded with veggies & spices", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style with soy & chilli", imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" },
-          { name: "Singapuri Noodles", price: "₹180", desc: "Spicy thin noodles Singapore style", imageUrl: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80" }
+          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80", tags: ['bestseller'] },
+          { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with paneer", imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80" },
+          { name: "Special Chowmein", price: "₹120", desc: "Chef's special with veggies", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80", tags: ['chefSpecial'] },
+          { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style noodles", imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" },
+          { name: "Singapuri Noodles", price: "₹180", desc: "Spicy Singapore style noodles", imageUrl: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80" }
         ]
       },
       {
         title: "Dosa", sub: "South Indian", emoji: "🥞",
         items: [
-          { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with caramelised onions", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80" },
-          { name: "Masala Dosa", price: "₹80", desc: "Golden dosa stuffed with spiced potato filling", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'] },
-          { name: "Special Dosa", price: "₹120", desc: "Premium stuffing with chef's secret masala", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80" },
-          { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with spiced cottage cheese bhurji", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
-          { name: "Uttapam", price: "₹180", desc: "Thick soft pancake with mixed veggies", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
-          { name: "Cheese Uttapam", price: "₹200", desc: "Uttapam loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" },
-          { name: "Shahi Dosa", price: "₹200", desc: "Royal dosa with cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with onions", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80" },
+          { name: "Masala Dosa", price: "₹80", desc: "Stuffed with spiced potato", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'] },
+          { name: "Special Dosa", price: "₹120", desc: "Premium chef's secret stuffing", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80" },
+          { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with paneer bhurji", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
+          { name: "Uttapam", price: "₹180", desc: "Thick pancake with veggies", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
+          { name: "Cheese Uttapam", price: "₹200", desc: "Loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" },
+          { name: "Shahi Dosa", price: "₹200", desc: "Cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80", tags: ['chefSpecial'] }
         ]
       },
       {
         title: "Chilli Manchurian", sub: "Half / Full", emoji: "🌶️",
         items: [
-          { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in fiery chilli sauce", imageUrl: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80" },
-          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Soft balls in tangy Manchurian gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80", tags: ['bestseller'] },
-          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Tender paneer in hot chilli-garlic sauce", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Mushroom Chilli", price: "₹200", desc: "Juicy mushrooms tossed with bell peppers", imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" }
+          { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in chilli sauce", imageUrl: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80" },
+          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Classic Manchurian gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80", tags: ['bestseller'] },
+          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Paneer in hot chilli-garlic", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80", tags: ['chefSpecial'] },
+          { name: "Mushroom Chilli", price: "₹200", desc: "Mushrooms with bell peppers", imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" }
         ]
       },
       {
         title: "Rice", sub: "Fried Rice", emoji: "🍚",
         items: [
-          { name: "Veg Fried Rice", price: "₹60", desc: "Fluffy rice with fresh veggies & soy", imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80" },
-          { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with soft paneer pieces", imageUrl: "https://images.unsplash.com/photo-1536304993881-ff86e0c9b0b4?w=400&q=80" },
-          { name: "Combo Rice", price: "₹110", desc: "Rice served with Manchurian gravy combo", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80", tags: ['bestseller'] }
+          { name: "Veg Fried Rice", price: "₹60", desc: "Fresh fried rice", imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80" },
+          { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with paneer", imageUrl: "https://images.unsplash.com/photo-1536304993881-ff86e0c9b0b4?w=400&q=80" },
+          { name: "Combo Rice", price: "₹110", desc: "Rice with Manchurian combo", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80", tags: ['bestseller'] }
         ]
       },
       {
         title: "Rolls", sub: "Street Style", emoji: "🌯",
         items: [
-          { name: "Veg Roll", price: "₹40", desc: "Stuffed paratha roll with fresh veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80" },
-          { name: "Paneer Roll", price: "₹50", desc: "Soft paneer tikka wrapped in flaky paratha", imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'] },
-          { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom filling in crispy roll", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80" },
-          { name: "Veg Crunchy Roll", price: "₹60", desc: "Extra crunchy filling with special chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80" }
+          { name: "Veg Roll", price: "₹40", desc: "Paratha roll with veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80" },
+          { name: "Paneer Roll", price: "₹50", desc: "Paneer tikka in paratha", imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'] },
+          { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom in crispy roll", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80" },
+          { name: "Veg Crunchy Roll", price: "₹60", desc: "Crunchy filling with chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80" }
         ]
       },
       {
         title: "Sandwich", sub: "Quick Bites", emoji: "🥪",
         items: [
-          { name: "Vegetable Sandwich", price: "₹60", desc: "Fresh garden veggies on toasted bread", imageUrl: "https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&q=80" },
-          { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn with herbs & cream cheese", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80" },
+          { name: "Vegetable Sandwich", price: "₹60", desc: "Veggies on toasted bread", imageUrl: "https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&q=80" },
+          { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn & cream cheese", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80" },
           { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney", imageUrl: "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400&q=80", tags: ['bestseller'] },
-          { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in toasted sandwich", imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&q=80" },
-          { name: "Mushroom Sandwich", price: "₹100", desc: "Sautéed mushrooms with garlic butter", imageUrl: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&q=80" }
+          { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in sandwich", imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&q=80" },
+          { name: "Mushroom Sandwich", price: "₹100", desc: "Mushrooms with garlic butter", imageUrl: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&q=80" }
         ]
       },
       {
         title: "Burger", sub: "Fast Food", emoji: "🍔",
         items: [
-          { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty in soft bun", imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" },
-          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty with fresh veggies", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80", tags: ['bestseller'] },
-          { name: "Sandwich Burger", price: "₹40", desc: "Best of both worlds — burger meets sandwich", imageUrl: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80" },
-          { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese inside a burger", imageUrl: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80" },
-          { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki with tangy sauces", imageUrl: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" },
-          { name: "Veg Burger", price: "₹70", desc: "Loaded veggie patty with crunchy lettuce", imageUrl: "https://images.unsplash.com/photo-1585190411866-9e83e4f67e7e?w=400&q=80" },
-          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double the indulgence", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty", imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" },
+          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80", tags: ['bestseller'] },
+          { name: "Sandwich Burger", price: "₹40", desc: "Burger meets sandwich", imageUrl: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80" },
+          { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese", imageUrl: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80" },
+          { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki", imageUrl: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" },
+          { name: "Veg Burger", price: "₹70", desc: "Veggie patty with lettuce", imageUrl: "https://images.unsplash.com/photo-1585190411866-9e83e4f67e7e?w=400&q=80" },
+          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double indulgence", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80", tags: ['chefSpecial'] }
         ]
       },
       {
         title: "Snacks", sub: "Lollipop & Pakoda", emoji: "🍢",
         items: [
-          { name: "Paneer Pakoda", price: "₹80", desc: "Golden fried paneer in spiced batter", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
-          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer sticks on skewers", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Paneer Pakoda", price: "₹80", desc: "Fried paneer in spiced batter", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
+          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer on skewers", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'] }
         ]
       }
     ];
@@ -3499,19 +3516,24 @@
 
       // Replace Category Navigation with the Requested Premium Vertical Cards
       const REQUESTED_CATS = [
+
+
         { name: 'All', filter: 'all', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80', emoji: '🍽️' },
-        { name: 'Famous', filter: 'Famous', img: 'https://images.unsplash.com/photo-1563227812-0ac4d638c8f9?w=400&q=80', emoji: '🔥' },
-        { name: 'Sweets', filter: 'Sweets', img: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80', emoji: '🍬' },
-        { name: 'Cakes', filter: 'Cakes', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80', emoji: '🎂' },
-        { name: 'Bakery', filter: 'Bakery', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80', emoji: '🥐' },
-        { name: 'Snacks', filter: 'Snacks', img: 'https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80', emoji: '🍢' },
-        { name: 'Beverages', filter: 'Beverages', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80', emoji: '🥤' },
-        { name: 'Pizza', filter: 'Pizza', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80', emoji: '🍕' },
+       
+        { name: 'Pizza', filter: 'Pizza', img: 'pizza.jpeg', emoji: '🍕' },
         { name: 'Chinese', filter: 'Chowmein', img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80', emoji: '🍜' },
         { name: 'South Indian', filter: 'Dosa', img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80', emoji: '🥞' },
         { name: 'Rolls', filter: 'Rolls', img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80', emoji: '🌯' },
         { name: 'Burger', filter: 'Burger', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80', emoji: '🍔' },
-        { name: 'Sandwich', filter: 'Sandwich', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80', emoji: '🥪' }
+        { name: 'Sandwich', filter: 'Sandwich', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80', emoji: '🥪' },
+         { name: 'Famous', filter: 'Famous', img: 'https://images.unsplash.com/photo-1563227812-0ac4d638c8f9?w=400&q=80', emoji: '🔥' },
+        { name: 'Sweets', filter: 'Sweets', img: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80', emoji: '🍬' },
+        { name: 'Cakes', filter: 'Cakes', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80', emoji: '🎂' },
+        { name: 'Bakery', filter: 'Bakery', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80', emoji: '🥐' },
+        { name: 'Snacks', filter: 'Snacks', img: 'https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80', emoji: '🍢' },
+        { name: 'Beverages', filter: 'Beverages', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80', emoji: '🥤' }
+      
+      
       ];
 
       catNav.innerHTML = '';
@@ -3824,7 +3846,7 @@
       if (old) old.remove();
       const pop = document.createElement('div');
       pop.className = 'cart-pop';
-      pop.textContent = '✦ ' + msg;
+      pop.textContent = ' ' + msg;
       document.body.appendChild(pop);
       setTimeout(() => { if (pop.parentNode) pop.remove(); }, 1800);
     }
@@ -3903,7 +3925,7 @@
         body: JSON.stringify(payload)
       }).catch(err => console.error("Webhook error:", err));
       // --- WhatsApp Redirection logic ---
-      let msg = `✦ *KSHIRSAGAR* ✦\n`;
+      let msg = ` *KSHIRSAGAR* \n`;
       msg += `_Hamesha Kuch Naya._\n\n`;
 
       msg += `🚚 *ORDER TYPE*\n`;
@@ -3935,7 +3957,7 @@
 
 
       msg += `━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-      msg += `*NEXT STEPS: *Our restaurant staff will review your order and share the final price details, including any applicable delivery charges, shortly.`;
+      msg += `*NEXT STEP:* Our restaurant staff will review your order and share the final price details, including any applicable delivery charges, shortly.`;
       // Save as Last Order, Reset State
       localStorage.setItem('kshirsagar_last_order', JSON.stringify(cart));
       cart = [];
@@ -3960,37 +3982,13 @@
       if (mobEl.value.replace(/\D/g, '').length !== 10) { shakeField(mobEl); return; }
       if (!descEl.value.trim()) { shakeField(descEl); return; }
 
-      let msg = `✦ *CUSTOM REQUEST* ✦\n\n👤 Name: ${nameEl.value.trim()}\n📱 Mobile: ${mobEl.value.trim()}\n📝 Details: ${descEl.value.trim()}`;
+      let msg = ` *CUSTOM REQUEST* \n\n👤 Name: ${nameEl.value.trim()}\n📱 Mobile: ${mobEl.value.trim()}\n📝 Details: ${descEl.value.trim()}`;
 
       document.getElementById('custom-request-modal').classList.remove('open');
       window.open('https://wa.me/919931890824?text=' + encodeURIComponent(msg), '_blank');
 
       nameEl.value = ''; mobEl.value = ''; descEl.value = '';
     }
-
-    /* ── (8) PWA INSTALL LOGIC ── */
-    let deferredPrompt;
-    const installBtns = [document.getElementById('install-app-nav'), document.getElementById('install-app-footer')];
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtns.forEach(btn => { if (btn) btn.style.display = 'inline-flex'; });
-    });
-
-    installBtns.forEach(btn => {
-      if (!btn) return;
-      btn.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-          installBtns.forEach(b => b.style.display = 'none');
-        }
-        deferredPrompt = null;
-      });
-    });
-
 
     /* Background Parallax & Scroll reveals */
     function initScrollParallax() {
