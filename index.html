@@ -2087,66 +2087,189 @@
   <!-- theme change code end -->
 
   <!-- ============================================================
+    MOBILE BOTTOM NAVIGATION STYLES
+  ============================================================ -->
+  <style>
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(65px + env(safe-area-inset-bottom));
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      padding-bottom: env(safe-area-inset-bottom);
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      body {
+        padding-bottom: calc(75px + env(safe-area-inset-bottom)) !important;
+      }
+    }
+
+    .mbn-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-decoration: none;
+      color: #888; /* Elegant Gray */
+      flex: 1;
+      height: 100%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .mbn-icon-wrap {
+      position: relative;
+      display: flex;
+    }
+
+    .mbn-item svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      transition: transform 0.3s ease, stroke 0.3s ease, filter 0.3s ease;
+    }
+
+    .mbn-item span {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .mbn-item.active {
+      color: #d4af37; /* Premium Gold */
+    }
+
+    .mbn-item.active svg {
+      transform: translateY(-2px);
+      filter: drop-shadow(0 4px 6px rgba(212, 175, 55, 0.3));
+    }
+
+    #mbn-cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      background: #e53935;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 100px;
+      border: 1.5px solid #fff;
+      transition: transform 0.2s;
+    }
+
+    #mbn-cart-badge.hidden {
+      display: none;
+    }
+    
+    /* ── BOTTOM SHEET CONTACT MODAL ── */
+    #contact-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    #contact-sheet-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .contact-sheet {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-radius: 24px 24px 0 0;
+      padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom));
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+    }
+
+    #contact-sheet-overlay.open .contact-sheet {
+      transform: translateY(0);
+    }
+
+    .cs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .cs-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: #111;
+      margin: 0;
+    }
+
+    .cs-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #eee;
+      background: #f9f9f9;
+      color: #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .cs-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+      border-radius: 12px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    
+    .cs-btn:active {
+      transform: scale(0.98);
+    }
+
+    .cs-call { background: #fdfaf3; border: 1px solid rgba(212, 175, 55, 0.4); color: #d4af37; }
+    .cs-wa { background: #eefaf2; border: 1px solid rgba(37, 211, 102, 0.4); color: #128c7e; }
+    .cs-map { background: #f4f6fb; border: 1px solid rgba(66, 133, 244, 0.4); color: #4285f4; }
+    .cs-hours { text-align: center; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #777; margin-top: 1rem; }
+  </style>
+
+  <!-- ============================================================
     CART & ENHANCED UI STYLES
   ============================================================ -->
   <style>
-    /* ── FLOATING CART WIDGET ── */
-    #cart-fab {
-      position: fixed;
-      bottom: 1.8rem;
-      right: 1.8rem;
-      z-index: 1200;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--saffron));
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.55rem;
-      box-shadow: 0 6px 28px rgba(212, 175, 55, .45), 0 2px 8px rgba(0, 0, 0, .4);
-      transition: transform .2s, box-shadow .2s;
-    }
-
-    #cart-fab:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 38px rgba(212, 175, 55, .6);
-    }
-
-    #cart-fab:active {
-      transform: scale(.95);
-    }
-
-    #cart-badge {
-      position: absolute;
-      top: -4px;
-      right: -4px;
-      background: #e53935;
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: .65rem;
-      font-weight: 800;
-      min-width: 20px;
-      height: 20px;
-      border-radius: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 4px;
-      border: 2px solid var(--bg-primary, #080808);
-      transition: transform .2s;
-    }
-
-    #cart-badge.hidden {
-      display: none;
-    }
-
-    #cart-badge.bump {
-      transform: scale(1.4);
-    }
-
     /* ── CART OVERLAY & MODAL ── */
     #cart-overlay {
       position: fixed;
@@ -2767,14 +2890,6 @@
         justify-content: center;
       }
 
-      #cart-fab {
-        bottom: 1.2rem;
-        right: 1.2rem;
-        width: 54px;
-        height: 54px;
-        font-size: 1.35rem;
-      }
-
       .cart-pop {
         right: 1.2rem;
         bottom: 5rem;
@@ -2792,7 +2907,7 @@
     <div id="cdot"></div>
 
     <!-- ============================================================
-    NAV — UPGRADED
+    NAV — ORIGINAL RESTORED
     ============================================================ -->
     <nav id="nav">
       <a href="https://kshirsagarmairwa.netlify.app/" class="nl" style="text-decoration:none;">
@@ -2815,12 +2930,6 @@
         <!-- Reorder Last Meal Button (Hidden by default) -->
         <button class="ncta" id="reorder-btn" style="display:none; border-color:var(--peacock); color:var(--peacock);">
           <span>🔄</span> Reorder
-        </button>
-        <!-- My Orders / Cart button -->
-        <button class="ncta" onclick="openCart()" aria-label="Open Cart">
-          🛒 My Orders
-          <span id="cart-badge-nav"
-            style="display:none;background:#e53935;color:#fff;border-radius:100px;font-size:.6rem;padding:1px 6px;font-family:'Inter',sans-serif;font-weight:800;"></span>
         </button>
       </div>
     </nav>
@@ -3193,6 +3302,67 @@
   </div>
 
   <!-- ============================================================
+    MOBILE BOTTOM NAVIGATION
+  ============================================================ -->
+  <nav class="mobile-bottom-nav">
+    <a href="#hero" class="mbn-item active" data-target="hero">
+      <div class="mbn-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </div>
+      <span>Home</span>
+    </a>
+    
+    <a href="#menu" class="mbn-item" data-target="menu">
+      <div class="mbn-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </div>
+      <span>Menu</span>
+    </a>
+    
+    <div class="mbn-item" onclick="openContactSheet()" data-target="contact">
+      <div class="mbn-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+      </div>
+      <span>Contact</span>
+    </div>
+    
+    <div class="mbn-item" onclick="openCart()" data-target="cart">
+      <div class="mbn-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span id="mbn-cart-badge" class="hidden">0</span>
+      </div>
+      <span>My Orders</span>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+    CONTACT BOTTOM SHEET MODAL
+  ============================================================ -->
+  <div id="contact-sheet-overlay" onclick="if(event.target===this) closeContactSheet()">
+    <div class="contact-sheet">
+      <div class="cs-header">
+        <h3>Contact Us</h3>
+        <button class="cs-close" onclick="closeContactSheet()" aria-label="Close">✕</button>
+      </div>
+      <a class="cs-btn cs-call" href="tel:+919931890824">📞 Call Now</a>
+      <a class="cs-btn cs-wa" href="https://wa.me/919931890824" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <a class="cs-btn cs-map" href="#location" onclick="closeContactSheet()">📍 Google Maps</a>
+      <div class="cs-hours">🕐 Mon-Sun: 6:00 AM - 10:00 PM</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
     DISH POPUP: Glassmorphism Modal
   ============================================================ -->
   <div id="dish-popup-overlay" role="dialog" aria-modal="true" aria-label="Dish Details">
@@ -3208,14 +3378,6 @@
       </div>
     </div>
   </div>
-
-  <!-- ============================================================
-    CART: Floating Action Button
-  ============================================================ -->
-  <button id="cart-fab" aria-label="Open Cart" onclick="openCart()">
-    🛒
-    <span id="cart-badge" class="hidden">0</span>
-  </button>
 
   <!-- ============================================================
     CART: Overlay + Slide-in Modal
@@ -3497,6 +3659,7 @@
       initCursor();
       updateCartUI();
       checkLastOrder();
+      updateActiveNav();
     };
 
     function checkLastOrder() {
@@ -3684,7 +3847,10 @@
 
       // Nav scroll effect
       const nav = document.getElementById('nav');
-      window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+        updateActiveNav();
+      }, { passive: true });
 
       // Delivery vs Pickup Toggle
       const orderToggleBtns = document.querySelectorAll('.cart-toggle-btn');
@@ -3718,6 +3884,7 @@
         if (e.key === 'Escape') {
           closeDishPopup();
           closeCart();
+          closeContactSheet();
           document.querySelectorAll('.glass-modal-overlay').forEach(el => el.classList.remove('open'));
         }
       });
@@ -3750,6 +3917,49 @@
       document.body.style.overflow = '';
     }
 
+    /* Mobile Bottom Navigation Update logic */
+    function updateActiveNav() {
+      if (document.getElementById('cart-overlay').classList.contains('open')) {
+        setActiveTab('cart');
+        return;
+      }
+      if (document.getElementById('contact-sheet-overlay').classList.contains('open')) {
+        setActiveTab('contact');
+        return;
+      }
+      
+      const scrollY = window.scrollY;
+      const menuEl = document.getElementById('menu');
+      
+      if (menuEl && scrollY >= (menuEl.offsetTop - 300)) {
+        setActiveTab('menu');
+      } else {
+        setActiveTab('hero');
+      }
+    }
+
+    function setActiveTab(tabName) {
+      document.querySelectorAll('.mbn-item').forEach(item => {
+        if (item.dataset.target === tabName) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+    
+    function openContactSheet() {
+      document.getElementById('contact-sheet-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      updateActiveNav();
+    }
+    
+    function closeContactSheet() {
+      document.getElementById('contact-sheet-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      updateActiveNav();
+    }
+
     /* ── (6) CART LOGIC & REORDER ── */
     function addToCart(name, price, variant, emoji, category) {
       const key = name + '||' + variant;
@@ -3776,24 +3986,23 @@
     function updateCartUI() {
       localStorage.setItem('kshirsagar_cart', JSON.stringify(cart)); // Persist state
 
-      const badge = document.getElementById('cart-badge');
-      const badgeNav = document.getElementById('cart-badge-nav');
+      const mbnBadge = document.getElementById('mbn-cart-badge');
       const area = document.getElementById('cart-items-area');
       const empty = document.getElementById('cart-empty-state');
       const totalEl = document.getElementById('cart-total-display');
       const checkoutBtn = document.getElementById('cart-checkout-btn');
 
       const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+      
       if (totalQty === 0) {
-        badge.classList.add('hidden');
-        badgeNav.style.display = 'none';
+        if (mbnBadge) mbnBadge.classList.add('hidden');
       } else {
-        badge.classList.remove('hidden');
-        badge.textContent = totalQty;
-        badge.classList.add('bump');
-        setTimeout(() => badge.classList.remove('bump'), 200);
-        badgeNav.style.display = 'inline';
-        badgeNav.textContent = totalQty;
+        if (mbnBadge) {
+          mbnBadge.classList.remove('hidden');
+          mbnBadge.textContent = totalQty > 99 ? '99+' : totalQty;
+          mbnBadge.classList.add('bump');
+          setTimeout(() => mbnBadge.classList.remove('bump'), 200);
+        }
       }
 
       document.getElementById('cart-item-count-label').textContent = totalQty > 0 ? `(${totalQty} item${totalQty > 1 ? 's' : ''})` : '';
@@ -3836,11 +4045,15 @@
     function openCart() {
       document.getElementById('cart-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
+      updateActiveNav();
     }
+    
     function closeCart() {
       document.getElementById('cart-overlay').classList.remove('open');
       document.body.style.overflow = '';
+      updateActiveNav();
     }
+    
     function showCartPop(msg) {
       const old = document.querySelector('.cart-pop');
       if (old) old.remove();
@@ -4066,7 +4279,7 @@
         requestAnimationFrame(loop);
       })();
 
-      document.querySelectorAll('button, a, .btn-add, .cart-qty-btn, .cart-delete-btn, .menu-item-img').forEach(el => {
+      document.querySelectorAll('button, a, .btn-add, .cart-qty-btn, .cart-delete-btn, .menu-item-img, .mbn-item').forEach(el => {
         el.addEventListener('mouseenter', () => {
           cur.style.width = '54px'; cur.style.height = '54px'; cur.style.borderColor = 'rgba(212,175,55,.9)';
         });
