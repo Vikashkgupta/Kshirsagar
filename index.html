@@ -45,7 +45,7 @@
 
   <!-- ── PWA MANIFEST (Placeholder) ── -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#ffffff">
 
   <!-- ── SCHEMA.ORG STRUCTURED DATA ── -->
   <script type="application/ld+json">
@@ -980,10 +980,10 @@
     /* Actions Layout - fully fluid to avoid clipping on mobile */
     .variant-actions {
       display: flex;
-      flex-wrap: wrap; /* Allows halves to stack if heavily constrained */
-      gap: clamp(0.5rem, 2vw, 1rem);
+      flex-direction: column;
+      gap: 0.6rem;
       margin-left: auto; /* Always pushes actions to the right */
-      justify-content: flex-end;
+      align-items: flex-end;
       flex: 0 0 auto;
     }
     .single-action {
@@ -994,11 +994,12 @@
       margin-left: auto;
       flex: 0 0 auto;
     }
-    .action-col {
+    .action-row {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      gap: 0.3rem;
+      justify-content: flex-end;
+      gap: 0.8rem;
       flex: 0 0 auto;
     }
     .action-label {
@@ -1007,13 +1008,16 @@
       font-weight: 700;
       letter-spacing: 0.05em;
       font-family: 'Inter', sans-serif;
+      min-width: 35px;
+      text-align: right;
     }
     .action-price {
       font-size: clamp(0.9rem, 3vw, 1rem);
       color: #111;
       font-weight: 800;
       font-family: 'Inter', sans-serif;
-      margin-bottom: 0.2rem;
+      min-width: 35px;
+      text-align: right;
     }
 
     .btn-add {
@@ -2092,18 +2096,20 @@
   <style>
     .mobile-bottom-nav {
       display: none;
-      position: fixed;
-      bottom: 0;
+      position: fixed !important;
+      bottom: 0 !important;
+      top: auto !important; /* Prevent it from ever being at the top */
       left: 0;
       right: 0;
+      width: 100%;
       height: calc(65px + env(safe-area-inset-bottom));
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       border-top: 1px solid rgba(212, 175, 55, 0.15);
       border-radius: 20px 20px 0 0;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
-      z-index: 1000;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+      z-index: 9999;
       padding-bottom: env(safe-area-inset-bottom);
       justify-content: space-around;
       align-items: center;
@@ -2111,10 +2117,10 @@
 
     @media (max-width: 768px) {
       .mobile-bottom-nav {
-        display: flex;
+        display: flex !important;
       }
       body {
-        padding-bottom: calc(75px + env(safe-area-inset-bottom)) !important;
+        padding-bottom: calc(85px + env(safe-area-inset-bottom)) !important;
       }
     }
 
@@ -2182,7 +2188,7 @@
     #contact-sheet-overlay {
       position: fixed;
       inset: 0;
-      z-index: 4000;
+      z-index: 10000;
       background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(5px);
       opacity: 0;
@@ -3357,7 +3363,7 @@
       </div>
       <a class="cs-btn cs-call" href="tel:+919931890824">📞 Call Now</a>
       <a class="cs-btn cs-wa" href="https://wa.me/919931890824" target="_blank" rel="noopener">💬 WhatsApp</a>
-      <a class="cs-btn cs-map" href="#location" onclick="closeContactSheet()">📍 Google Maps</a>
+      <a class="cs-btn cs-map" href="https://maps.app.goo.gl/yFmYmRWbCnh69ivz7" onclick="closeContactSheet()">📍 Google Maps</a>
       <div class="cs-hours">🕐 Mon-Sun: 6:00 AM - 10:00 PM</div>
     </div>
   </div>
@@ -3582,7 +3588,7 @@
           { name: "Masala Dosa", price: "₹80", desc: "Stuffed with spiced potato", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'] },
           { name: "Special Dosa", price: "₹120", desc: "Premium chef's secret stuffing", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80" },
           { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with paneer bhurji", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
-          { name: "Uttapam", price: "₹180", desc: "Thick pancake with veggies", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
+          { name: "Uttapam", price: "₹180", desc: "Thick pancake with veggies", imageUrl: "https://images.unspllash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
           { name: "Cheese Uttapam", price: "₹200", desc: "Loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" },
           { name: "Shahi Dosa", price: "₹200", desc: "Cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80", tags: ['chefSpecial'] }
         ]
@@ -3608,7 +3614,7 @@
         title: "Rolls", sub: "Street Style", emoji: "🌯",
         items: [
           { name: "Veg Roll", price: "₹40", desc: "Paratha roll with veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80" },
-          { name: "Paneer Roll", price: "₹50", desc: "Paneer tikka in paratha", imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'] },
+          { name: "Paneer Roll", price: "₹50", desc: "Paneer tikka in paratha", imageUrl: "https://images.unspllash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'] },
           { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom in crispy roll", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80" },
           { name: "Veg Crunchy Roll", price: "₹60", desc: "Crunchy filling with chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80" }
         ]
@@ -3639,7 +3645,7 @@
         title: "Snacks", sub: "Lollipop & Pakoda", emoji: "🍢",
         items: [
           { name: "Paneer Pakoda", price: "₹80", desc: "Fried paneer in spiced batter", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
-          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer on skewers", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer on skewers", imageUrl: "https://images.unspllash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'] }
         ]
       }
     ];
@@ -3742,7 +3748,7 @@
           const row = document.createElement('div');
           row.className = 'menu-item-row';
 
-          // Price Variants & Add Buttons - Updated layout template
+          // Price Variants & Add Buttons - Updated stacked layout
           const hasVariant = item.price.includes('/');
           let addButtonsHTML = '';
 
@@ -3763,12 +3769,12 @@
             const catTitleEsc = cat.title.replace(/'/g, "\\'");
             addButtonsHTML = `
               <div class="variant-actions">
-                <div class="action-col">
+                <div class="action-row">
                   <span class="action-label">${labelA.toUpperCase()}</span>
                   <span class="action-price">₹${priceA}</span>
                   <button class="btn-add btn-half" onclick="addToCart('${nameEsc}',${priceA},'${labelAEsc}','${emojiEsc}','${catTitleEsc}')">ADD</button>
                 </div>
-                <div class="action-col">
+                <div class="action-row">
                   <span class="action-label">${labelB.toUpperCase()}</span>
                   <span class="action-price">₹${priceB}</span>
                   <button class="btn-add" onclick="addToCart('${nameEsc}',${priceB},'${labelBEsc}','${emojiEsc}','${catTitleEsc}')">ADD</button>
@@ -3849,7 +3855,7 @@
       const nav = document.getElementById('nav');
       window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 40);
-        updateActiveNav();
+        if (typeof updateActiveNav === 'function') updateActiveNav();
       }, { passive: true });
 
       // Delivery vs Pickup Toggle
@@ -3951,13 +3957,13 @@
     function openContactSheet() {
       document.getElementById('contact-sheet-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
-      updateActiveNav();
+      if (typeof updateActiveNav === 'function') updateActiveNav();
     }
     
     function closeContactSheet() {
       document.getElementById('contact-sheet-overlay').classList.remove('open');
       document.body.style.overflow = '';
-      updateActiveNav();
+      if (typeof updateActiveNav === 'function') updateActiveNav();
     }
 
     /* ── (6) CART LOGIC & REORDER ── */
@@ -3994,10 +4000,10 @@
 
       const totalQty = cart.reduce((s, i) => s + i.qty, 0);
       
-      if (totalQty === 0) {
-        if (mbnBadge) mbnBadge.classList.add('hidden');
-      } else {
-        if (mbnBadge) {
+      if (mbnBadge) {
+        if (totalQty === 0) {
+          mbnBadge.classList.add('hidden');
+        } else {
           mbnBadge.classList.remove('hidden');
           mbnBadge.textContent = totalQty > 99 ? '99+' : totalQty;
           mbnBadge.classList.add('bump');
@@ -4045,13 +4051,13 @@
     function openCart() {
       document.getElementById('cart-overlay').classList.add('open');
       document.body.style.overflow = 'hidden';
-      updateActiveNav();
+      if (typeof updateActiveNav === 'function') updateActiveNav();
     }
     
     function closeCart() {
       document.getElementById('cart-overlay').classList.remove('open');
       document.body.style.overflow = '';
-      updateActiveNav();
+      if (typeof updateActiveNav === 'function') updateActiveNav();
     }
     
     function showCartPop(msg) {
