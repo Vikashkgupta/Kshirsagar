@@ -686,14 +686,11 @@
     }
 
     /* ============================================================
-      SECTION: #menu
+      SECTION: #menu - WHITE LUXURY PREMIUM UPGRADE
     ============================================================ */
     #menu {
       padding: 5rem 0 3rem;
-      background: #040404;
-      background-image: radial-gradient(circle at center, rgba(212, 175, 55, .06), transparent 70%);
-      background-repeat: no-repeat;
-      background-size: cover;
+      background: #ffffff !important;
     }
 
     .sh {
@@ -712,7 +709,7 @@
       font-size: clamp(1.9rem, 4vw, 3rem);
       font-weight: 700;
       line-height: 1.1;
-      color: #fff;
+      color: #111 !important;
     }
 
     .gt {
@@ -725,12 +722,11 @@
     /* ── REDESIGNED CATEGORY NAV (White Luxury Theme) ── */
     .menu-cat-nav {
       display: flex;
-      gap: 1.2rem;
-      padding: 0 2.5rem 2.5rem;
+      gap: 1.5rem;
+      padding: 1rem 2.5rem 3rem !important;
       overflow-x: auto;
       scrollbar-width: none;
-      flex-wrap: nowrap;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     .menu-cat-nav::-webkit-scrollbar {
@@ -740,133 +736,172 @@
     .menu-cat-btn {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      width: 120px;
-      height: 145px;
-      padding: 0;
-      border-radius: 18px;
-      background: #ffffff;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      width: 140px !important;
+      height: 175px !important;
+      padding: 0 !important;
+      border-radius: 16px !important;
+      background: #ffffff !important;
+      border: 1px solid rgba(212, 175, 55, 0.3) !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03) !important;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: box-shadow 0.3s, border-color 0.3s !important;
       flex-shrink: 0;
       overflow: hidden;
       text-decoration: none;
+      transform: none !important;
+    }
+
+    .menu-cat-btn:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06) !important;
+      transform: none !important;
+    }
+
+    .menu-cat-btn.active {
+      border: 1px solid #d4af37 !important;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25) !important;
+      background: #ffffff !important;
+      transform: none !important;
     }
 
     .menu-cat-img-wrap {
-      width: 100%;
-      height: 70%;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      width: 100% !important;
+      height: 65% !important;
+      border-bottom: none !important;
+      background: transparent !important;
     }
 
     .menu-cat-img {
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       object-fit: cover;
-      transition: transform 0.4s ease;
-      display: block;
+      transform: none !important;
+    }
+    
+    .menu-cat-btn:hover .menu-cat-img {
+      transform: none !important;
     }
 
     .menu-cat-text {
-      width: 100%;
-      height: 30%;
-      display: flex;
+      height: 35% !important;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       padding: 0 0.4rem;
       font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.95rem !important;
+      font-weight: 700 !important;
+      color: #222 !important;
+      background: #ffffff !important;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    /* Pure underline depending only on text width */
+    .menu-cat-btn.active .menu-cat-text::after {
+      content: '';
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #d4af37;
+      border-radius: 2px;
+    }
+
+    /* ── DYNAMIC CATEGORY HEADING ── */
+    .active-category-heading {
+      padding: 0 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .active-category-title-wrapper {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+
+    .active-category-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
       font-weight: 700;
-      color: #222;
-      background: #ffffff;
-      transition: background 0.3s, color 0.3s;
-      line-height: 1.2;
+      color: #111;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
     }
 
-    .menu-cat-btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 24px rgba(212, 175, 55, 0.15);
-      border-color: #d4af37;
-    }
-
-    .menu-cat-btn:hover .menu-cat-img {
-      transform: scale(1.08);
-    }
-
-    .menu-cat-btn.active {
-      border: 2px solid #d4af37;
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.25);
-    }
-
-    .menu-cat-btn.active .menu-cat-text {
-      background: #fffdf8;
-      /* light cream */
-      color: #b8860b;
+    .active-category-line {
+      height: 2px;
+      background: #d4af37;
+      border-radius: 2px;
+      width: 100%;
     }
 
     /* Menu item grid */
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: .75rem;
-      padding: 0 2.5rem 3rem;
+      gap: 1.5rem;
+      padding: 0 2.5rem 4rem;
     }
 
     .menu-item-row {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: .85rem 1rem;
-      background: rgba(255, 255, 255, .025);
-      border: 1px solid rgba(255, 255, 255, .06);
-      border-radius: 14px;
-      transition: border-color .25s, background .25s;
+      gap: 1.5rem;
+      padding: 1.5rem !important;
+      background: #ffffff !important;
+      border: 1px solid rgba(0,0,0,0.06) !important;
+      border-radius: 18px !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03) !important;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease !important;
       position: relative;
     }
 
     .menu-item-row:hover {
-      border-color: rgba(212, 175, 55, .25);
-      background: rgba(212, 175, 55, .04);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
+      background: #ffffff !important;
+      border-color: rgba(212, 175, 55, 0.2) !important;
     }
 
-    /* ── UPGRADED: Dish image (clickable for popup) ── */
     .menu-item-img {
-      width: 64px;
-      height: 64px;
-      min-width: 64px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(212, 175, 55, .15), rgba(249, 115, 22, .1));
-      border: 1.5px solid rgba(212, 175, 55, .22);
+      width: 90px !important;
+      height: 90px !important;
+      min-width: 90px !important;
+      border-radius: 12px !important;
+      border: none !important;
+      background: #fdfdfd !important;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.7rem;
+      font-size: 2rem;
       overflow: hidden;
       cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
       transition: transform .2s, box-shadow .2s;
       flex-shrink: 0;
       position: relative;
     }
 
     .menu-item-img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 18px rgba(212, 175, 55, .3);
+      transform: scale(1.03) !important;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08) !important;
     }
 
     .menu-item-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 50%;
+      border-radius: 12px !important;
       transition: transform .3s;
     }
 
     .menu-item-img:hover img {
-      transform: scale(1.1);
+      transform: scale(1.05) !important;
     }
 
     /* ── PWA UI: Premium Ribbon for Famous Items ── */
@@ -900,44 +935,109 @@
     }
 
     .menu-item-name {
-      font-size: .92rem;
-      font-weight: 700;
-      color: #e8e8e8;
-      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem !important;
+      font-weight: 700 !important;
+      color: #111 !important;
+      font-family: 'Playfair Display', serif !important;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .menu-item-desc {
-      font-size: .72rem;
-      color: #4a4a4a;
+      font-size: 0.85rem !important;
+      color: #666 !important;
       font-family: 'Inter', sans-serif;
-      margin-top: .18rem;
-      line-height: 1.4;
+      margin-top: 0.4rem !important;
+      line-height: 1.5 !important;
     }
 
     .menu-item-tag {
       display: inline-block;
-      margin-top: .35rem;
-      font-size: .62rem;
-      letter-spacing: .07em;
-      color: #5a5a5a;
+      margin-top: 0.6rem !important;
+      font-size: 0.7rem !important;
+      letter-spacing: 0.05em;
+      color: #b8860b !important;
       font-family: 'Inter', sans-serif;
-      background: rgba(255, 255, 255, .04);
-      border: 1px solid rgba(255, 255, 255, .06);
-      border-radius: 100px;
-      padding: .1rem .55rem;
+      background: rgba(212,175,55,0.05) !important;
+      border: 1px solid rgba(212,175,55,0.2) !important;
+      border-radius: 100px !important;
+      padding: 0.2rem 0.8rem !important;
+      font-weight: 600 !important;
     }
 
-    .menu-item-price {
-      font-size: .95rem;
-      font-weight: 800;
-      color: var(--gold);
+    /* Actions styling structure based on modified JS output */
+    .variant-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    .single-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+    .action-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .action-label {
+      font-size: 0.65rem;
+      color: #888;
+      font-weight: 700;
+      letter-spacing: 0.05em;
       font-family: 'Inter', sans-serif;
+    }
+    .action-price {
+      font-size: 1rem;
+      color: #111;
+      font-weight: 800;
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 0.2rem;
+    }
+
+    .btn-add {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1.4rem !important;
+      border-radius: 8px !important;
+      border: 1px solid #d4af37 !important;
+      background: #ffffff !important;
+      color: #d4af37 !important;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.05em !important;
+      cursor: pointer;
       white-space: nowrap;
-      text-align: right;
-      min-width: fit-content;
+      transition: all .3s ease !important;
+      box-shadow: none !important;
+      text-transform: uppercase;
+    }
+
+    .btn-add:hover {
+      background: rgba(212, 175, 55, 0.05) !important;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    .btn-add:active {
+      transform: scale(.97) !important;
+    }
+
+    /* Remove previous half variant distinct coloring to keep uniform premium white styling */
+    .btn-add.btn-half {
+      border-color: #d4af37 !important;
+      background: #ffffff !important;
+      color: #d4af37 !important;
+    }
+
+    .btn-add.btn-half:hover {
+      background: rgba(212, 175, 55, 0.05) !important;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15) !important;
     }
 
     /* Custom glowing button for requests */
@@ -1723,6 +1823,13 @@
         padding: 0 1rem 1.5rem !important;
       }
 
+      .active-category-heading {
+        padding: 0 1rem 1.5rem !important;
+      }
+      .active-category-title {
+        font-size: 1.6rem !important;
+      }
+
       .menu-grid {
         grid-template-columns: 1fr !important;
         padding: 0 1rem 2rem !important;
@@ -1831,7 +1938,6 @@
         --nav-bg: rgba(255, 255, 255, 0.85);
       }
 
-      .menu-item-row,
       .scard,
       .fc,
       .ic {
@@ -1879,33 +1985,6 @@
 
     .nm a:hover {
       color: var(--gold);
-    }
-
-    #menu {
-      background: var(--bg-secondary);
-    }
-
-    .st {
-      color: var(--text-main);
-    }
-
-    .menu-item-row {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-    }
-
-    .menu-item-name {
-      color: var(--text-main);
-    }
-
-    .menu-item-desc {
-      color: var(--text-soft);
-    }
-
-    .menu-item-tag {
-      background: var(--card-bg-soft);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
     }
 
     #legacy {
@@ -1994,54 +2073,6 @@
     CART & ENHANCED UI STYLES
   ============================================================ -->
   <style>
-    /* ── ADD BUTTON on menu items ── */
-    .menu-item-actions {
-      display: flex;
-      flex-direction: column;
-      gap: .35rem;
-      align-items: flex-end;
-      min-width: fit-content;
-    }
-
-    .btn-add {
-      display: inline-flex;
-      align-items: center;
-      gap: .3rem;
-      padding: .38rem .82rem;
-      border-radius: 100px;
-      border: 1px solid rgba(212, 175, 55, .45);
-      background: rgba(212, 175, 55, .08);
-      color: var(--gold);
-      font-family: 'Inter', sans-serif;
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: .04em;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background .2s, transform .15s, box-shadow .2s;
-    }
-
-    .btn-add:hover {
-      background: rgba(212, 175, 55, .2);
-      box-shadow: 0 0 14px rgba(212, 175, 55, .25);
-      transform: scale(1.04);
-    }
-
-    .btn-add:active {
-      transform: scale(.97);
-    }
-
-    .btn-add.btn-half {
-      border-color: rgba(249, 115, 22, .45);
-      background: rgba(249, 115, 22, .07);
-      color: var(--saffron);
-    }
-
-    .btn-add.btn-half:hover {
-      background: rgba(249, 115, 22, .18);
-      box-shadow: 0 0 14px rgba(249, 115, 22, .2);
-    }
-
     /* ── FLOATING CART WIDGET ── */
     #cart-fab {
       position: fixed;
@@ -2182,25 +2213,31 @@
       color: var(--gold);
     }
 
-    .cart-items-area {
+    /* ── CART SINGLE SCROLL WRAPPER ── */
+    .cart-scroll-container {
       flex: 1;
       overflow-y: auto;
-      padding: .8rem 1.2rem;
       scrollbar-width: thin;
       scrollbar-color: rgba(212, 175, 55, .2) transparent;
+      display: flex;
+      flex-direction: column;
     }
 
-    .cart-items-area::-webkit-scrollbar {
+    .cart-scroll-container::-webkit-scrollbar {
       width: 4px;
     }
 
-    .cart-items-area::-webkit-scrollbar-track {
+    .cart-scroll-container::-webkit-scrollbar-track {
       background: transparent;
     }
 
-    .cart-items-area::-webkit-scrollbar-thumb {
+    .cart-scroll-container::-webkit-scrollbar-thumb {
       background: rgba(212, 175, 55, .25);
       border-radius: 4px;
+    }
+
+    .cart-items-area {
+      padding: .8rem 1.2rem;
     }
 
     .cart-empty {
@@ -2208,12 +2245,11 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100%;
+      padding: 3rem 2rem;
       gap: .8rem;
       color: #3a3a3a;
       font-family: 'Inter', sans-serif;
       text-align: center;
-      padding: 2rem;
     }
 
     .cart-empty-emoji {
@@ -2423,19 +2459,6 @@
       flex-shrink: 0;
       padding: 1rem 1.4rem 1.3rem;
       background: rgba(0, 0, 0, .3);
-      overflow-y: auto;
-      max-height: 55vh;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(212, 175, 55, .15) transparent;
-    }
-
-    .cart-footer::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    .cart-footer::-webkit-scrollbar-thumb {
-      background: rgba(212, 175, 55, .2);
-      border-radius: 3px;
     }
 
     .cart-field-label {
@@ -2907,7 +2930,7 @@
     </section>
 
     <!-- ============================================================
-    SECTION: #menu
+    SECTION: #menu - WHITE LUXURY PREMIUM UPGRADE
     ============================================================ -->
     <section id="menu">
       <div class="sh">
@@ -2917,6 +2940,12 @@
       <div class="menu-cat-nav" id="menuCatNav">
         <!-- Will be populated by JS -->
       </div>
+      
+      <!-- DYNAMIC CATEGORY HEADING -->
+      <div id="active-category-heading" class="active-category-heading">
+        <!-- Generated dynamically via JS -->
+      </div>
+
       <div class="menu-grid" id="menuGrid"></div>
 
       <!-- Custom Request CTA -->
@@ -3185,84 +3214,87 @@
         <button class="cart-close-btn" onclick="closeCart()" aria-label="Close Cart">&#10005;</button>
       </div>
 
-      <div class="cart-items-area" id="cart-items-area">
-        <div class="cart-empty" id="cart-empty-state">
-          <div class="cart-empty-emoji">🍽️</div>
-          <p>Your cart is empty.<br>Add something delicious from the menu!</p>
-        </div>
-      </div>
-
-      <!-- ADD-ONS ROW -->
-      <div class="cart-addons-section">
-        <div class="cart-field-label">✨ FREQUENTLY BOUGHT TOGETHER</div>
-        <div class="cart-addons-scroll">
-          <div class="cart-addon-card">
-            <div class="addon-name">Extra Sambhar</div>
-            <div class="addon-price">₹20</div>
-            <button class="addon-add-btn" onclick="addToCart('Extra Sambhar', 20, '', '🍲', 'Add-on')">+ Add</button>
-          </div>
-          <div class="cart-addon-card">
-            <div class="addon-name">Cold Drink</div>
-            <div class="addon-price">₹40</div>
-            <button class="addon-add-btn" onclick="addToCart('Cold Drink', 40, '', '🥤', 'Add-on')">+ Add</button>
-          </div>
-          <div class="cart-addon-card">
-            <div class="addon-name">Extra Pav</div>
-            <div class="addon-price">₹15</div>
-            <button class="addon-add-btn" onclick="addToCart('Extra Pav', 15, '', '🍞', 'Add-on')">+ Add</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- UPGRADED CART FOOTER -->
-      <div class="cart-footer">
-
-        <label class="cart-field-label">🚚 ORDER TYPE</label>
-        <div class="cart-toggle-group">
-          <button class="cart-toggle-btn active" type="button" data-type="Delivery">🛵 Delivery</button>
-          <button class="cart-toggle-btn" type="button" data-type="Pickup">🛍️ Store Pickup</button>
-        </div>
-
-        <label class="cart-field-label" for="cart-name">👤 NAME *</label>
-        <input id="cart-name" type="text" class="cart-input" placeholder="Enter your name…" autocomplete="name">
-
-        <label class="cart-field-label" for="cart-mobile">📱 MOBILE NUMBER *</label>
-        <input id="cart-mobile" type="tel" class="cart-input" placeholder="10-digit number" autocomplete="tel">
-
-        <div id="address-wrapper">
-          <label class="cart-field-label" for="cart-address">📍 COMPLETE DELIVERY ADDRESS *</label>
-          <textarea id="cart-address" class="cart-input" placeholder="House no., street, landmark, area, city…"
-            rows="3"></textarea>
-        </div>
-
-        <label class="cart-field-label" for="cart-instructions">👨‍🍳 COOKING INSTRUCTIONS</label>
-        <textarea id="cart-instructions" class="cart-input" placeholder="Make it spicy, extra onions..."
-          rows="2"></textarea>
-
-        <div class="cart-tip-section">
-          <label class="cart-field-label">❤️ SHOW SOME LOVE TO THE CHEF</label>
-          <div class="cart-tip-group">
-            <button class="cart-tip-btn" type="button" data-tip="10">+ ₹10</button>
-            <button class="cart-tip-btn" type="button" data-tip="20">+ ₹20</button>
-            <button class="cart-tip-btn" type="button" data-tip="50">+ ₹50</button>
+      <!-- ONE SINGLE VERTICAL SCROLL CONTAINER -->
+      <div class="cart-scroll-container">
+        <div class="cart-items-area" id="cart-items-area">
+          <div class="cart-empty" id="cart-empty-state">
+            <div class="cart-empty-emoji">🍽️</div>
+            <p>Your cart is empty.<br>Add something delicious from the menu!</p>
           </div>
         </div>
 
-        <div class="cart-total-row">
-          <div class="cart-total-label">Reference Total</div>
-          <div class="cart-total-amount" id="cart-total-display">₹0</div>
-        </div>
-        <div class="cart-disclaimer">
-          ⚠️ Note: Final price will be confirmed by staff on WhatsApp. This is only an estimated reference.
+        <!-- ADD-ONS ROW -->
+        <div class="cart-addons-section">
+          <div class="cart-field-label">✨ FREQUENTLY BOUGHT TOGETHER</div>
+          <div class="cart-addons-scroll">
+            <div class="cart-addon-card">
+              <div class="addon-name">Extra Sambhar</div>
+              <div class="addon-price">₹20</div>
+              <button class="addon-add-btn" onclick="addToCart('Extra Sambhar', 20, '', '🍲', 'Add-on')">+ Add</button>
+            </div>
+            <div class="cart-addon-card">
+              <div class="addon-name">Cold Drink</div>
+              <div class="addon-price">₹40</div>
+              <button class="addon-add-btn" onclick="addToCart('Cold Drink', 40, '', '🥤', 'Add-on')">+ Add</button>
+            </div>
+            <div class="cart-addon-card">
+              <div class="addon-name">Extra Pav</div>
+              <div class="addon-price">₹15</div>
+              <button class="addon-add-btn" onclick="addToCart('Extra Pav', 15, '', '🍞', 'Add-on')">+ Add</button>
+            </div>
+          </div>
         </div>
 
-        <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="handleCheckoutClick()" disabled>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
-            <path
-              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-          </svg>
-          Checkout via WhatsApp
-        </button>
+        <!-- UPGRADED CART FOOTER -->
+        <div class="cart-footer">
+
+          <label class="cart-field-label">🚚 ORDER TYPE</label>
+          <div class="cart-toggle-group">
+            <button class="cart-toggle-btn active" type="button" data-type="Delivery">🛵 Delivery</button>
+            <button class="cart-toggle-btn" type="button" data-type="Pickup">🛍️ Store Pickup</button>
+          </div>
+
+          <label class="cart-field-label" for="cart-name">👤 NAME *</label>
+          <input id="cart-name" type="text" class="cart-input" placeholder="Enter your name…" autocomplete="name">
+
+          <label class="cart-field-label" for="cart-mobile">📱 MOBILE NUMBER *</label>
+          <input id="cart-mobile" type="tel" class="cart-input" placeholder="10-digit number" autocomplete="tel">
+
+          <div id="address-wrapper">
+            <label class="cart-field-label" for="cart-address">📍 COMPLETE DELIVERY ADDRESS *</label>
+            <textarea id="cart-address" class="cart-input" placeholder="House no., street, landmark, area, city…"
+              rows="3"></textarea>
+          </div>
+
+          <label class="cart-field-label" for="cart-instructions">👨‍🍳 COOKING INSTRUCTIONS</label>
+          <textarea id="cart-instructions" class="cart-input" placeholder="Make it spicy, extra onions..."
+            rows="2"></textarea>
+
+          <div class="cart-tip-section">
+            <label class="cart-field-label">❤️ SHOW SOME LOVE TO THE CHEF</label>
+            <div class="cart-tip-group">
+              <button class="cart-tip-btn" type="button" data-tip="10">+ ₹10</button>
+              <button class="cart-tip-btn" type="button" data-tip="20">+ ₹20</button>
+              <button class="cart-tip-btn" type="button" data-tip="50">+ ₹50</button>
+            </div>
+          </div>
+
+          <div class="cart-total-row">
+            <div class="cart-total-label">Reference Total</div>
+            <div class="cart-total-amount" id="cart-total-display">₹0</div>
+          </div>
+          <div class="cart-disclaimer">
+            ⚠️ Note: Final price will be confirmed by staff on WhatsApp. This is only an estimated reference.
+          </div>
+
+          <button class="cart-checkout-btn" id="cart-checkout-btn" onclick="handleCheckoutClick()" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Checkout via WhatsApp
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -3467,19 +3499,19 @@
 
       // Replace Category Navigation with the Requested Premium Vertical Cards
       const REQUESTED_CATS = [
-        { name: 'All', filter: 'all', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80' },
-        { name: 'Famous', filter: 'Famous', img: 'https://images.unsplash.com/photo-1563227812-0ac4d638c8f9?w=400&q=80' },
-        { name: 'Sweets', filter: 'Sweets', img: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80' },
-        { name: 'Cakes', filter: 'Cakes', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80' },
-        { name: 'Bakery', filter: 'Bakery', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80' },
-        { name: 'Snacks', filter: 'Snacks', img: 'https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80' },
-        { name: 'Beverages', filter: 'Beverages', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80' },
-        { name: 'Pizza', filter: 'Pizza', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80' },
-        { name: 'Chinese', filter: 'Chowmein', img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80' },
-        { name: 'South Indian', filter: 'Dosa', img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80' },
-        { name: 'Rolls', filter: 'Rolls', img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80' },
-        { name: 'Burger', filter: 'Burger', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80' },
-        { name: 'Sandwich', filter: 'Sandwich', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80' }
+        { name: 'All', filter: 'all', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80', emoji: '🍽️' },
+        { name: 'Famous', filter: 'Famous', img: 'https://images.unsplash.com/photo-1563227812-0ac4d638c8f9?w=400&q=80', emoji: '🔥' },
+        { name: 'Sweets', filter: 'Sweets', img: 'https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80', emoji: '🍬' },
+        { name: 'Cakes', filter: 'Cakes', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80', emoji: '🎂' },
+        { name: 'Bakery', filter: 'Bakery', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80', emoji: '🥐' },
+        { name: 'Snacks', filter: 'Snacks', img: 'https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80', emoji: '🍢' },
+        { name: 'Beverages', filter: 'Beverages', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80', emoji: '🥤' },
+        { name: 'Pizza', filter: 'Pizza', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80', emoji: '🍕' },
+        { name: 'Chinese', filter: 'Chowmein', img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80', emoji: '🍜' },
+        { name: 'South Indian', filter: 'Dosa', img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80', emoji: '🥞' },
+        { name: 'Rolls', filter: 'Rolls', img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80', emoji: '🌯' },
+        { name: 'Burger', filter: 'Burger', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80', emoji: '🍔' },
+        { name: 'Sandwich', filter: 'Sandwich', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80', emoji: '🥪' }
       ];
 
       catNav.innerHTML = '';
@@ -3501,6 +3533,18 @@
         grid.innerHTML = '';
         let list = [];
 
+        // Find the active category for heading display
+        const activeCat = REQUESTED_CATS.find(c => c.filter === catTitle);
+        const headingContainer = document.getElementById('active-category-heading');
+        if (activeCat && headingContainer) {
+          headingContainer.innerHTML = `
+            <div class="active-category-title-wrapper">
+              <div class="active-category-title">${activeCat.emoji} ${activeCat.name}</div>
+              <div class="active-category-line"></div>
+            </div>
+          `;
+        }
+
         if (catTitle === 'all') {
           list = allItems;
         } else if (catTitle === 'Famous') {
@@ -3513,17 +3557,17 @@
           const row = document.createElement('div');
           row.className = 'menu-item-row';
 
-          // Price Variants & Add Buttons
+          // Price Variants & Add Buttons - Updated layout template
           const hasVariant = item.price.includes('/');
           let addButtonsHTML = '';
 
           if (hasVariant) {
             const parts = item.price.split('/').map(p => p.trim());
-            let labelA = 'Small', labelB = 'Large';
+            let labelA = 'Half', labelB = 'Full';
             if (cat.sub && cat.sub.includes('/')) {
               const subParts = cat.sub.split('/').map(s => s.trim());
-              labelA = subParts[0] || 'Small';
-              labelB = subParts[1] || 'Large';
+              labelA = subParts[0] || 'Half';
+              labelB = subParts[1] || 'Full';
             }
             const priceA = parseInt(parts[0].replace(/[^\d]/g, ''), 10);
             const priceB = parseInt(parts[1].replace(/[^\d]/g, ''), 10);
@@ -3533,10 +3577,17 @@
             const emojiEsc = cat.emoji.replace(/'/g, "\\'");
             const catTitleEsc = cat.title.replace(/'/g, "\\'");
             addButtonsHTML = `
-              <div class="menu-item-actions">
-                <div class="menu-item-price">${item.price}</div>
-                <button class="btn-add btn-half" onclick="addToCart('${nameEsc}',${priceA},'${labelAEsc}','${emojiEsc}','${catTitleEsc}')">+ ${labelA}</button>
-                <button class="btn-add" onclick="addToCart('${nameEsc}',${priceB},'${labelBEsc}','${emojiEsc}','${catTitleEsc}')">+ ${labelB}</button>
+              <div class="variant-actions">
+                <div class="action-col">
+                  <span class="action-label">${labelA.toUpperCase()}</span>
+                  <span class="action-price">₹${priceA}</span>
+                  <button class="btn-add btn-half" onclick="addToCart('${nameEsc}',${priceA},'${labelAEsc}','${emojiEsc}','${catTitleEsc}')">ADD</button>
+                </div>
+                <div class="action-col">
+                  <span class="action-label">${labelB.toUpperCase()}</span>
+                  <span class="action-price">₹${priceB}</span>
+                  <button class="btn-add" onclick="addToCart('${nameEsc}',${priceB},'${labelBEsc}','${emojiEsc}','${catTitleEsc}')">ADD</button>
+                </div>
               </div>`;
           } else {
             const priceVal = parseInt(item.price.replace(/[^\d]/g, ''), 10);
@@ -3544,9 +3595,9 @@
             const emojiEsc = cat.emoji.replace(/'/g, "\\'");
             const catTitleEsc = cat.title.replace(/'/g, "\\'");
             addButtonsHTML = `
-              <div class="menu-item-actions">
-                <div class="menu-item-price">${item.price}</div>
-                <button class="btn-add" onclick="addToCart('${nameEsc}',${priceVal},'','${emojiEsc}','${catTitleEsc}')">+ Add</button>
+              <div class="single-action">
+                <span class="action-price">₹${priceVal}</span>
+                <button class="btn-add" onclick="addToCart('${nameEsc}',${priceVal},'','${emojiEsc}','${catTitleEsc}')">ADD</button>
               </div>`;
           }
 
