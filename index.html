@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+
 <!-- ============================================================
-  KSHIRSAGAR MAIRWA — Landing Page
-  Author: Vikash Kumar Gupta
-  Last Updated: Apr 2026
-  Live on: https://kshirsagarmairwa.netlify.app/
-  Sections: #hero | #menu | #legacy | #location | #footer
-  Performance: FPS-limited rAF, device detection, lazy images.
+  KSHIRSAGAR SWEETS & RESTAURANT — Official Website (PWA)
+  Author        : Vikash Kumar Gupta
+  Last Updated  : July 2026
+  Live URL      : https://kshirsagarmairwa.netlify.app
+  For Monitoring Orders : https://docs.google.com/spreadsheets/d/1tJGOLMaPQ27NvLOeHKqi2OGysObGXcCotaQjG5F0AEY/edit?usp=sharing
+
+  ------------------------------------------------------------
+  FEATURES
+  ------------------------------------------------------------
+  • Premium Responsive Restaurant Website
+  • Progressive Web App (PWA)
+  • Dynamic Menu with Categories & Variants
+  • Luxury Dish Detail Popup
+  • Shopping Cart & Checkout
+  • WhatsApp Order Integration
+  • Google Maps & Location
+  • Install App Support
+  • Offline Support (Service Worker)
+  • Lazy Loading & Image Optimization
+  • SEO + Open Graph + Schema.org
+  • Google Analytics Integration
+  • Mobile Bottom Navigation
+  • Desktop Navigation + Cart
+  • Custom Modals & Notifications
+  • Light / Premium Theme
+  • Performance Optimized
+
+  ------------------------------------------------------------
+  MAIN SECTIONS
+  ------------------------------------------------------------
+  #hero
+  #menu
+  #legacy
+  #location
+  #footer
+
+  ------------------------------------------------------------
+  TECH STACK
+  ------------------------------------------------------------
+  HTML5
+  CSS3
+  Vanilla JavaScript (ES6)
+  PWA
+  Tailwind Utility Classes
+  Google Analytics
+  Schema.org JSON-LD
+
+  ------------------------------------------------------------
+  © 2026 Vikash Kumar Gupta
+  All Rights Reserved.
 ============================================================ -->
 
 <head>
@@ -140,11 +186,11 @@
     /* ── KEYFRAME ANIMATIONS ── */
     @keyframes shimmer {
       0% {
-        background-position: -200% center;
+        background-position: -200% 0;
       }
 
       100% {
-        background-position: 200% center;
+        background-position: 200% 0;
       }
     }
 
@@ -1110,22 +1156,22 @@
     }
 
     /* ============================================================
-      GLASSMORPHISM DISH POPUP MODAL
+      REDESIGNED APPLE + LUXURY RESTAURANT DISH POPUP MODAL
     ============================================================ */
     #dish-popup-overlay {
       position: fixed;
       inset: 0;
       z-index: 2000;
-      background: rgba(0, 0, 0, .7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity .3s;
-      padding: 1.5rem;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: clamp(1rem, 3vw, 2rem);
     }
 
     #dish-popup-overlay.open {
@@ -1133,82 +1179,289 @@
       pointer-events: all;
     }
 
-    #dish-popup {
-      background: rgba(12, 10, 6, .82);
-      border: 1px solid rgba(212, 175, 55, .22);
-      border-radius: 22px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, .7), 0 0 0 1px rgba(212, 175, 55, .08);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      max-width: 440px;
+    #dish-popup-wrapper {
+      position: relative;
       width: 100%;
-      overflow: hidden;
-      transform: scale(.92) translateY(20px);
-      transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    #dish-popup {
+      background: #FFFFFF;
+      border-radius: 32px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(212, 175, 55, 0.15);
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    #dish-popup::-webkit-scrollbar {
+      display: none;
     }
 
     #dish-popup-overlay.open #dish-popup {
       transform: scale(1) translateY(0);
     }
 
+    /* Image Wrapper & Curved Cutout */
+    .dish-popup-img-container {
+      position: relative;
+      width: 100%;
+      height: 270px;
+      background: #F3F3F3;
+      overflow: hidden;
+    }
+
+    .dish-popup-skeleton {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      z-index: 1;
+    }
+
     .dish-popup-img {
       width: 100%;
-      height: 230px;
+      height: 100%;
       object-fit: cover;
       display: block;
-      border-radius: 22px 22px 0 0;
+      border-radius: 32px 32px 0 0;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      position: relative;
+      z-index: 2;
     }
 
-    .dish-popup-body {
-      padding: 1.5rem 1.6rem 1.8rem;
+    .dish-popup-img.loaded {
+      opacity: 1;
     }
 
-    .dish-popup-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.45rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--gold), var(--saffron));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: .5rem;
-      line-height: 1.2;
+    .dish-popup-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #F3F3F3;
+      z-index: 2;
     }
 
-    .dish-popup-desc {
+    .dish-popup-placeholder-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .dish-popup-placeholder-text {
       font-family: 'Inter', sans-serif;
-      font-size: .88rem;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: #888;
-      line-height: 1.7;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .dish-popup-close {
       position: absolute;
       top: 1rem;
       right: 1rem;
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, .15);
-      background: rgba(8, 8, 8, .7);
-      color: #fff;
-      font-size: 1rem;
+      border: none;
+      background: rgba(0, 0, 0, 0.55);
+      color: #FFFFFF;
+      font-size: 1.1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background .2s;
+      transition: background 0.2s, transform 0.2s;
       z-index: 10;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .dish-popup-close:hover {
-      background: rgba(212, 175, 55, .2);
-      border-color: rgba(212, 175, 55, .5);
-      color: var(--gold);
+      background: rgba(0, 0, 0, 0.8);
+      transform: scale(1.05);
     }
 
-    #dish-popup-wrapper {
+    /* Seamless Curved Organic Smooth Transition */
+    .dish-popup-curved-cut {
       position: relative;
+      height: 30px;
+      background: #FFFFFF;
+      margin-top: -30px;
+      border-radius: 32px 32px 0 0;
+      z-index: 3;
+    }
+
+    /* Popup Body */
+    .dish-popup-body {
+      padding: 0 1.8rem 2rem;
+      background: #FFFFFF;
+      position: relative;
+      z-index: 4;
+    }
+
+    .dish-popup-header {
+      margin-bottom: 1.2rem;
+    }
+
+    .dish-popup-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #1A1A1A;
+      line-height: 1.2;
+      margin-bottom: 0.8rem;
+    }
+
+    .dish-popup-divider {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(212, 175, 55, 0.4) 0%, rgba(212, 175, 55, 0.05) 100%);
+      margin-bottom: 1rem;
+      border: none;
+    }
+
+    .dish-popup-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      color: #555555;
+      line-height: 1.6;
+      margin-bottom: 1.4rem;
+    }
+
+    /* Ingredients Section */
+    .dish-ingredients-wrap {
+      margin-bottom: 1.6rem;
+    }
+
+    .dish-ingredients-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      color: #B8860B;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .dish-ingredients-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .ingredient-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #FAFAFA;
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 100px;
+      padding: 0.4rem 0.85rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #333333;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    /* Price Section & Variants */
+    .dish-popup-price-section {
+      background: #FDFBF6;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 20px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .dish-popup-variant-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px dashed rgba(212, 175, 55, 0.2);
+    }
+
+    .dish-popup-variant-row:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .dish-popup-variant-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #222222;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .dish-popup-variant-price {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #111111;
+      margin-left: auto;
+      padding-right: 0.5rem;
+    }
+
+    .dish-popup-add-btn {
+      padding: 0.6rem 1.4rem;
+      background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);
+      border: none;
+      border-radius: 100px;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dish-popup-add-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.45);
+    }
+
+    .dish-popup-add-btn:active {
+      transform: scale(0.96);
+    }
+
+    @media (max-width: 480px) {
+      #dish-popup {
+        width: 92vw;
+      }
+
+      .dish-popup-img-container {
+        height: 220px;
+      }
+
+      .dish-popup-body {
+        padding: 0 1.2rem 1.6rem;
+      }
+
+      .dish-popup-name {
+        font-size: 1.5rem;
+      }
     }
 
     /* ============================================================
@@ -1927,14 +2180,6 @@
         font-size: .82rem !important;
       }
 
-      #dish-popup {
-        max-width: 95vw;
-      }
-
-      .dish-popup-img {
-        height: 180px;
-      }
-
       .cart-footer {
         /* Ensures checkout button is accessible above mobile bottom nav */
         padding-bottom: calc(85px + env(safe-area-inset-bottom, 0px)) !important;
@@ -1949,24 +2194,6 @@
       --gold: #d4af37;
       --saffron: #f97316;
       --peacock: #0d7c6e;
-
-      /* DARK DEFAULT */
-      /* --bg-primary: #080808;
-      --bg-secondary: #040404;
-      --bg-tertiary: #030303;
-
-      --card-bg: rgba(255, 255, 255, 0.025);
-      --card-bg-soft: rgba(255, 255, 255, 0.018);
-
-      --text-main: #ffffff;
-      --text-muted: #777;
-      --text-soft: #5a5a5a;
-      --text-dim: #3d3d3d;
-
-      --border: rgba(255, 255, 255, 0.06);
-      --border-gold: rgba(212, 175, 55, 0.2);
-
-      --nav-bg: rgba(8, 8, 8, 0.93); */
     }
 
     /* ================= LIGHT MODE ================= */
@@ -1994,15 +2221,6 @@
       .fc,
       .ic {
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      }
-
-      #dish-popup {
-        background: rgba(253, 250, 240, .92);
-        border-color: rgba(212, 175, 55, .3);
-      }
-
-      .dish-popup-desc {
-        color: #555;
       }
 
       .glass-modal-content {
@@ -2366,7 +2584,6 @@
       transition: transform .35s cubic-bezier(.22, 1, .36, 1);
       overflow: hidden;
       padding-top: env(safe-area-inset-top, 0px);
-      /* Issue 2 Fix */
     }
 
     #cart-overlay.open #cart-modal {
@@ -3502,17 +3719,35 @@
   </div>
 
   <!-- ============================================================
-    DISH POPUP: Glassmorphism Modal
+    REDESIGNED DISH POPUP: Apple + Luxury Restaurant UI Modal
   ============================================================ -->
   <div id="dish-popup-overlay" role="dialog" aria-modal="true" aria-label="Dish Details">
     <div style="position:absolute;inset:0;" onclick="closeDishPopup()"></div>
-    <div id="dish-popup-wrapper" style="position:relative;z-index:1">
+    <div id="dish-popup-wrapper">
       <div id="dish-popup">
         <button class="dish-popup-close" onclick="closeDishPopup()" aria-label="Close">✕</button>
-        <img id="dish-popup-img" class="dish-popup-img" src="" alt="" loading="lazy">
+        <div class="dish-popup-img-container">
+          <div id="dish-popup-skeleton" class="dish-popup-skeleton"></div>
+          <img id="dish-popup-img" class="dish-popup-img" src="" alt="" loading="lazy">
+          <div id="dish-popup-placeholder" class="dish-popup-placeholder" style="display:none;">
+            <div id="dish-popup-placeholder-icon" class="dish-popup-placeholder-icon">🍽️</div>
+            <div id="dish-popup-placeholder-text" class="dish-popup-placeholder-text">Kshirsagar</div>
+          </div>
+        </div>
+        <div class="dish-popup-curved-cut"></div>
         <div class="dish-popup-body">
-          <div class="dish-popup-name" id="dish-popup-name"></div>
-          <div class="dish-popup-desc" id="dish-popup-desc"></div>
+          <div class="dish-popup-header">
+            <h3 class="dish-popup-name" id="dish-popup-name"></h3>
+            <div class="dish-popup-divider"></div>
+            <p class="dish-popup-desc" id="dish-popup-desc"></p>
+          </div>
+
+          <div id="dish-ingredients-wrap" class="dish-ingredients-wrap" style="display:none;">
+            <div class="dish-ingredients-title">Ingredients</div>
+            <div id="dish-ingredients-chips" class="dish-ingredients-chips"></div>
+          </div>
+
+          <div id="dish-popup-price-section" class="dish-popup-price-section"></div>
         </div>
       </div>
     </div>
@@ -3684,6 +3919,48 @@
   <script>
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzT211Di3tn-Q7Afyv0VEX9wf9MrlKyWUu0znmMZuvTvTEnHdpurDcIB3MXSSAXwhDY/exec";
 
+    /* Ingredient Icon Map Helper */
+    const INGREDIENT_ICON_MAP = {
+      "Sweet Corn": "🌽",
+      "Corn": "🌽",
+      "Cheese": "🧀",
+      "Mozzarella": "🧀",
+      "Paneer": "🧀",
+      "Capsicum": "🫑",
+      "Bell Pepper": "🫑",
+      "Fresh Basil": "🌿",
+      "Basil": "🌿",
+      "Mint": "🌿",
+      "Onion": "🧅",
+      "Garlic": "🧄",
+      "Tomato": "🍅",
+      "Mushroom": "🍄",
+      "Chilli": "🌶️",
+      "Spice": "🌶️",
+      "Saffron": "🌸",
+      "Cashew": "🥜",
+      "Peanut": "🥜",
+      "Dry Fruits": "🌰",
+      "Milk": "🥛",
+      "Butter": "🧈",
+      "Chocolate": "🍫",
+      "Cherry": "🍒",
+      "Pineapple": "🍍",
+      "Strawberry": "🍓",
+      "Mango": "🥭",
+      "Lemon": "🍋",
+      "Apple": "🍎"
+    };
+
+    function getIngredientIcon(name) {
+      for (const key in INGREDIENT_ICON_MAP) {
+        if (name.toLowerCase().includes(key.toLowerCase())) {
+          return INGREDIENT_ICON_MAP[key];
+        }
+      }
+      return "✨";
+    }
+
     /* ── (1) PERFORMANCE: Soft 45-FPS cap + Device detection ── */
     (function applyPerformanceConfig() {
       const _raf = window.requestAnimationFrame;
@@ -3693,121 +3970,121 @@
     })();
 
     /* ── (2) MENU DATA & STATE ── */
-    // Updated MENU with 'tags' for Phase 2 Famous/Chef special categories
+    // Updated MENU with 'tags' and optional 'ingredients'
     const MENU = [
       {
         title: "Pizza", sub: "Small / Large", emoji: "🍕",
         items: [
-          { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn & cheese", imageUrl: "img/sweetcornpizza.jpg" },
-          { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Veggies with golden mozzarella", imageUrl: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80" },
-          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Spicy paneer", imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Cheesy mushrooms", imageUrl: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80" }
+          { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn & cheese", imageUrl: "img/sweetcornpizza.jpg", ingredients: ["Sweet Corn", "Cheese", "Capsicum", "Fresh Basil"] },
+          { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Veggies with golden mozzarella", imageUrl: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80", ingredients: ["Capsicum", "Onion", "Tomato", "Mozzarella"] },
+          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Spicy paneer", imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Paneer", "Capsicum", "Cheese", "Chilli"] },
+          { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Cheesy mushrooms", imageUrl: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80", ingredients: ["Mushroom", "Cheese", "Garlic", "Fresh Basil"] }
         ]
       },
       {
         title: "Chowmein", sub: "Half / Full", emoji: "🍜",
         items: [
-          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80", tags: ['bestseller'] },
-          { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with paneer", imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80" },
-          { name: "Special Chowmein", price: "₹120", desc: "Chef's special with veggies", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style noodles", imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" },
-          { name: "Singapuri Noodles", price: "₹180", desc: "Spicy Singapore style noodles", imageUrl: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80" }
+          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80", tags: ['bestseller'], ingredients: ["Capsicum", "Onion", "Garlic", "Spice"] },
+          { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with paneer", imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80", ingredients: ["Paneer", "Capsicum", "Onion", "Garlic"] },
+          { name: "Special Chowmein", price: "₹120", desc: "Chef's special with veggies", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Mushroom", "Paneer", "Capsicum", "Fresh Basil"] },
+          { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style noodles", imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80", ingredients: ["Capsicum", "Onion", "Garlic", "Chilli"] },
+          { name: "Singapuri Noodles", price: "₹180", desc: "Spicy Singapore style noodles", imageUrl: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80", ingredients: ["Chilli", "Capsicum", "Garlic", "Spice"] }
         ]
       },
       {
         title: "Dosa", sub: "South Indian", emoji: "🥞",
         items: [
-          { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with onions", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80" },
-          { name: "Masala Dosa", price: "₹80", desc: "Stuffed with spiced potato", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'] },
-          { name: "Special Dosa", price: "₹120", desc: "Premium chef's secret stuffing", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80" },
-          { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with paneer bhurji", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80" },
-          { name: "Uttapam", price: "₹180", desc: "Thick pancake with veggies", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
-          { name: "Cheese Uttapam", price: "₹200", desc: "Loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" },
-          { name: "Shahi Dosa", price: "₹200", desc: "Cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1668236203588-4444983a48e7?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with onions", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80", ingredients: ["Onion", "Butter", "Spice"] },
+          { name: "Masala Dosa", price: "₹80", desc: "Stuffed with spiced potato", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'], ingredients: ["Onion", "Butter", "Spice", "Mustard"] },
+          { name: "Special Dosa", price: "₹120", desc: "Premium chef's secret stuffing", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80", ingredients: ["Paneer", "Butter", "Cashew", "Spice"] },
+          { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with paneer bhurji", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80", ingredients: ["Paneer", "Onion", "Butter", "Spice"] },
+          { name: "Uttapam", price: "₹180", desc: "Thick pancake with veggies", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", ingredients: ["Tomato", "Onion", "Capsicum", "Butter"] },
+          { name: "Cheese Uttapam", price: "₹200", desc: "Loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80", ingredients: ["Cheese", "Tomato", "Onion", "Butter"] },
+          { name: "Shahi Dosa", price: "₹200", desc: "Cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1668236203588-4444983a48e7?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Cashew", "Dry Fruits", "Paneer", "Butter"] }
         ]
       },
       {
         title: "Chilli Manchurian", sub: "Half / Full", emoji: "🌶️",
         items: [
-          { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in chilli sauce", imageUrl: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80" },
-          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Classic Manchurian gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80", tags: ['bestseller'] },
-          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Paneer in hot chilli-garlic", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Mushroom Chilli", price: "₹200", desc: "Mushrooms with bell peppers", imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" }
+          { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in chilli sauce", imageUrl: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80", ingredients: ["Chilli", "Garlic", "Capsicum", "Onion"] },
+          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Classic Manchurian gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80", tags: ['bestseller'], ingredients: ["Garlic", "Onion", "Chilli", "Capsicum"] },
+          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Paneer in hot chilli-garlic", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Paneer", "Chilli", "Garlic", "Capsicum"] },
+          { name: "Mushroom Chilli", price: "₹200", desc: "Mushrooms with bell peppers", imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80", ingredients: ["Mushroom", "Bell Pepper", "Chilli", "Garlic"] }
         ]
       },
       {
         title: "Rice", sub: "Fried Rice", emoji: "🍚",
         items: [
-          { name: "Veg Fried Rice", price: "₹60", desc: "Fresh fried rice", imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80" },
-          { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with paneer", imageUrl: "https://images.unsplash.com/photo-1536304993881-ff86e0c9b0b4?w=400&q=80" },
-          { name: "Combo Rice", price: "₹110", desc: "Rice with Manchurian combo", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80", tags: ['bestseller'] }
+          { name: "Veg Fried Rice", price: "₹60", desc: "Fresh fried rice", imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80", ingredients: ["Capsicum", "Onion", "Garlic"] },
+          { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with paneer", imageUrl: "https://images.unsplash.com/photo-1536304993881-ff86e0c9b0b4?w=400&q=80", ingredients: ["Paneer", "Capsicum", "Garlic", "Spice"] },
+          { name: "Combo Rice", price: "₹110", desc: "Rice with Manchurian combo", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80", tags: ['bestseller'], ingredients: ["Garlic", "Capsicum", "Chilli", "Onion"] }
         ]
       },
       {
         title: "Rolls", sub: "Street Style", emoji: "🌯",
         items: [
-          { name: "Veg Roll", price: "₹40", desc: "Paratha roll with veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80" },
-          { name: "Paneer Roll", price: "₹50", desc: "Paneer tikka in paratha", imageUrl: "https://images.unspllash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'] },
-          { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom in crispy roll", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80" },
-          { name: "Veg Crunchy Roll", price: "₹60", desc: "Crunchy filling with chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80" }
+          { name: "Veg Roll", price: "₹40", desc: "Paratha roll with veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80", ingredients: ["Capsicum", "Onion", "Butter"] },
+          { name: "Paneer Roll", price: "₹50", desc: "Paneer tikka in paratha", imageUrl: "https://images.unspllash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'], ingredients: ["Paneer", "Onion", "Chilli", "Mint"] },
+          { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom in crispy roll", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80", ingredients: ["Mushroom", "Garlic", "Butter", "Spice"] },
+          { name: "Veg Crunchy Roll", price: "₹60", desc: "Crunchy filling with chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80", ingredients: ["Mint", "Onion", "Capsicum"] }
         ]
       },
       {
         title: "Sandwich", sub: "Quick Bites", emoji: "🥪",
         items: [
-          { name: "Vegetable Sandwich", price: "₹60", desc: "Veggies on toasted bread", imageUrl: "https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&q=80" },
-          { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn & cream cheese", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80" },
-          { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney", imageUrl: "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400&q=80", tags: ['bestseller'] },
-          { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in sandwich", imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&q=80" },
-          { name: "Mushroom Sandwich", price: "₹100", desc: "Mushrooms with garlic butter", imageUrl: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&q=80" }
+          { name: "Vegetable Sandwich", price: "₹60", desc: "Veggies on toasted bread", imageUrl: "https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&q=80", ingredients: ["Tomato", "Onion", "Capsicum", "Butter"] },
+          { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn & cream cheese", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80", ingredients: ["Sweet Corn", "Cheese", "Butter"] },
+          { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney", imageUrl: "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400&q=80", tags: ['bestseller'], ingredients: ["Paneer", "Mint", "Butter"] },
+          { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in sandwich", imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&q=80", ingredients: ["Cheese", "Capsicum", "Tomato", "Fresh Basil"] },
+          { name: "Mushroom Sandwich", price: "₹100", desc: "Mushrooms with garlic butter", imageUrl: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&q=80", ingredients: ["Mushroom", "Garlic", "Butter"] }
         ]
       },
       {
         title: "Burger", sub: "Fast Food", emoji: "🍔",
         items: [
-          { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty", imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" },
-          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80", tags: ['bestseller'] },
-          { name: "Sandwich Burger", price: "₹40", desc: "Burger meets sandwich", imageUrl: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80" },
-          { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese", imageUrl: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80" },
-          { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki", imageUrl: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" },
-          { name: "Veg Burger", price: "₹70", desc: "Veggie patty with lettuce", imageUrl: "https://images.unsplash.com/photo-1585190411866-9e83e4f67e7e?w=400&q=80" },
-          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double indulgence", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty", imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80", ingredients: ["Onion", "Spice", "Butter"] },
+          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80", tags: ['bestseller'], ingredients: ["Paneer", "Cheese", "Onion", "Butter"] },
+          { name: "Sandwich Burger", price: "₹40", desc: "Burger meets sandwich", imageUrl: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80", ingredients: ["Tomato", "Onion", "Butter"] },
+          { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese", imageUrl: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80", ingredients: ["Cheese", "Fresh Basil", "Tomato"] },
+          { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki", imageUrl: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80", ingredients: ["Paneer", "Spice", "Onion"] },
+          { name: "Veg Burger", price: "₹70", desc: "Veggie patty with lettuce", imageUrl: "https://images.unsplash.com/photo-1585190411866-9e83e4f67e7e?w=400&q=80", ingredients: ["Onion", "Tomato", "Butter"] },
+          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double indulgence", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Cheese", "Onion", "Tomato", "Butter"] }
         ]
       },
       {
         title: "Snacks", sub: "Lollipop & Pakoda", emoji: "🍟",
         items: [
-          { name: "Paneer Pakoda", price: "₹80", desc: "Fried paneer in spiced batter", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
-          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer on skewers", imageUrl: "https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Veg Pakoda", price: "₹60", desc: "Crispy mixed vegetable fritters", imageUrl: "https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80" },
-          { name: "Onion Pakoda", price: "₹50", desc: "Spiced crispy onion rings", imageUrl: "https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80", tags: ['bestseller'] },
+          { name: "Paneer Pakoda", price: "₹80", desc: "Fried paneer in spiced batter", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80", ingredients: ["Paneer", "Spice", "Chilli"] },
+          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer on skewers", imageUrl: "https://images.unsplash.com/photo-1596560548464-f010549b84d7?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Paneer", "Garlic", "Spice"] },
+          { name: "Veg Pakoda", price: "₹60", desc: "Crispy mixed vegetable fritters", imageUrl: "https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80", ingredients: ["Onion", "Chilli", "Spice"] },
+          { name: "Onion Pakoda", price: "₹50", desc: "Spiced crispy onion rings", imageUrl: "https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80", tags: ['bestseller'], ingredients: ["Onion", "Spice", "Chilli"] },
           { name: "French Fries", price: "₹70", desc: "Classic salted potato fries", imageUrl: "https://images.unsplash.com/photo-1562059390-d71548de2201?w=400&q=80" },
-          { name: "Cheese Fries", price: "₹100", desc: "Fries loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?w=400&q=80" },
-          { name: "Masala Fries", price: "₹90", desc: "Spicy Indian style potato fries", imageUrl: "https://images.unsplash.com/photo-1534422298391-e4f8c9714c53?w=400&q=80" },
-          { name: "Veg Momos", price: "₹60", desc: "Steamed vegetable stuffed dumplings", imageUrl: "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?w=400&q=80", tags: ['bestseller'] },
-          { name: "Fried Momos", price: "₹80", desc: "Crispy fried vegetable dumplings", imageUrl: "https://images.unsplash.com/photo-1534422298391-e4f8c9714c53?w=400&q=80" },
-          { name: "Spring Roll", price: "₹90", desc: "Crispy rolls stuffed with veggies", imageUrl: "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&q=80" }
+          { name: "Cheese Fries", price: "₹100", desc: "Fries loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1574126154517-d1e0d89ef734?w=400&q=80", ingredients: ["Cheese"] },
+          { name: "Masala Fries", price: "₹90", desc: "Spicy Indian style potato fries", imageUrl: "https://images.unsplash.com/photo-1534422298391-e4f8c9714c53?w=400&q=80", ingredients: ["Spice", "Chilli"] },
+          { name: "Veg Momos", price: "₹60", desc: "Steamed vegetable stuffed dumplings", imageUrl: "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?w=400&q=80", tags: ['bestseller'], ingredients: ["Onion", "Garlic", "Chilli"] },
+          { name: "Fried Momos", price: "₹80", desc: "Crispy fried vegetable dumplings", imageUrl: "https://images.unsplash.com/photo-1534422298391-e4f8c9714c53?w=400&q=80", ingredients: ["Onion", "Garlic", "Chilli"] },
+          { name: "Spring Roll", price: "₹90", desc: "Crispy rolls stuffed with veggies", imageUrl: "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&q=80", ingredients: ["Capsicum", "Onion", "Garlic"] }
         ]
       },
       {
         title: "Sweets", sub: "Traditional Indian", emoji: "🍬",
         items: [
-          { name: "Gulab Jamun", price: "₹20", desc: "Soft milk dough in syrup (1 pc)", imageUrl: "https://images.unsplash.com/photo-1557434444-245ed7e793ea?w=400&q=80", tags: ['bestseller'] },
-          { name: "Rasgulla", price: "₹20", desc: "Spongy cottage cheese balls (1 pc)", imageUrl: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80" },
-          { name: "Rajbhog", price: "₹30", desc: "Premium saffron cottage cheese (1 pc)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80" },
-          { name: "Rasmalai", price: "₹40", desc: "Cottage cheese in sweetened milk (1 pc)", imageUrl: "https://images.unsplash.com/photo-1621236894042-4916a445dbe7?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Cham Cham", price: "₹25", desc: "Traditional sweet Bengali delicacy (1 pc)", imageUrl: "https://images.unsplash.com/photo-1519869380628-ba459a1f28bc?w=400&q=80" },
-          { name: "Kala Jamun", price: "₹25", desc: "Dark roasted sweet milk dumplings (1 pc)", imageUrl: "https://images.unsplash.com/photo-1557434444-245ed7e793ea?w=400&q=80" },
-          { name: "Milk Cake", price: "₹200", desc: "Rich condensed milk fudge (250 g)", imageUrl: "https://images.unsplash.com/photo-1621236894042-4916a445dbe7?w=400&q=80" },
-          { name: "Kalakand", price: "₹210", desc: "Soft milk and cheese fudge (250 g)", imageUrl: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80" },
-          { name: "Kaju Katli", price: "₹800", desc: "Premium cashew nut fudge (1 kg)", imageUrl: "https://images.unsplash.com/photo-1519869380628-ba459a1f28bc?w=400&q=80", tags: ['bestseller'] },
-          { name: "Besan Laddu", price: "₹250", desc: "Roasted gram flour sweet balls (1 kg)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80" },
-          { name: "Motichoor Laddu", price: "₹300", desc: "Fine sweet gram flour pearls (1 kg)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80" },
-          { name: "Peda", price: "₹350", desc: "Soft traditional milk fudge (1 kg)", imageUrl: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80" },
-          { name: "Barfi", price: "₹350", desc: "Classic Indian sweet milk squares (1 kg)", imageUrl: "https://images.unsplash.com/photo-1621236894042-4916a445dbe7?w=400&q=80" },
-          { name: "Soan Papdi", price: "₹200", desc: "Flaky sweet gram flour dessert (250 g)", imageUrl: "https://images.unsplash.com/photo-1519869380628-ba459a1f28bc?w=400&q=80" },
-          { name: "Balushahi", price: "₹280", desc: "Flaky sweet pastry doughnuts (1 kg)", imageUrl: "https://images.unsplash.com/photo-1557434444-245ed7e793ea?w=400&q=80" },
-          { name: "Ghewar", price: "₹500", desc: "Traditional Rajasthani disc sweet (1 kg)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80", tags: ['chefSpecial'] },
+          { name: "Gulab Jamun", price: "₹20", desc: "Soft milk dough in syrup (1 pc)", imageUrl: "https://images.unsplash.com/photo-1557434444-245ed7e793ea?w=400&q=80", tags: ['bestseller'], ingredients: ["Milk"] },
+          { name: "Rasgulla", price: "₹20", desc: "Spongy cottage cheese balls (1 pc)", imageUrl: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80", ingredients: ["Milk"] },
+          { name: "Rajbhog", price: "₹30", desc: "Premium saffron cottage cheese (1 pc)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80", ingredients: ["Saffron", "Milk", "Dry Fruits"] },
+          { name: "Rasmalai", price: "₹40", desc: "Cottage cheese in sweetened milk (1 pc)", imageUrl: "https://images.unsplash.com/photo-1621236894042-4916a445dbe7?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Saffron", "Milk", "Pistachio"] },
+          { name: "Cham Cham", price: "₹25", desc: "Traditional sweet Bengali delicacy (1 pc)", imageUrl: "https://images.unsplash.com/photo-1519869380628-ba459a1f28bc?w=400&q=80", ingredients: ["Milk"] },
+          { name: "Kala Jamun", price: "₹25", desc: "Dark roasted sweet milk dumplings (1 pc)", imageUrl: "https://images.unsplash.com/photo-1557434444-245ed7e793ea?w=400&q=80", ingredients: ["Milk"] },
+          { name: "Milk Cake", price: "₹200", desc: "Rich condensed milk fudge (250 g)", imageUrl: "https://images.unsplash.com/photo-1621236894042-4916a445dbe7?w=400&q=80", ingredients: ["Milk"] },
+          { name: "Kalakand", price: "₹210", desc: "Soft milk and cheese fudge (250 g)", imageUrl: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80", ingredients: ["Milk"] },
+          { name: "Kaju Katli", price: "₹800", desc: "Premium cashew nut fudge (1 kg)", imageUrl: "https://images.unsplash.com/photo-1519869380628-ba459a1f28bc?w=400&q=80", tags: ['bestseller'], ingredients: ["Cashew"] },
+          { name: "Besan Laddu", price: "₹250", desc: "Roasted gram flour sweet balls (1 kg)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80", ingredients: ["Gram Flour", "Butter"] },
+          { name: "Motichoor Laddu", price: "₹300", desc: "Fine sweet gram flour pearls (1 kg)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80", ingredients: ["Gram Flour", "Butter"] },
+          { name: "Peda", price: "₹350", desc: "Soft traditional milk fudge (1 kg)", imageUrl: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80", ingredients: ["Milk"] },
+          { name: "Barfi", price: "₹350", desc: "Classic Indian sweet milk squares (1 kg)", imageUrl: "https://images.unsplash.com/photo-1621236894042-4916a445dbe7?w=400&q=80", ingredients: ["Milk"] },
+          { name: "Soan Papdi", price: "₹200", desc: "Flaky sweet gram flour dessert (250 g)", imageUrl: "https://images.unsplash.com/photo-1519869380628-ba459a1f28bc?w=400&q=80", ingredients: ["Gram Flour", "Butter"] },
+          { name: "Balushahi", price: "₹280", desc: "Flaky sweet pastry doughnuts (1 kg)", imageUrl: "https://images.unsplash.com/photo-1557434444-245ed7e793ea?w=400&q=80", ingredients: ["Butter"] },
+          { name: "Ghewar", price: "₹500", desc: "Traditional Rajasthani disc sweet (1 kg)", imageUrl: "https://images.unsplash.com/photo-1605197175225-b827e693245c?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Butter", "Milk", "Dry Fruits"] },
           { name: "Imarti", price: "₹300", desc: "Flower-shaped lentil flour sweet (1 kg)", imageUrl: "https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=400&q=80" },
           { name: "Jalebi", price: "₹200", desc: "Crispy deep-fried sweet spirals (1 kg)", imageUrl: "https://images.unsplash.com/photo-1621236894042-4916a445dbe7?w=400&q=80" }
         ]
@@ -3815,15 +4092,15 @@
       {
         title: "Cakes", sub: "Fresh Baked", emoji: "🎂",
         items: [
-          { name: "Chocolate Cake", price: "₹350", desc: "Rich chocolate layer cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80", tags: ['bestseller'] },
-          { name: "Black Forest", price: "₹300", desc: "Chocolate cherry cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1588195538320-064908f57348?w=400&q=80" },
-          { name: "White Forest", price: "₹320", desc: "Vanilla cherry cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80" },
-          { name: "Butterscotch", price: "₹350", desc: "Caramelized butterscotch cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80" },
-          { name: "Pineapple", price: "₹300", desc: "Fresh pineapple cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1588195538320-064908f57348?w=400&q=80" },
-          { name: "Vanilla", price: "₹250", desc: "Classic vanilla sponge cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80" },
-          { name: "Red Velvet", price: "₹450", desc: "Rich crimson layer cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Fruit Cake", price: "₹400", desc: "Fresh mixed fruit cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1588195538320-064908f57348?w=400&q=80" },
-          { name: "Truffle Cake", price: "₹500", desc: "Dense chocolate truffle cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1535141192574-5d48937f6104?w=400&q=80" },
+          { name: "Chocolate Cake", price: "₹350", desc: "Rich chocolate layer cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80", tags: ['bestseller'], ingredients: ["Chocolate", "Milk", "Butter"] },
+          { name: "Black Forest", price: "₹300", desc: "Chocolate cherry cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1588195538320-064908f57348?w=400&q=80", ingredients: ["Chocolate", "Cherry", "Milk"] },
+          { name: "White Forest", price: "₹320", desc: "Vanilla cherry cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80", ingredients: ["Cherry", "Milk"] },
+          { name: "Butterscotch", price: "₹350", desc: "Caramelized butterscotch cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80", ingredients: ["Butter", "Milk"] },
+          { name: "Pineapple", price: "₹300", desc: "Fresh pineapple cream cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1588195538320-064908f57348?w=400&q=80", ingredients: ["Pineapple", "Milk"] },
+          { name: "Vanilla", price: "₹250", desc: "Classic vanilla sponge cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&q=80", ingredients: ["Milk", "Butter"] },
+          { name: "Red Velvet", price: "₹450", desc: "Rich crimson layer cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Cheese", "Milk", "Butter"] },
+          { name: "Fruit Cake", price: "₹400", desc: "Fresh mixed fruit cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1588195538320-064908f57348?w=400&q=80", ingredients: ["Mango", "Apple", "Milk"] },
+          { name: "Truffle Cake", price: "₹500", desc: "Dense chocolate truffle cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1535141192574-5d48937f6104?w=400&q=80", ingredients: ["Chocolate", "Butter", "Milk"] },
           { name: "Photo Cake", price: "₹600", desc: "Customizable printed photo cake (500 g)", imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80" }
         ]
       },
@@ -3834,16 +4111,16 @@
           { name: "Brown Bread", price: "₹50", desc: "Healthy whole wheat bread (400 g)", imageUrl: "https://images.unsplash.com/photo-1599320677561-bd804b4d825c?w=400&q=80" },
           { name: "Pav", price: "₹30", desc: "Soft Indian bread rolls (6 pcs)", imageUrl: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80" },
           { name: "Bun", price: "₹20", desc: "Sweet and soft round bun (1 pc)", imageUrl: "https://images.unsplash.com/photo-1599320677561-bd804b4d825c?w=400&q=80" },
-          { name: "Garlic Bread", price: "₹80", desc: "Buttery toasted garlic bread (150 g)", imageUrl: "https://images.unspllash.com/photo-1573140247632-f8fd74997d5c?w=400&q=80", tags: ['bestseller'] },
+          { name: "Garlic Bread", price: "₹80", desc: "Buttery toasted garlic bread (150 g)", imageUrl: "https://images.unspllash.com/photo-1573140247632-f8fd74997d5c?w=400&q=80", tags: ['bestseller'], ingredients: ["Garlic", "Butter"] },
           { name: "Toast", price: "₹50", desc: "Crispy baked bread slices (200 g)", imageUrl: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80" },
           { name: "Rusk", price: "₹60", desc: "Crunchy twice-baked tea bread (250 g)", imageUrl: "https://images.unsplash.com/photo-1599320677561-bd804b4d825c?w=400&q=80" },
-          { name: "Cookies", price: "₹100", desc: "Classic buttery baked cookies (250 g)", imageUrl: "https://images.unsplash.com/photo-1589367920969-abce89c259f8?w=400&q=80" },
-          { name: "Butter Cookies", price: "₹120", desc: "Rich butter flavored cookies (250 g)", imageUrl: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&q=80" },
-          { name: "Jeera Cookies", price: "₹90", desc: "Sweet and salty cumin cookies (250 g)", imageUrl: "https://images.unsplash.com/photo-1589367920969-abce89c259f8?w=400&q=80" },
-          { name: "Cup Cake", price: "₹30", desc: "Miniature baked sweet cake (1 pc)", imageUrl: "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=400&q=80" },
-          { name: "Muffin", price: "₹40", desc: "Soft and fluffy baked muffin (1 pc)", imageUrl: "https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&q=80" },
-          { name: "Puff", price: "₹20", desc: "Flaky baked savory pastry (1 pc)", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
-          { name: "Veg Puff", price: "₹25", desc: "Spiced vegetable filled pastry (1 pc)", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Cookies", price: "₹100", desc: "Classic buttery baked cookies (250 g)", imageUrl: "https://images.unsplash.com/photo-1589367920969-abce89c259f8?w=400&q=80", ingredients: ["Butter"] },
+          { name: "Butter Cookies", price: "₹120", desc: "Rich butter flavored cookies (250 g)", imageUrl: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=400&q=80", ingredients: ["Butter"] },
+          { name: "Jeera Cookies", price: "₹90", desc: "Sweet and salty cumin cookies (250 g)", imageUrl: "https://images.unsplash.com/photo-1589367920969-abce89c259f8?w=400&q=80", ingredients: ["Butter"] },
+          { name: "Cup Cake", price: "₹30", desc: "Miniature baked sweet cake (1 pc)", imageUrl: "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?w=400&q=80", ingredients: ["Butter"] },
+          { name: "Muffin", price: "₹40", desc: "Soft and fluffy baked muffin (1 pc)", imageUrl: "https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&q=80", ingredients: ["Butter"] },
+          { name: "Puff", price: "₹20", desc: "Flaky baked savory pastry (1 pc)", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", ingredients: ["Butter"] },
+          { name: "Veg Puff", price: "₹25", desc: "Spiced vegetable filled pastry (1 pc)", imageUrl: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Onion", "Spice", "Butter"] }
         ]
       },
       {
@@ -3851,15 +4128,15 @@
         items: [
           { name: "Coca Cola", price: "₹40", desc: "Chilled classic carbonated cola (500 ml)", imageUrl: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80", tags: ['bestseller'] },
           { name: "Pepsi", price: "₹40", desc: "Refreshing carbonated cola drink (500 ml)", imageUrl: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&q=80" },
-          { name: "Sprite", price: "₹40", desc: "Crisp lemon lime soda (500 ml)", imageUrl: "https://images.unsplash.com/photo-1625772299849-227fb23907c1?w=400&q=80" },
-          { name: "Limca", price: "₹40", desc: "Cloudy lemon flavored soda (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80" },
+          { name: "Sprite", price: "₹40", desc: "Crisp lemon lime soda (500 ml)", imageUrl: "https://images.unsplash.com/photo-1625772299849-227fb23907c1?w=400&q=80", ingredients: ["Lemon"] },
+          { name: "Limca", price: "₹40", desc: "Cloudy lemon flavored soda (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80", ingredients: ["Lemon"] },
           { name: "Fanta", price: "₹40", desc: "Fruity orange carbonated drink (500 ml)", imageUrl: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&q=80" },
           { name: "Thums Up", price: "₹40", desc: "Strong Indian carbonated cola (500 ml)", imageUrl: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80" },
-          { name: "Mountain Dew", price: "₹40", desc: "Citrus flavored refreshing soda (500 ml)", imageUrl: "https://images.unsplash.com/photo-1625772299849-227fb23907c1?w=400&q=80" },
-          { name: "Slice", price: "₹45", desc: "Sweet mango fruit drink (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80" },
-          { name: "Maaza", price: "₹45", desc: "Rich and thick mango juice (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80" },
-          { name: "Frooti", price: "₹45", desc: "Classic mango juice drink (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80" },
-          { name: "Appy Fizz", price: "₹40", desc: "Sparkling apple juice drink (250 ml)", imageUrl: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&q=80" },
+          { name: "Mountain Dew", price: "₹40", desc: "Citrus flavored refreshing soda (500 ml)", imageUrl: "https://images.unsplash.com/photo-1625772299849-227fb23907c1?w=400&q=80", ingredients: ["Lemon"] },
+          { name: "Slice", price: "₹45", desc: "Sweet mango fruit drink (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80", ingredients: ["Mango"] },
+          { name: "Maaza", price: "₹45", desc: "Rich and thick mango juice (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80", ingredients: ["Mango"] },
+          { name: "Frooti", price: "₹45", desc: "Classic mango juice drink (500 ml)", imageUrl: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80", ingredients: ["Mango"] },
+          { name: "Appy Fizz", price: "₹40", desc: "Sparkling apple juice drink (250 ml)", imageUrl: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?w=400&q=80", ingredients: ["Apple"] },
           { name: "Red Bull", price: "₹120", desc: "Popular canned energy drink (250 ml)", imageUrl: "https://images.unsplash.com/photo-1625772299849-227fb23907c1?w=400&q=80" },
           { name: "Sting", price: "₹20", desc: "Sweet red energy drink (250 ml)", imageUrl: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80" },
           { name: "Mineral Water", price: "₹20", desc: "Pure packaged drinking water (1 L)", imageUrl: "https://images.unsplash.com/photo-1523362628745-0c13750d176c?w=400&q=80" }
@@ -3868,15 +4145,15 @@
       {
         title: "Namkeen", sub: "Savory Bites", emoji: "🥨",
         items: [
-          { name: "Aloo Bhujia", price: "₹60", desc: "Spicy potato noodle snack (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80", tags: ['bestseller'] },
-          { name: "Mixture", price: "₹70", desc: "Spicy mixed savory snack (250 g)", imageUrl: "https://images.unsplash.com/photo-1585237894569-8a587d4f9b8c?w=400&q=80" },
+          { name: "Aloo Bhujia", price: "₹60", desc: "Spicy potato noodle snack (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80", tags: ['bestseller'], ingredients: ["Spice", "Chilli"] },
+          { name: "Mixture", price: "₹70", desc: "Spicy mixed savory snack (250 g)", imageUrl: "https://images.unsplash.com/photo-1585237894569-8a587d4f9b8c?w=400&q=80", ingredients: ["Peanut", "Spice"] },
           { name: "Sev", price: "₹50", desc: "Crispy chickpea flour noodles (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80" },
-          { name: "Ratlami Sev", price: "₹80", desc: "Spicy thick gram flour noodles (250 g)", imageUrl: "https://images.unsplash.com/photo-1585237894569-8a587d4f9b8c?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Chana Dal", price: "₹60", desc: "Crunchy fried split chickpeas (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80" },
+          { name: "Ratlami Sev", price: "₹80", desc: "Spicy thick gram flour noodles (250 g)", imageUrl: "https://images.unsplash.com/photo-1585237894569-8a587d4f9b8c?w=400&q=80", tags: ['chefSpecial'], ingredients: ["Spice", "Chilli"] },
+          { name: "Chana Dal", price: "₹60", desc: "Crunchy fried split chickpeas (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80", ingredients: ["Spice"] },
           { name: "Moong Dal", price: "₹60", desc: "Salty fried yellow lentils (250 g)", imageUrl: "https://images.unsplash.com/photo-1585237894569-8a587d4f9b8c?w=400&q=80" },
-          { name: "Salted Peanuts", price: "₹40", desc: "Classic roasted salted peanuts (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80" },
-          { name: "Masala Peanuts", price: "₹50", desc: "Spicy coated fried peanuts (250 g)", imageUrl: "https://images.unsplash.com/photo-1585237894569-8a587d4f9b8c?w=400&q=80" },
-          { name: "Khatta Meetha Mix", price: "₹75", desc: "Sweet and sour snack mix (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80" }
+          { name: "Salted Peanuts", price: "₹40", desc: "Classic roasted salted peanuts (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80", ingredients: ["Peanut"] },
+          { name: "Masala Peanuts", price: "₹50", desc: "Spicy coated fried peanuts (250 g)", imageUrl: "https://images.unsplash.com/photo-1585237894569-8a587d4f9b8c?w=400&q=80", ingredients: ["Peanut", "Spice", "Chilli"] },
+          { name: "Khatta Meetha Mix", price: "₹75", desc: "Sweet and sour snack mix (250 g)", imageUrl: "https://images.unsplash.com/photo-1596662951497-6a7e0e7a8e83?w=400&q=80", ingredients: ["Peanut"] }
         ]
       }
     ];
@@ -4035,12 +4312,12 @@
           }
 
           const imgHTML = imgUrl
-            ? `<div class="menu-item-img" onclick="openDishPopup('${imgUrl}','${imgEscName}','${imgEscDesc}')" title="View dish">
+            ? `<div class="menu-item-img" onclick="openDishPopup('${imgEscName}')" title="View dish">
                  ${badgeHTML}
                  <img src="${imgUrl}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                  <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:1.7rem;">${cat.emoji}</div>
                </div>`
-            : `<div class="menu-item-img" onclick="openDishPopup('','${imgEscName}','${imgEscDesc}')" title="View dish">
+            : `<div class="menu-item-img" onclick="openDishPopup('${imgEscName}')" title="View dish">
                  ${badgeHTML}
                  ${cat.emoji}
                </div>`;
@@ -4048,7 +4325,7 @@
           row.innerHTML = `
             ${imgHTML}
             <div class="menu-item-info">
-              <div class="menu-item-name">${item.name}</div>
+              <div class="menu-item-name" onclick="openDishPopup('${imgEscName}')" style="cursor:pointer;">${item.name}</div>
               <div class="menu-item-desc">${item.desc}</div>
               <span class="menu-item-tag">${cat.title}</span>
             </div>
@@ -4135,20 +4412,132 @@
       setTimeout(() => el.classList.remove('shake'), 500);
     }
 
-    /* Dish Popup */
-    function openDishPopup(imgUrl, name, desc) {
+    /* Redesigned Apple + Luxury Restaurant Dish Popup */
+    function openDishPopup(nameEsc, argDesc) {
+      let found = null;
+      for (const cat of MENU) {
+        const item = cat.items.find(i => i.name === nameEsc);
+        if (item) {
+          found = { cat, item };
+          break;
+        }
+      }
+
       const overlay = document.getElementById('dish-popup-overlay');
       const img = document.getElementById('dish-popup-img');
+      const skeleton = document.getElementById('dish-popup-skeleton');
+      const placeholder = document.getElementById('dish-popup-placeholder');
+      const placeholderIcon = document.getElementById('dish-popup-placeholder-icon');
+      const placeholderText = document.getElementById('dish-popup-placeholder-text');
+      const ingredientsWrap = document.getElementById('dish-ingredients-wrap');
+      const ingredientsChips = document.getElementById('dish-ingredients-chips');
+      const priceSection = document.getElementById('dish-popup-price-section');
 
-      img.src = imgUrl || '';
-      img.alt = name;
-      img.style.display = imgUrl ? 'block' : 'none';
+      const name = found ? found.item.name : nameEsc;
+      const desc = found ? found.item.desc : (argDesc || '');
+      const imgUrl = found ? (found.item.imageUrl || '') : '';
+      const categoryEmoji = found ? found.cat.emoji : '🍽️';
+      const categoryTitle = found ? found.cat.title : 'Kshirsagar';
+
       document.getElementById('dish-popup-name').textContent = name;
       document.getElementById('dish-popup-desc').textContent = desc;
+
+      // Handle Image Loading, Skeleton & Placeholder
+      skeleton.style.display = 'block';
+      img.classList.remove('loaded');
+      img.style.display = 'none';
+      placeholder.style.display = 'none';
+
+      if (imgUrl) {
+        img.onload = () => {
+          skeleton.style.display = 'none';
+          img.style.display = 'block';
+          setTimeout(() => img.classList.add('loaded'), 20);
+        };
+        img.onerror = () => {
+          skeleton.style.display = 'none';
+          img.style.display = 'none';
+          placeholderIcon.textContent = categoryEmoji;
+          placeholderText.textContent = categoryTitle;
+          placeholder.style.display = 'flex';
+        };
+        img.src = imgUrl;
+      } else {
+        skeleton.style.display = 'none';
+        placeholderIcon.textContent = categoryEmoji;
+        placeholderText.textContent = categoryTitle;
+        placeholder.style.display = 'flex';
+      }
+
+      // Ingredients chips support
+      if (found && found.item.ingredients && Array.isArray(found.item.ingredients) && found.item.ingredients.length > 0) {
+        ingredientsChips.innerHTML = found.item.ingredients.map(ing => `
+          <div class="ingredient-chip">
+            <span>${getIngredientIcon(ing)}</span>
+            <span>${ing}</span>
+          </div>
+        `).join('');
+        ingredientsWrap.style.display = 'block';
+      } else {
+        ingredientsWrap.style.display = 'none';
+        ingredientsChips.innerHTML = '';
+      }
+
+      // Price Rows & Integration with Cart logic
+      priceSection.innerHTML = '';
+      if (found) {
+        const item = found.item;
+        const cat = found.cat;
+        const hasVariant = item.price.includes('/');
+
+        if (hasVariant) {
+          const parts = item.price.split('/').map(p => p.trim());
+          let labelA = 'Small', labelB = 'Large';
+          if (cat.sub && cat.sub.includes('/')) {
+            const subParts = cat.sub.split('/').map(s => s.trim());
+            labelA = subParts[0] || 'Small';
+            labelB = subParts[1] || 'Large';
+          }
+          const priceA = parseInt(parts[0].replace(/[^\d]/g, ''), 10);
+          const priceB = parseInt(parts[1].replace(/[^\d]/g, ''), 10);
+          const safeName = item.name.replace(/'/g, "\\'");
+          const safeLabelA = labelA.replace(/'/g, "\\'");
+          const safeLabelB = labelB.replace(/'/g, "\\'");
+          const safeEmoji = cat.emoji.replace(/'/g, "\\'");
+          const safeCatTitle = cat.title.replace(/'/g, "\\'");
+
+          priceSection.innerHTML = `
+            <div class="dish-popup-variant-row">
+              <span class="dish-popup-variant-label">${labelA}</span>
+              <span class="dish-popup-variant-price">₹${priceA}</span>
+              <button class="dish-popup-add-btn" onclick="addToCart('${safeName}',${priceA},'${safeLabelA}','${safeEmoji}','${safeCatTitle}')">ADD</button>
+            </div>
+            <div class="dish-popup-variant-row">
+              <span class="dish-popup-variant-label">${labelB}</span>
+              <span class="dish-popup-variant-price">₹${priceB}</span>
+              <button class="dish-popup-add-btn" onclick="addToCart('${safeName}',${priceB},'${safeLabelB}','${safeEmoji}','${safeCatTitle}')">ADD</button>
+            </div>
+          `;
+        } else {
+          const priceVal = parseInt(item.price.replace(/[^\d]/g, ''), 10);
+          const safeName = item.name.replace(/'/g, "\\'");
+          const safeEmoji = cat.emoji.replace(/'/g, "\\'");
+          const safeCatTitle = cat.title.replace(/'/g, "\\'");
+
+          priceSection.innerHTML = `
+            <div class="dish-popup-variant-row">
+              <span class="dish-popup-variant-label">Price</span>
+              <span class="dish-popup-variant-price">₹${priceVal}</span>
+              <button class="dish-popup-add-btn" onclick="addToCart('${safeName}',${priceVal},'','${safeEmoji}','${safeCatTitle}')">ADD TO CART</button>
+            </div>
+          `;
+        }
+      }
 
       overlay.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function closeDishPopup() {
       document.getElementById('dish-popup-overlay').classList.remove('open');
       document.body.style.overflow = '';
