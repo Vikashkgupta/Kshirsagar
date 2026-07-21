@@ -3566,129 +3566,92 @@
     })();
 
     /* ── (2) MENU DATA & STATE ── */
-    // Updated MENU reflecting actual physical menu + restaurant inventory
+    // Updated MENU with 'tags' for Phase 2 Famous/Chef special categories
     const MENU = [
       {
         title: "Pizza", sub: "Small / Large", emoji: "🍕",
         items: [
-          { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn and melted cheese", imageUrl: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80" },
-          { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Fresh veggies with golden mozzarella", imageUrl: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80" },
-          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Spiced paneer tikka with sauce", imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Earthy mushrooms with rich cheese", imageUrl: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80" }
+          { name: "Sweetcorn Pizza", price: "₹80 / ₹130", desc: "Fresh sweetcorn & cheese", imageUrl: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" },
+          { name: "Vegetable Pizza", price: "₹80 / ₹130", desc: "Veggies with golden mozzarella", imageUrl: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80" },
+          { name: "Paneer Pizza", price: "₹100 / ₹150", desc: "Paneer tikka with sauce", imageUrl: "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80", tags: ['chefSpecial'] },
+          { name: "Mushroom Pizza", price: "₹120 / ₹180", desc: "Mushrooms with cheese", imageUrl: "https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80" }
         ]
       },
       {
-        title: "Chinese", sub: "Half / Full", emoji: "🍜",
+        title: "Chowmein", sub: "Half / Full", emoji: "🍜",
         items: [
-          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style stir-fried noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80", tags: ['bestseller'] },
-          { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with soft paneer", imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80" },
-          { name: "Special Chowmein", price: "₹120", desc: "Chef's special noodles with veggies", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Hakka Noodle", price: "₹180", desc: "Authentic Indo-Chinese style hakka noodles", imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" },
-          { name: "Singapuri Noodle", price: "₹180", desc: "Spicy and tangy Singapore noodles", imageUrl: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80" }
+          { name: "Veg Chowmein", price: "₹35 / ₹70", desc: "Classic street-style noodles", imageUrl: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80", tags: ['bestseller'] },
+          { name: "Paneer Chowmein", price: "₹60 / ₹100", desc: "Noodles tossed with paneer", imageUrl: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80" },
+          { name: "Special Chowmein", price: "₹120", desc: "Chef's special with veggies", imageUrl: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80", tags: ['chefSpecial'] },
+          { name: "Hakka Noodles", price: "₹180", desc: "Indo-Chinese style noodles", imageUrl: "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?w=400&q=80" },
+          { name: "Singapuri Noodles", price: "₹180", desc: "Spicy Singapore style noodles", imageUrl: "https://images.unsplash.com/photo-1555126634-323283e090fa?w=400&q=80" }
         ]
       },
       {
-        title: "South Indian", sub: "Dosa & Uttapam", emoji: "🥞",
+        title: "Dosa", sub: "South Indian", emoji: "🥞",
         items: [
-          { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with savory onions", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80" },
-          { name: "Masala Dosa", price: "₹80", desc: "Classic dosa stuffed with potato", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'] },
-          { name: "Special Dosa", price: "₹120", desc: "Premium dosa with secret stuffing", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80" },
-          { name: "Paneer Dosa", price: "Crispy dosa stuffed with paneer", price: "₹140", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80" },
-          { name: "Uttapam Dosa", price: "₹180", desc: "Thick savory pancake with veggies", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80" },
-          { name: "Cheese Uttapam Dosa", price: "₹200", desc: "Loaded with rich melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" },
-          { name: "Shahi Dosa", price: "₹200", desc: "Rich cashew and dry-fruit filling", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Onion Dosa", price: "₹70", desc: "Crispy dosa with onions", imageUrl: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&q=80" },
+          { name: "Masala Dosa", price: "₹80", desc: "Stuffed with spiced potato", imageUrl: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80", tags: ['bestseller'] },
+          { name: "Special Dosa", price: "₹120", desc: "Premium chef's secret stuffing", imageUrl: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400&q=80" },
+          { name: "Paneer Dosa", price: "₹140", desc: "Stuffed with paneer bhurji", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
+          { name: "Uttapam", price: "₹180", desc: "Thick pancake with veggies", imageUrl: "https://images.unspllash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
+          { name: "Cheese Uttapam", price: "₹200", desc: "Loaded with melted cheese", imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=80" },
+          { name: "Shahi Dosa", price: "₹200", desc: "Cashew & dry fruit filling", imageUrl: "https://images.unsplash.com/photo-1610192244261-3517640d2fe8?w=400&q=80", tags: ['chefSpecial'] }
         ]
       },
       {
         title: "Chilli Manchurian", sub: "Half / Full", emoji: "🌶️",
         items: [
-          { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in hot chilli", imageUrl: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80" },
-          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Vegetable balls in classic gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80", tags: ['bestseller'] },
-          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Paneer cubes in spicy garlic", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80", tags: ['chefSpecial'] },
-          { name: "Mushroom Chilli", price: "₹200", desc: "Tender mushrooms with bell peppers", imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" }
+          { name: "Potato Chilli", price: "₹60 / ₹100", desc: "Crispy potatoes in chilli sauce", imageUrl: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&q=80" },
+          { name: "Veg Manchurian", price: "₹70 / ₹120", desc: "Classic Manchurian gravy", imageUrl: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80", tags: ['bestseller'] },
+          { name: "Paneer Chilli", price: "₹90 / ₹170", desc: "Paneer in hot chilli-garlic", imageUrl: "https://images.unsplash.com/photo-1645177628172-a6b1e490b4a0?w=400&q=80", tags: ['chefSpecial'] },
+          { name: "Mushroom Chilli", price: "₹200", desc: "Mushrooms with bell peppers", imageUrl: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" }
         ]
       },
       {
         title: "Rice", sub: "Fried Rice", emoji: "🍚",
         items: [
-          { name: "Veg Fried Rice", price: "₹60", desc: "Freshly tossed vegetable fried rice", imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80" },
-          { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice tossed with paneer", imageUrl: "https://images.unsplash.com/photo-1536304993881-ff86e0c9b0b4?w=400&q=80" },
-          { name: "Combo Rice", price: "₹110", desc: "Manchurian paired with paneer rice", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80", tags: ['bestseller'] }
+          { name: "Veg Fried Rice", price: "₹60", desc: "Fresh fried rice", imageUrl: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80" },
+          { name: "Paneer Fried Rice", price: "₹80", desc: "Aromatic rice with paneer", imageUrl: "https://images.unsplash.com/photo-1536304993881-ff86e0c9b0b4?w=400&q=80" },
+          { name: "Combo Rice", price: "₹110", desc: "Rice with Manchurian combo", imageUrl: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400&q=80", tags: ['bestseller'] }
         ]
       },
       {
         title: "Rolls", sub: "Street Style", emoji: "🌯",
         items: [
-          { name: "Veg Roll", price: "₹40", desc: "Crispy paratha wrap with veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80" },
-          { name: "Paneer Roll", price: "₹50", desc: "Spiced paneer filling in paratha", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80", tags: ['bestseller'] },
-          { name: "Veg Crunchy Roll", price: "₹60", desc: "Crunchy filling with tangy chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80" },
-          { name: "Mushroom Roll", price: "₹70", desc: "Earthy mushrooms wrapped in paratha", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80" }
+          { name: "Veg Roll", price: "₹40", desc: "Paratha roll with veggies", imageUrl: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80" },
+          { name: "Paneer Roll", price: "₹50", desc: "Paneer tikka in paratha", imageUrl: "https://images.unspllash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80", tags: ['bestseller'] },
+          { name: "Mushroom Roll", price: "₹70", desc: "Spiced mushroom in crispy roll", imageUrl: "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80" },
+          { name: "Veg Crunchy Roll", price: "₹60", desc: "Crunchy filling with chutney", imageUrl: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?w=400&q=80" }
         ]
       },
       {
         title: "Sandwich", sub: "Quick Bites", emoji: "🥪",
         items: [
-          { name: "Vegetable Sandwich", price: "₹60", desc: "Fresh veggies on toasted bread", imageUrl: "https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&q=80" },
-          { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn and creamy cheese", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80" },
+          { name: "Vegetable Sandwich", price: "₹60", desc: "Veggies on toasted bread", imageUrl: "https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&q=80" },
+          { name: "Corn Sandwich", price: "₹80", desc: "Sweet corn & cream cheese", imageUrl: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80" },
           { name: "Paneer Sandwich", price: "₹80", desc: "Grilled paneer with mint chutney", imageUrl: "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400&q=80", tags: ['bestseller'] },
-          { name: "Cheese Sandwich", price: "₹100", desc: "Classic grilled melted cheese sandwich", imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&q=80" },
-          { name: "Mushroom Sandwich", price: "₹100", desc: "Mushrooms grilled with garlic butter", imageUrl: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&q=80" }
+          { name: "Pizza Sandwich", price: "₹100", desc: "Pizza-style filling in sandwich", imageUrl: "https://images.unsplash.com/photo-1509722747041-616f39b57569?w=400&q=80" },
+          { name: "Mushroom Sandwich", price: "₹100", desc: "Mushrooms with garlic butter", imageUrl: "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&q=80" }
         ]
       },
       {
         title: "Burger", sub: "Fast Food", emoji: "🍔",
         items: [
-          { name: "Tikki Burger", price: "₹30", desc: "Classic crispy aloo tikki patty", imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" },
-          { name: "Sandwich Burger", price: "₹40", desc: "Burger filling in toasted sandwich", imageUrl: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80" },
-          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty with veggies", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80", tags: ['bestseller'] },
-          { name: "Cheese Spice Burger", price: "₹50", desc: "Spicy patty with melted cheese", imageUrl: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80" },
-          { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki with sauces", imageUrl: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" },
-          { name: "Cheese Burger", price: "₹70", desc: "Classic patty with extra cheese", imageUrl: "https://images.unsplash.com/photo-1585190411866-9e83e4f67e7e?w=400&q=80" },
-          { name: "Double Cheese Burger", price: "₹99", desc: "Double patty and double cheese", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80", tags: ['chefSpecial'] }
+          { name: "Tikki Burger", price: "₹30", desc: "Classic aloo tikki patty", imageUrl: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" },
+          { name: "Paneer Burger", price: "₹50", desc: "Juicy paneer patty", imageUrl: "https://images.unsplash.com/photo-1550317138-10000687a72b?w=400&q=80", tags: ['bestseller'] },
+          { name: "Sandwich Burger", price: "₹40", desc: "Burger meets sandwich", imageUrl: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80" },
+          { name: "Pizza Style Burger", price: "₹50", desc: "Pizza sauce & cheese", imageUrl: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80" },
+          { name: "Paneer Tikki Burger", price: "₹50", desc: "Spiced paneer tikki", imageUrl: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" },
+          { name: "Veg Burger", price: "₹70", desc: "Veggie patty with lettuce", imageUrl: "https://images.unsplash.com/photo-1585190411866-9e83e4f67e7e?w=400&q=80" },
+          { name: "Double Veg Burger", price: "₹99", desc: "Double patty, double indulgence", imageUrl: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&q=80", tags: ['chefSpecial'] }
         ]
       },
       {
-        title: "Snacks", sub: "Crispy Bites", emoji: "🍢",
+        title: "Snacks", sub: "Lollipop & Pakoda", emoji: "🍢",
         items: [
           { name: "Paneer Pakoda", price: "₹80", desc: "Fried paneer in spiced batter", imageUrl: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80" },
-          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer skewers with dip", imageUrl: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&q=80", tags: ['chefSpecial'] }
-        ]
-      },
-      {
-        title: "Sweets", sub: "Fresh Mithai", emoji: "🍬",
-        items: [
-          { name: "Kaju Katli (250g)", price: "₹200", desc: "Premium cashew fudge sweet", imageUrl: "https://images.unsplash.com/photo-1605196426744-f1d1ed96d2e0?w=400&q=80", tags: ['bestseller'] },
-          { name: "Rasgulla (1pc)", price: "₹15", desc: "Soft spongy cottage cheese balls", imageUrl: "https://images.unsplash.com/photo-1626844131082-256783844137?w=400&q=80" },
-          { name: "Gulab Jamun (1pc)", price: "₹15", desc: "Deep-fried sweet dipped in syrup", imageUrl: "https://images.unsplash.com/photo-1598514982205-f36b96d1e8d4?w=400&q=80" },
-          { name: "Motichoor Ladoo (250g)", price: "₹140", desc: "Sweet gram flour pearl balls", imageUrl: "https://images.unsplash.com/photo-1605807646983-377bc5a76493?w=400&q=80" }
-        ]
-      },
-      {
-        title: "Cakes", sub: "Freshly Baked", emoji: "🎂",
-        items: [
-          { name: "Black Forest Cake (500g)", price: "₹350", desc: "Chocolate sponge with fresh cream", imageUrl: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80", tags: ['bestseller'] },
-          { name: "Chocolate Truffle (500g)", price: "₹450", desc: "Rich and dense chocolate cake", imageUrl: "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=400&q=80", tags: ['chefSpecial'] }
-        ]
-      },
-      {
-        title: "Bakery", sub: "Oven Fresh", emoji: "🥐",
-        items: [
-          { name: "Veg Patties", price: "₹15", desc: "Flaky puff pastry with veggies", imageUrl: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&q=80" },
-          { name: "Paneer Patties", price: "₹25", desc: "Flaky pastry with spiced paneer", imageUrl: "https://images.unsplash.com/photo-1621236378699-8597faf6a176?w=400&q=80" }
-        ]
-      },
-      {
-        title: "Beverages", sub: "Chilled", emoji: "🥤",
-        items: [
-          { name: "Cold Drink (500ml)", price: "₹40", desc: "Refreshing carbonated cold drink", imageUrl: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&q=80" },
-          { name: "Mineral Water (1L)", price: "₹20", desc: "Packaged pure drinking water", imageUrl: "https://images.unsplash.com/photo-1523362628745-0c100150b504?w=400&q=80" }
-        ]
-      },
-      {
-        title: "Namkeen", sub: "Crunchy Bites", emoji: "🥜",
-        items: [
-          { name: "Aloo Bhujia (250g)", price: "₹50", desc: "Spicy potato and gram flour", imageUrl: "https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80" },
-          { name: "Navratan Mixture (250g)", price: "₹60", desc: "Crispy sweet and spicy mix", imageUrl: "https://images.unsplash.com/photo-1604085449792-7634f1ecbc1b?w=400&q=80" }
+          { name: "Paneer Lollipop (6pcs)", price: "₹200", desc: "Crispy paneer on skewers", imageUrl: "https://images.unspllash.com/photo-1601050690597-df0568f70950?w=400&q=80", tags: ['chefSpecial'] }
         ]
       }
     ];
@@ -3728,22 +3691,24 @@
 
       // Replace Category Navigation with the Requested Premium Vertical Cards
       const REQUESTED_CATS = [
+
+
         { name: 'All', filter: 'all', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80', emoji: '🍽️' },
-        { name: 'Famous', filter: 'Famous', img: 'https://images.unsplash.com/photo-1563227812-0ac4d638c8f9?w=400&q=80', emoji: '🔥' },
-        { name: 'Pizza', filter: 'Pizza', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80', emoji: '🍕' },
-        { name: 'Chinese', filter: 'Chinese', img: 'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=80', emoji: '🍜' },
-        { name: 'South Indian', filter: 'South Indian', img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80', emoji: '🥞' },
-        { name: 'Manchurian', filter: 'Chilli Manchurian', img: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&q=80', emoji: '🌶️' },
-        { name: 'Rice', filter: 'Rice', img: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80', emoji: '🍚' },
+       
+        { name: 'Pizza', filter: 'Pizza', img: 'pizza.jpeg', emoji: '🍕' },
+        { name: 'Chinese', filter: 'Chowmein', img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80', emoji: '🍜' },
+        { name: 'South Indian', filter: 'Dosa', img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&q=80', emoji: '🥞' },
         { name: 'Rolls', filter: 'Rolls', img: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80', emoji: '🌯' },
-        { name: 'Sandwich', filter: 'Sandwich', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80', emoji: '🥪' },
         { name: 'Burger', filter: 'Burger', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80', emoji: '🍔' },
-        { name: 'Snacks', filter: 'Snacks', img: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&q=80', emoji: '🍢' },
-        { name: 'Sweets', filter: 'Sweets', img: 'https://images.unsplash.com/photo-1605196426744-f1d1ed96d2e0?w=400&q=80', emoji: '🍬' },
+        { name: 'Sandwich', filter: 'Sandwich', img: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&q=80', emoji: '🥪' },
+         { name: 'Famous', filter: 'Famous', img: 'https://images.unsplash.com/photo-1563227812-0ac4d638c8f9?w=400&q=80', emoji: '🔥' },
+        { name: 'Sweets', filter: 'Sweets', img: 'https://images.unspllash.com/photo-1582562124811-c09040d0a901?w=400&q=80', emoji: '🍬' },
         { name: 'Cakes', filter: 'Cakes', img: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&q=80', emoji: '🎂' },
-        { name: 'Bakery', filter: 'Bakery', img: 'https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&q=80', emoji: '🥐' },
-        { name: 'Beverages', filter: 'Beverages', img: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&q=80', emoji: '🥤' },
-        { name: 'Namkeen', filter: 'Namkeen', img: 'https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80', emoji: '🥜' }
+        { name: 'Bakery', filter: 'Bakery', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80', emoji: '🥐' },
+        { name: 'Snacks', filter: 'Snacks', img: 'https://images.unsplash.com/photo-1626776876729-bab43bde8290?w=400&q=80', emoji: '🍢' },
+        { name: 'Beverages', filter: 'Beverages', img: 'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80', emoji: '🥤' }
+      
+      
       ];
 
       catNav.innerHTML = '';
