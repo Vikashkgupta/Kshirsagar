@@ -3016,7 +3016,7 @@
             text-decoration: none;
             font-weight: 600;
             transition: .3s;
-            background: #fff;
+            background: transparent;
             cursor: pointer;
           }
 
@@ -3032,11 +3032,24 @@
             border-radius: 50%;
             background: #d4af37;
             color: #fff;
+
             font-size: 12px;
             font-weight: 700;
             display: none;
             align-items: center;
             justify-content: center;
+          }
+
+          /* Desktop Cart Button */
+          #desktop-cart-btn {
+            display: flex;
+          }
+
+          /* Hide on Mobile */
+          @media (max-width:768px) {
+            #desktop-cart-btn {
+              display: none !important;
+            }
           }
         </style>
 
@@ -3467,7 +3480,7 @@
         </svg>
         <span id="mbn-cart-badge" class="hidden">0</span>
       </div>
-      <span>My Orders</span>
+      <span>My Cart</span>
     </div>
   </nav>
 
